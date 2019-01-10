@@ -1,0 +1,162 @@
+﻿{
+  "StatMaxLookup": [
+    {
+      "StartDate": "2000-02-01",
+      "EndDate": "2001-01-31",
+      "StatMax": "230"
+    },
+    {
+      "StartDate": "2001-02-01",
+      "EndDate": "2002-01-31",
+      "StatMax": "240"
+    },
+    {
+      "StartDate": "2002-02-01",
+      "EndDate": "2003-01-31",
+      "StatMax": "250"
+    },
+    {
+      "StartDate": "2003-02-01",
+      "EndDate": "2004-01-31",
+      "StatMax": "260"
+    },
+    {
+      "StartDate": "2004-02-01",
+      "EndDate": "2005-01-29",
+      "StatMax": "270"
+    },
+    {
+      "StartDate": "2005-01-30",
+      "EndDate": "2006-01-31",
+      "StatMax": "280"
+    },
+    {
+      "StartDate": "2006-02-01",
+      "EndDate": "2007-01-31",
+      "StatMax": "290"
+    },
+    {
+      "StartDate": "2007-02-01",
+      "EndDate": "2008-01-31",
+      "StatMax": "310"
+    },
+    {
+      "StartDate": "2008-02-01",
+      "EndDate": "2009-01-31",
+      "StatMax": "330"
+    },
+    {
+      "StartDate": "2009-02-01",
+      "EndDate": "2009-09-29",
+      "StatMax": "350"
+    },
+    {
+      "StartDate": "2009-09-30",
+      "EndDate": "2011-01-31",
+      "StatMax": "380"
+    },
+    {
+      "StartDate": "2011-02-01",
+      "EndDate": "2012-01-31",
+      "StatMax": "400"
+    },
+    {
+      "StartDate": "2012-02-01",
+      "EndDate": "2013-01-31",
+      "StatMax": "430"
+    },
+    {
+      "StartDate": "2013-02-01",
+      "EndDate": "2014-04-05",
+      "StatMax": "450"
+    },
+    {
+      "StartDate": "2014-04-06",
+      "EndDate": "2015-04-05",
+      "StatMax": "464"
+    },
+    {
+      "StartDate": "2015-04-06",
+      "EndDate": "2016-04-05",
+      "StatMax": "475"
+    },
+    {
+      "StartDate": "2016-04-06",
+      "EndDate": "2017-04-05",
+      "StatMax": "479"
+    },
+    {
+      "StartDate": "2017-04-06",
+      "EndDate": "2018-04-05",
+      "StatMax": "489"
+    },
+    {
+      "StartDate": "2018-04-06",
+      "EndDate": "9999-12-31",
+      "StatMax": "508"
+    }
+  ],
+  "NotionalBenefitsMonthlyRateUnder25": [
+    {
+      "StartDate": "1900-01-01",
+      "EndDate": "9999-12-31",
+      "Amount": "251.77"
+    }
+  ],
+  "NotionalBenefitsMonthlyRate25AndOver": [
+    {
+      "StartDate": "1900-01-01",
+      "EndDate": "9999-12-31",
+      "Amount": "317.82"
+    }
+  ],
+  "BenefitWaitingDaysLookup": [
+    {
+      "StartDate": "2011-04-06",
+      "EndDate": "9999-12-31",
+      "BenefitWaitingDays": "7"
+    }
+  ],
+  "TaxRateLookup": [
+    {
+      "StartDate": "1900-01-01",
+      "EndDate": "9999-12-31",
+      "TaxRate": "0.20"
+    }
+  ],
+  "NIThresholdLookup": [
+    {
+      "StartDate": "1900-01-01",
+      "EndDate": "9999-12-31",
+      "NIThreshold": "162"
+    }
+  ],
+  "NIUpperThresholdLookup": [
+    {
+      "StartDate": "1900-01-01",
+      "EndDate": "9999-12-31",
+      "NIThreshold": "892"
+    }
+  ],
+  "NIRateLookup": [
+    {
+      "StartDate": "1900-01-01",
+      "EndDate": "9999-12-31",
+      "NIRate": "0.12"
+    }
+  ],
+  "NIUpperRateLookup": [
+    {
+      "StartDate": "1900-01-01",
+      "EndDate": "9999-12-31",
+      "NIRate": "0.02"
+    }
+  ],
+  "PrefentialLimitLookup": [
+    {
+      "StartDate": "1900-01-01",
+      "EndDate": "9999-12-31",
+      "PreferentialLimit": "800"
+    }
+  ]
+}

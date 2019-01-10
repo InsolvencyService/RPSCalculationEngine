@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  rpscalculationsengineapi:
+    image: ${DOCKER_REGISTRY}insolvencycalculationsengineredundancyapi
+    build:
+      context: .
+      dockerfile: Insolvency.CalculationsEngine.Redundancy.API/Dockerfile
+    ports:
+      - "7101:80"
