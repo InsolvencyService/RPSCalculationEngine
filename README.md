@@ -20,7 +20,7 @@ The GET methods on all calculations serves as a ping function to test the endpoi
 * Net Core 2.1
 
 # Getting Started
-Clone the repository on your development machine using the link https://github.com/InsolvencyService/CalculationsEngine.
+Clone the repository on your development machine using the link https://github.com/InsolvencyService/RPSCalculationEngine.
 
 Open the solution in Visual studio. Make Insolvency.CalculationEngine.Redundancy.API as start-up project and hit run. This will allow to run project and open a swagger generated page(configured on http://localhost:58065/swagger/)  that shows the interface definitions and the json models for the request and response payloads.
 
