@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="5.3.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.1" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Insolvency.CalculationsEngine.Redundancy.API.UnitTests\Insolvency.CalculationsEngine.Redundancy.API.UnitTests.csproj" />
+    <ProjectReference Include="..\Insolvency.CalculationsEngine.Redundancy.API\Insolvency.CalculationsEngine.Redundancy.API.csproj" />
+    <ProjectReference Include="..\Insolvency.CalculationsEngine.Redundancy.Common\Insolvency.CalculationsEngine.Redundancy.Common.csproj" />
+  </ItemGroup>
+
+</Project>
