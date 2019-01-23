@@ -12,7 +12,6 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="Moq" Version="4.10.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
@@ -24,15 +23,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Insolvency.CalculationsEngine.Redundancy.API\Insolvency.CalculationsEngine.Redundancy.API.csproj" />
     <ProjectReference Include="..\Insolvency.CalculationsEngine.Redundancy.BL\Insolvency.CalculationsEngine.Redundancy.BL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.Mvc.Core">
-      <HintPath>..\..\..\Users\atifmir\.nuget\packages\microsoft.aspnetcore.mvc.core\2.0.3\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNetCore.Mvc.ViewFeatures">
-      <HintPath>..\..\..\Users\atifmir\.nuget\packages\microsoft.aspnetcore.mvc.viewfeatures\2.0.3\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.ViewFeatures.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

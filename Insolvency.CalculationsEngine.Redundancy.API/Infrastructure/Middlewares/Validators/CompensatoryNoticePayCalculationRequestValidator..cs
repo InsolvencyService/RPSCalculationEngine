@@ -61,10 +61,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                 .When(HasDeceasedDate)
                 .WithMessage($"'Decreased Date' can not be before the Date of Birth");
 
-            RuleFor(x => x.Benefits).SetCollectionValidator(new CompensatoryNoticePayBenefitValidator());
-            RuleFor(x => x.NewEmployments).SetCollectionValidator(new CompensatoryNoticePayNewEmploymentValidator());
-            RuleFor(x => x.WageIncreases).SetCollectionValidator(new CompensatoryNoticePayWageIncreaseValidator());
-            RuleFor(x => x.NotionalBenefitOverrides).SetCollectionValidator(new CompensatoryNoticePayNotionalBenefitOverrideValidator());
+            RuleForEach(x => x.Benefits).SetValidator(new CompensatoryNoticePayBenefitValidator());
+            RuleForEach(x => x.NewEmployments).SetValidator(new CompensatoryNoticePayNewEmploymentValidator());
+            RuleForEach(x => x.WageIncreases).SetValidator(new CompensatoryNoticePayWageIncreaseValidator());
+            RuleForEach(x => x.NotionalBenefitOverrides).SetValidator(new CompensatoryNoticePayNotionalBenefitOverrideValidator());
         }
 
         private bool HasDeceasedDate(CompensatoryNoticePayCalculationRequestModel model)

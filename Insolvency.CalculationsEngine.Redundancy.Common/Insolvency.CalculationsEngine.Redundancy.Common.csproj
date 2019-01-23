@@ -11,10 +11,4 @@
     <PackageReference Include="TimePeriodLibrary.NET" Version="2.1.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Itenso.TimePeriod">
-      <HintPath>..\..\..\Users\atifmir\.nuget\packages\timeperiodlibrary.net\2.1.1\lib\netstandard1.6\Itenso.TimePeriod.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

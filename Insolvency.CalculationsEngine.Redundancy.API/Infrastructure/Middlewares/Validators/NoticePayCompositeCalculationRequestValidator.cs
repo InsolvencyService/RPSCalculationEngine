@@ -16,8 +16,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                 .SetValidator(new CompensatoryNoticePayCalculationRequestValidator())
                 .When(req => req.Cnp != null);
 
-            RuleFor(req => req.Nwnp)
-                .SetCollectionValidator(new NoticeWorkedNotPaidCalculationRequestValidator());
+            RuleForEach(req => req.Nwnp)
+                .SetValidator(new NoticeWorkedNotPaidCalculationRequestValidator());
 
             RuleFor(req => req.Nwnp)
                .NotNull()
