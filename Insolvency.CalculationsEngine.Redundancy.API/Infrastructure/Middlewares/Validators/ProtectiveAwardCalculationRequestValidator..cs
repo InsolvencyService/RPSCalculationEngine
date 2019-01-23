@@ -69,7 +69,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                 .WithMessage(
                     $"Invalid shift pattern correct values are 0,1,2,3,4,5,6 Note: [0 = Sunday, 1 = Mon, 2 = Tues, 3 = Wed, 4 = Thurs, 5 = Fri, 6 = Sat]");
 
-            RuleFor(x => x.Benefits).SetCollectionValidator(new ProtectiveAwardBenefitValidator());
+            RuleForEach(x => x.Benefits).SetValidator(new ProtectiveAwardBenefitValidator());
 
             RuleFor(x => x)
                 .Must(BenefitStartAndEndDateBeAfterDismissalDate)

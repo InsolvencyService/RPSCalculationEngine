@@ -16,8 +16,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                 .SetValidator(new HolidayPayAccruedCalculationRequestValidator())
                 .When(req => req.Hpa != null);
 
-            RuleFor(req => req.Htnp)
-                .SetCollectionValidator(new HolidayTakenNotPaidCalculationRequestValidator());
+            RuleForEach(req => req.Htnp)
+                .SetValidator(new HolidayTakenNotPaidCalculationRequestValidator());
 
             RuleFor(req => req.Htnp)
                .NotNull()

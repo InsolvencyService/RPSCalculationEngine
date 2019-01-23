@@ -13,8 +13,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
     {
         public APPACalculationRequestValidator()
         {
-            RuleFor(req => req.Ap)
-                .SetCollectionValidator(new ArrearsOfPayCalculationRequestValidator());
+            RuleForEach(req => req.Ap)
+                .SetValidator(new ArrearsOfPayCalculationRequestValidator());
 
             RuleFor(req => req.Pa)
                .SetValidator(new ProtectiveAwardCalculationRequestValidator())
