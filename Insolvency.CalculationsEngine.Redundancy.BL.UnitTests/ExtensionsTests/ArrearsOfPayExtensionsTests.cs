@@ -5,7 +5,6 @@ using Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData;
 using Insolvency.CalculationsEngine.Redundancy.BL.Calculations.APPA.Extensions;
 using Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.TestData;
 using Insolvency.CalculationsEngine.Redundancy.Common.Extensions;
-using Itenso.TimePeriod;
 using Xunit;
 
 namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ExtensionsTests
@@ -51,30 +50,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ExtensionsTests
 
             //Assert
             result.Should().Be(requestData.WeeklyWage);
-        }
-
-        [Fact]
-        [Trait("Category", "UnitTest")]
-        public async Task GetShiftDaysInClaimPeriodAsync_Returns_CountOfShiftDays_FromGivenPeriod()
-        {
-            //Arrange
-            //Shift Pattern in request data => {"2", "3", "4", "5", "6"}
-            //claim period => 19/12/2016 to 03/01/2017
-            var requestData = ArrearsOfPayTestsDataGenerator.GetValidRequestData();
-            //check count of first day in shift pattern in this instance 2 (Tuesday) in the claim period
-            //result should be [3] Tuesdays = >20/12/2016, 27/12/2017, 03/01/2017
-            var shiftDay = Convert.ToInt32(requestData.ShiftPattern[0]);
-            var adjustedClaimPeriodFrom =
-                await requestData.UnpaidPeriodFrom.GetAdjustedPeriodFromAsync(requestData.InsolvencyDate);
-            var adjustedClaimPeriodTo =
-                await requestData.UnpaidPeriodTo.GetAdjustedPeriodToAsync(requestData.InsolvencyDate,
-                    requestData.DismissalDate);
-
-            //Act
-            var result = await adjustedClaimPeriodFrom.GetShiftDaysInClaimPeriodAsync(adjustedClaimPeriodTo, shiftDay);
-
-            //Assert
-            result.Should().Be(3);
         }
 
         [Fact]

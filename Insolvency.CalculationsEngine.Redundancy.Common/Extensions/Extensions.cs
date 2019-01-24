@@ -2,26 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Itenso.TimePeriod;
 
 namespace Insolvency.CalculationsEngine.Redundancy.Common.Extensions
 {
     public static class Extensions
     {
-        public static async Task<CalendarPeriodCollector> GetPayDaysFromAdjustedClaimPeriodsAsync(
-            this DateTime adjustedClaimPeriodFrom,
-            DateTime adjustedClaimPeriodTo, int? payday)
-        {
-            var filter = new CalendarPeriodCollectorFilter();
-            filter.WeekDays.Add(await payday.GetEnumValueAsync());
-            var claimPeriod =
-                new CalendarTimeRange(adjustedClaimPeriodFrom.AddDays(-1), adjustedClaimPeriodTo);
-            var payDayCollector =
-                new CalendarPeriodCollector(filter, claimPeriod);
-            payDayCollector.CollectDays();
-            return await Task.FromResult(payDayCollector);
-        }
-
         public static async Task<DateTime> GetAdjustedPeriodFromAsync(this DateTime unpaidPeriodFrom,
             DateTime insolvencyDate)
         {
@@ -71,12 +56,13 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.Extensions
 
         public static async Task<int> GetServiceYearsAsync(this DateTime firstDate, DateTime secondDate)
         {
-            var dateDiff = new DateDiff(firstDate, secondDate);
-            var yearsService = dateDiff.Years;
-            return await Task.FromResult(yearsService);
+            int yearsService = secondDate.Year - firstDate.Year;
+
+            if (secondDate.Month < firstDate.Month || (secondDate.Month == firstDate.Month && secondDate.Day < firstDate.Day))
+                yearsService--;
+
+            return await Task.FromResult(Math.Max(0, yearsService));
         }
-
-
 
         public static async Task<DateTime> GetRelevantNoticeDate(this DateTime noticeDate, DateTime dismissalDate)
         {

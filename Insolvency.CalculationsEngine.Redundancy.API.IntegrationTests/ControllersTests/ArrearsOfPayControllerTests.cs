@@ -2,7 +2,6 @@
 using FluentAssertions;
 using Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using Xunit;
 
