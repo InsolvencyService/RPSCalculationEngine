@@ -5,7 +5,6 @@ using Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData;
 using Insolvency.CalculationsEngine.Redundancy.BL.Calculations.APPA.Extensions;
 using Insolvency.CalculationsEngine.Redundancy.BL.Calculations.RedundancyPaymentCalculation.Extensions;
 using Insolvency.CalculationsEngine.Redundancy.Common.Extensions;
-using Itenso.TimePeriod;
 using Xunit;
 
 namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ExtensionsTests

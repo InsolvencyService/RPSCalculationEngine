@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData;
 using Insolvency.CalculationsEngine.Redundancy.Common.Extensions;
-using Itenso.TimePeriod;
 using Xunit;
 
 namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.ExtensionsTests
@@ -43,50 +42,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.ExtensionsTe
 
             //Assert
             result.Should().Be(insolvencyDate);
-        }
-
-        [Fact]
-        [Trait("Category", "UnitTest")]
-        public async Task GetPayDaysFromAdjustedClaimPeriodsAsync_ReturnsCorrectPayDaysFromGivenPeriod()
-        {
-            // 19/12/2016||....24/12/2016(Sat Payday 1)......31/12/2016(Say Payday 2)..||03/01/2017
-            //Arrange 
-            var unpaidClaimPeriodFrom = new DateTime(2016, 12, 19);
-            var unpaidClaimPeriodTo = new DateTime(2017, 01, 03);
-            var firstPayday = new DateTime(2016, 12, 24);
-            var seccondPayday = new DateTime(2016, 12, 31);
-            //DayOfWeek.Saturday 6
-            var payDay = 6;
-
-            //Act
-            var result =
-                await unpaidClaimPeriodFrom.GetPayDaysFromAdjustedClaimPeriodsAsync(unpaidClaimPeriodTo, payDay);
-
-            //Assert
-            var periodCollector = result.Should().BeOfType<CalendarPeriodCollector>().Subject;
-            periodCollector.Periods.Count.Should().Be(2);
-            periodCollector.Periods[0].Start.Date.Should().Be(firstPayday);
-            periodCollector.Periods[1].Start.Date.Should().Be(seccondPayday);
-        }
-
-        [Fact]
-        [Trait("Category", "UnitTest")]
-        public async Task GetPayDaysFromAdjustedClaimPeriodsAsync_ReturnsPaydaysCollectionFromGivenPeriod()
-        {
-            // 19/12/2016||....24/12/2016(Saturday Payday #1)......31/12/2016(Saturday Payday #2)..||03/01/2017
-            //Arrange 
-            var unpaidClaimPeriodFrom = new DateTime(2016, 12, 19);
-            var unpaidClaimPeriodTo = new DateTime(2017, 01, 03);
-            //DayOfWeek.Saturday 6
-            var payDay = 6;
-
-            //Act
-            var result =
-                await unpaidClaimPeriodFrom.GetPayDaysFromAdjustedClaimPeriodsAsync(unpaidClaimPeriodTo, payDay);
-
-            //Assert
-            var periodCollector = result.Should().BeOfType<CalendarPeriodCollector>().Subject;
-            periodCollector.Periods.Count.Should().Be(2);
         }
 
         [Fact]
