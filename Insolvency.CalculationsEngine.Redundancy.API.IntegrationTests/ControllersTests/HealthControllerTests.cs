@@ -1,7 +1,6 @@
 using System.Net.Http;
 using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
 using Xunit;
 
 namespace Insolvency.CalculationsEngine.Redundancy.API.IntegrationTests.ControllersTests
