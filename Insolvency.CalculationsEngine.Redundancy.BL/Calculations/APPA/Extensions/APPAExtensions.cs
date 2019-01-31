@@ -59,9 +59,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Calculations.APPA.Extensio
                 return new ArrearsOfPayResponseDTO()
                 {
                     StatutoryMax = list.First().StatutoryMax,
-                    InputSource = list.First().InputSource,
-                    DngApplied = list.First().DngApplied,
-                    RunNWNP = list.First().RunNWNP,
+                    InputSource = inputSource,
+                    DngApplied = list.Any(x => x.DngApplied),
+                    RunNWNP = list.Any(x => x.RunNWNP),
                     WeeklyResult = weekList
                 };
             }
