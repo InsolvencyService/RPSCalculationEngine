@@ -69,7 +69,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             calculationResult.YearsOfServiceUpto21 = yearsOfServiceUpto21;
             calculationResult.YearsOfServiceFrom22To41 = yearsOfService22To41;
             calculationResult.YearsServiceOver41 = yearsOfServiceOver41;
-            calculationResult.GrossEntitlement = Math.Round(grossEntitlement, 2);
+            calculationResult.GrossEntitlement = Math.Max(0m, Math.Round(grossEntitlement, 2) - Math.Round(data.EmployerPartPayment, 2));
             calculationResult.EmployerPartPayment = Math.Round(data.EmployerPartPayment, 2);
             calculationResult.NetEntitlement = Math.Max(0m, Math.Round(grossEntitlement, 2) - Math.Round(data.EmployerPartPayment, 2));
             calculationResult.PreferentialClaim = 0m;
