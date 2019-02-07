@@ -116,7 +116,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             _mockLogger.Verify(x => x.Log(
                 LogLevel.Error,
                 It.IsAny<EventId>(),
-                It.Is<object>(v => v.ToString().Contains("Unable to calculate redundancy payment as the years of service eligible for making redundancy payment is less than 2 years")),
+                It.Is<object>(v => v.ToString().Contains("Years of service cannot be less than 2 years")),
                 null,
                 It.IsAny<Func<object, Exception, string>>()
             ));

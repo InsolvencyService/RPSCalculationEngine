@@ -51,7 +51,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
             RuleFor(Req => Req)
                 .MustAsync(TotalYearsOfServiceGreaterThan2)
                 .WithName("EmploymentStartDate")
-                .WithMessage("Unable to calculate redundancy payment as the years of service eligible for making redundancy payment is less than 2 years")
+                .WithMessage("Years of service cannot be less than 2 years")
                 .When(x => x.EmploymentStartDate != DateTime.MinValue &&
                             x.DismissalDate != DateTime.MinValue &&
                             x.DateNoticeGiven != DateTime.MinValue);
