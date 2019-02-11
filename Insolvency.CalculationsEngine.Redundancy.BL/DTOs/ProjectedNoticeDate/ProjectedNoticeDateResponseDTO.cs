@@ -16,5 +16,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.ProjectedNoticeDate
         }
 
         public DateTime ProjectedNoticeDate { get; set; }
+
+        public DateTime NoticeStartDate { get; set; }
     }
 }

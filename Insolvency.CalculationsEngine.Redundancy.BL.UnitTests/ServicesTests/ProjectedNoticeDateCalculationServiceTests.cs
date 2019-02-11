@@ -33,7 +33,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 DateNoticeGiven = new DateTime(2018, 01, 05)
             };
 
-            await TestCalculation(request, new DateTime(2018, 01, 08));
+            await TestCalculation(request, new DateTime(2018, 01, 08), new DateTime(2018, 01, 02));
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 DateNoticeGiven = new DateTime(2018, 01, 01)
             };
 
-            await TestCalculation(request, new DateTime(2018, 01, 08));
+            await TestCalculation(request, new DateTime(2018, 01, 08), new DateTime(2018, 01, 02));
         }
 
         [Fact]
@@ -61,16 +61,17 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 DateNoticeGiven = new DateTime(2018, 01, 01)
             };
 
-            await TestCalculation(request, new DateTime(2018, 03, 26));
+            await TestCalculation(request, new DateTime(2018, 03, 26), new DateTime(2018, 01, 02));
         }
 
-        private async Task TestCalculation(ProjectedNoticeDateCalculationRequestModel request, DateTime expectedResult)
+        private async Task TestCalculation(ProjectedNoticeDateCalculationRequestModel request, DateTime expectedProjectedNoticeDate, DateTime expectedNoticeStartDate)
         {
             //Act 
             var actualResult = await _service.PerformProjectedNoticeDateCalculationAsync(request,  _options);
 
             //Assert 
-            actualResult.ProjectedNoticeDate.Should().Be(expectedResult);
+            actualResult.ProjectedNoticeDate.Should().Be(expectedProjectedNoticeDate);
+            actualResult.NoticeStartDate.Should().Be(expectedNoticeStartDate);
         }
     }
 }
