@@ -22,6 +22,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             noticeEntitlementWeeks = Math.Max(Math.Min(noticeEntitlementWeeks, 12), 1);
 
             result.ProjectedNoticeDate = relNoticeDate.AddDays(noticeEntitlementWeeks * 7);
+            result.NoticeStartDate = relNoticeDate.AddDays(1);
             return await Task.FromResult(result);
         }
     }
