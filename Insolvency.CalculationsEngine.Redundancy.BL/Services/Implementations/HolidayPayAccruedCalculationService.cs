@@ -21,7 +21,11 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             var calculationResult = new HolidayPayAccruedResponseDTO();
 
             var shiftPattern = data.ShiftPattern;
+            var twelveMonthsPrior = data.InsolvencyDate.Date.AddMonths(-12).AddDays(1);
             var adjHolYearStart = await data.GetHolidayYearStart();
+            if (adjHolYearStart < twelveMonthsPrior)
+                adjHolYearStart = twelveMonthsPrior;
+
             var holYearEndDate = await data.GetHolidayYearEnd();
             var statMaxWeeklyPay = ConfigValueLookupHelper.GetStatutoryMax(options, data.DismissalDate);
 
@@ -30,7 +34,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
             int totalWorkingDaysInClaim = 0;
             totalWorkingDaysInClaim = await totalWorkingDaysInClaim.GetTotalWorkingDaysInHolidayClaim(
-                data.ShiftPattern, data.HolidayYearStart.Date, holYearEndDate.Date, data.DismissalDate.Date, 
+                data.ShiftPattern, adjHolYearStart, holYearEndDate.Date, data.DismissalDate.Date, 
                 data.InsolvencyDate.Date, data.EmpStartDate.Date);
 
             decimal limitedDaysCFwd = 0.00m;
