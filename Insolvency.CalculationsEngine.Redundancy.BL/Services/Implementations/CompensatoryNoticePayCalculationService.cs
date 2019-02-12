@@ -89,32 +89,34 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
                         foreach (var benefit in request.Benefits)
                         {
-                            if (claimDay >= benefit.BenefitStartDate.Date && claimDay <= benefit.BenefitEndDate.Date)
+                            var endDate = benefit.BenefitEndDate ?? claimEndDate;
+                            if (claimDay >= benefit.BenefitStartDate.Date && claimDay <= endDate)
                             {
                                 benefitOrIncomeReceived = true;
-                                totalBenefitAmount += await benefit.BenefitAmount.GetDailyAmount(benefit.BenefitStartDate, benefit.BenefitEndDate);
+                                totalBenefitAmount += await benefit.BenefitAmount.GetDailyAmount(benefit.BenefitStartDate, endDate);
                             }
                         }
 
                         foreach (var newEmployment in request.NewEmployments)
                         {
-                            if (claimDay >= newEmployment.NewEmploymentStartDate.Date && claimDay <= newEmployment.NewEmploymentEndDate.Date)
+                            var endDate = newEmployment.NewEmploymentEndDate ?? claimEndDate;
+                            if (claimDay >= newEmployment.NewEmploymentStartDate.Date && claimDay <= endDate)
                             {
                                 benefitOrIncomeReceived = true;
                                 var newEmploymentEarnings = newEmployment.NewEmploymentWage;
                                 if (newEmployment.NewEmploymentWeeklyWage.HasValue)
-                                    newEmploymentEarnings = Math.Max(newEmploymentEarnings, await newEmployment.NewEmploymentWeeklyWage.Value.GetEarnings(newEmployment.NewEmploymentStartDate, newEmployment.NewEmploymentEndDate));
-                                totalNewEmploymentAmount += await newEmploymentEarnings.GetDailyAmount(newEmployment.NewEmploymentStartDate, newEmployment.NewEmploymentEndDate);
+                                    newEmploymentEarnings = Math.Max(newEmploymentEarnings, await newEmployment.NewEmploymentWeeklyWage.Value.GetEarnings(newEmployment.NewEmploymentStartDate, endDate));
+                                totalNewEmploymentAmount += await newEmploymentEarnings.GetDailyAmount(newEmployment.NewEmploymentStartDate, endDate);
                             }
                         }
 
-
                         foreach (var wageIncrease in request.WageIncreases)
                         {
-                            if (claimDay >= wageIncrease.WageIncreaseStartDate.Date && claimDay <= wageIncrease.WageIncreaseEndDate.Date)
+                            var endDate = wageIncrease.WageIncreaseEndDate ?? claimEndDate;
+                            if (claimDay >= wageIncrease.WageIncreaseStartDate.Date && claimDay <= endDate)
                             {
                                 benefitOrIncomeReceived = true;
-                                totalWageIncreaseAmount += await wageIncrease.WageIncreaseAmount.GetDailyAmount(wageIncrease.WageIncreaseStartDate, wageIncrease.WageIncreaseEndDate);
+                                totalWageIncreaseAmount += await wageIncrease.WageIncreaseAmount.GetDailyAmount(wageIncrease.WageIncreaseStartDate, endDate);
                             }
                         }
 

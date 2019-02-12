@@ -14,7 +14,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Notice
         public DateTime NewEmploymentStartDate { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime NewEmploymentEndDate { get; set; }
+        public DateTime? NewEmploymentEndDate { get; set; }
 
         public decimal NewEmploymentWage { get; set; }
 
