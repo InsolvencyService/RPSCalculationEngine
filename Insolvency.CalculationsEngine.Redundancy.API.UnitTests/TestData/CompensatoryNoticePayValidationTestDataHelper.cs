@@ -62,9 +62,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithInvalidBenefitStartDate(),
                 "'Benefit Start Date' is not provided or it is an invalid date" };
             yield return new object[] {
-                CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithInvalidBenefitEndDate(),
-                "'Benefit End Date' is not provided or it is an invalid date" };
-            yield return new object[] {
                 CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithBenefitEndDateBeforeBenefitStartDate(),
                 "'Benefit End Date' cannot be before the Benefit Start Date" };
             yield return new object[] {
@@ -76,9 +73,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
             yield return new object[] {
                 CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithInvalidNewEmploymentStartDate(),
                 "'New Employment Start Date' is not provided or it is an invalid date" };
-            yield return new object[] {
-                CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithInvalidNewEmploymentEndDate(),
-                "'New Employment End Date' is not provided or it is an invalid date" };
             yield return new object[] {
                 CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithNewEmploymentEndDateBeforeNewEmploymentStartDate(),
                 "'New Employment End Date' cannot be before the New Employment Start Date" };
@@ -97,9 +91,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
             yield return new object[] {
                 CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithInvalidWageIncreaseStartDate(),
                 "'Wage Increase Start Date' is not provided or it is an invalid date" };
-            yield return new object[] {
-                CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithInvalidWageIncreaseEndDate(),
-                "'Wage Increase End Date' is not provided or it is an invalid date" };
             yield return new object[] {
                 CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithWageIncreaseEndDateBeforeWageIncreaseStartDate(),
                 "'Wage Increase End Date' cannot be before the Wage Increase Start Date" };

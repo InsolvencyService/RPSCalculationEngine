@@ -14,7 +14,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Notice
         public DateTime WageIncreaseStartDate { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime WageIncreaseEndDate { get; set; }
+        public DateTime? WageIncreaseEndDate { get; set; }
 
         public decimal WageIncreaseAmount { get; set; }
     }

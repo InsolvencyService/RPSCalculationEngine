@@ -80,11 +80,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                 RuleFor(req => req.BenefitStartDate.Date).Must(CommonValidation.BeValidDate)
                     .WithMessage($"'Benefit Start Date' is not provided or it is an invalid date");
 
-                RuleFor(req => req.BenefitEndDate.Date).Must(CommonValidation.BeValidDate)
-                    .WithMessage($"'Benefit End Date' is not provided or it is an invalid date");
-
-                RuleFor(req => req.BenefitEndDate.Date).GreaterThanOrEqualTo(model => model.BenefitStartDate.Date)
-                    .WithMessage($"'Benefit End Date' cannot be before the Benefit Start Date");
+                RuleFor(req => req.BenefitEndDate.Value.Date)
+                    .GreaterThanOrEqualTo(model => model.BenefitStartDate.Date)
+                    .WithMessage($"'Benefit End Date' cannot be before the Benefit Start Date")
+                    .When(req => req.BenefitEndDate.HasValue);
 
                 RuleFor(req => req.BenefitAmount)
                     .NotNull()
@@ -102,11 +101,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                 RuleFor(req => req.NewEmploymentStartDate.Date).Must(CommonValidation.BeValidDate)
                     .WithMessage($"'New Employment Start Date' is not provided or it is an invalid date");
 
-                RuleFor(req => req.NewEmploymentEndDate.Date).Must(CommonValidation.BeValidDate)
-                    .WithMessage($"'New Employment End Date' is not provided or it is an invalid date");
-
-                RuleFor(req => req.NewEmploymentEndDate.Date).GreaterThanOrEqualTo(model => model.NewEmploymentStartDate.Date)
-                    .WithMessage($"'New Employment End Date' cannot be before the New Employment Start Date");
+                RuleFor(req => req.NewEmploymentEndDate.Value.Date)
+                    .GreaterThanOrEqualTo(model => model.NewEmploymentStartDate.Date)
+                    .WithMessage($"'New Employment End Date' cannot be before the New Employment Start Date")
+                    .When(req => req.NewEmploymentEndDate.HasValue);
 
                 RuleFor(req => req.NewEmploymentWage)
                     .NotNull()
@@ -139,11 +137,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                 RuleFor(req => req.WageIncreaseStartDate.Date).Must(CommonValidation.BeValidDate)
                     .WithMessage($"'Wage Increase Start Date' is not provided or it is an invalid date");
 
-                RuleFor(req => req.WageIncreaseEndDate.Date).Must(CommonValidation.BeValidDate)
-                    .WithMessage($"'Wage Increase End Date' is not provided or it is an invalid date");
-
-                RuleFor(req => req.WageIncreaseEndDate.Date).GreaterThanOrEqualTo(model => model.WageIncreaseStartDate.Date)
-                    .WithMessage($"'Wage Increase End Date' cannot be before the Wage Increase Start Date");
+                RuleFor(req => req.WageIncreaseEndDate.Value.Date)
+                    .GreaterThanOrEqualTo(model => model.WageIncreaseStartDate.Date)
+                    .WithMessage($"'Wage Increase End Date' cannot be before the Wage Increase Start Date")
+                    .When(req => req.WageIncreaseEndDate.HasValue);
 
                 RuleFor(req => req.WageIncreaseAmount)
                     .NotNull()

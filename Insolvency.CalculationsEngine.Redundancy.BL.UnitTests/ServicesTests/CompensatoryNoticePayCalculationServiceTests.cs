@@ -431,5 +431,203 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             response.WeeklyResults[1].NonPreferentialClaim.Should().Be(response.WeeklyResults[1].NetEntitlement);
             response.WeeklyResults[1].WeekNumber.Should().Be(2);
         }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformCalculationAsync_ForBenefitWithNoEndDate()
+        {
+            var request = new CompensatoryNoticePayCalculationRequestModel
+            {
+                InsolvencyEmploymentStartDate = new DateTime(2016, 02, 01),
+                InsolvencyDate = new DateTime(2018, 6, 1),
+                DismissalDate = new DateTime(2018, 06, 05),
+                DateNoticeGiven = new DateTime(2018, 06, 01),
+                WeeklyWage = 330.25m,
+                ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                IsTaxable = true,
+                DateOfBirth = new DateTime(1990, 1, 1),
+                DeceasedDate = null,
+                Benefits = new List<CompensatoryNoticePayBenefit>()
+                {
+                    new CompensatoryNoticePayBenefit()
+                    {
+                        BenefitStartDate = new DateTime(2018, 06, 05),
+                        BenefitAmount = 220
+                    }
+                }
+            };
+
+            var response = await _service.PerformCompensatoryNoticePayCalculationAsync(request, _options);
+
+            response.CompensationEndDate.Should().Be(new DateTime(2018, 6, 15));
+            response.DaysInClaim.Should().Be(8);
+            response.NoticeStartDate.Should().Be(new DateTime(2018, 6, 2));
+            response.NoticeWeeksDue.Should().Be(2);
+            response.MaxCNPEntitlement.Should().Be(660.5m);
+            response.StatutoryMax.Should().Be(508m);
+            response.ProjectedNoticeDate.Should().Be(new DateTime(2018, 6, 15));
+            response.WeeklyResults.Count.Should().Be(2);
+
+            response.WeeklyResults[0].BenefitsDeducted.Should().Be(60m);
+            response.WeeklyResults[0].EmployerEntitlement.Should().Be(198.15m);
+            response.WeeklyResults[0].GrossEntitlement.Should().Be(138.15m);
+            response.WeeklyResults[0].IsTaxable.Should().BeTrue();
+            response.WeeklyResults[0].NIDeducted.Should().Be(0m);
+            response.WeeklyResults[0].NetEntitlement.Should().Be(110.52m);
+            response.WeeklyResults[0].NewEmploymentDeducted.Should().Be(0m);
+            response.WeeklyResults[0].NotionalBenefitDeducted.Should().Be(0m);
+            response.WeeklyResults[0].NotionalTaxDeducted.Should().Be(0m);
+            response.WeeklyResults[0].TaxDeducted.Should().Be(27.63m);
+            response.WeeklyResults[0].WageIncreaseDeducted.Should().Be(0m);
+            response.WeeklyResults[0].PreferentialClaim.Should().Be(0m);
+            response.WeeklyResults[0].NonPreferentialClaim.Should().Be(response.WeeklyResults[0].NetEntitlement);
+            response.WeeklyResults[0].WeekNumber.Should().Be(1);
+
+            response.WeeklyResults[1].BenefitsDeducted.Should().Be(140m);
+            response.WeeklyResults[1].EmployerEntitlement.Should().Be(330.25m);
+            response.WeeklyResults[1].GrossEntitlement.Should().Be(190.25m);
+            response.WeeklyResults[1].NIDeducted.Should().Be(3.39m);
+            response.WeeklyResults[1].NetEntitlement.Should().Be(148.81m);
+            response.WeeklyResults[1].NewEmploymentDeducted.Should().Be(0m);
+            response.WeeklyResults[1].NotionalBenefitDeducted.Should().Be(0m);
+            response.WeeklyResults[1].NotionalTaxDeducted.Should().Be(0m);
+            response.WeeklyResults[1].TaxDeducted.Should().Be(38.05m);
+            response.WeeklyResults[1].WageIncreaseDeducted.Should().Be(0m);
+            response.WeeklyResults[1].PreferentialClaim.Should().Be(0m);
+            response.WeeklyResults[1].NonPreferentialClaim.Should().Be(response.WeeklyResults[1].NetEntitlement);
+            response.WeeklyResults[1].WeekNumber.Should().Be(2);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformCalculationAsync_ForNewEmploymentWithNoEndDate()
+        {
+            var request = new CompensatoryNoticePayCalculationRequestModel
+            {
+                InsolvencyEmploymentStartDate = new DateTime(2016, 02, 01),
+                InsolvencyDate = new DateTime(2018, 6, 1),
+                DismissalDate = new DateTime(2018, 06, 05),
+                DateNoticeGiven = new DateTime(2018, 06, 01),
+                WeeklyWage = 330.25m,
+                ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                IsTaxable = true,
+                DateOfBirth = new DateTime(1990, 1, 1),
+                DeceasedDate = null,
+                NewEmployments = new List<CompensatoryNoticePayNewEmployment>()
+                {
+                    new CompensatoryNoticePayNewEmployment()
+                    {
+                        NewEmploymentStartDate = new DateTime(2018, 06, 05),
+                        NewEmploymentWage = 220
+                    }
+                }
+            };
+
+            var response = await _service.PerformCompensatoryNoticePayCalculationAsync(request, _options);
+
+            response.CompensationEndDate.Should().Be(new DateTime(2018, 6, 15));
+            response.DaysInClaim.Should().Be(8);
+            response.NoticeStartDate.Should().Be(new DateTime(2018, 6, 2));
+            response.NoticeWeeksDue.Should().Be(2);
+            response.MaxCNPEntitlement.Should().Be(660.5m);
+            response.StatutoryMax.Should().Be(508m);
+            response.ProjectedNoticeDate.Should().Be(new DateTime(2018, 6, 15));
+            response.WeeklyResults.Count.Should().Be(2);
+
+            response.WeeklyResults[0].BenefitsDeducted.Should().Be(0m);
+            response.WeeklyResults[0].EmployerEntitlement.Should().Be(198.15m);
+            response.WeeklyResults[0].GrossEntitlement.Should().Be(138.15m);
+            response.WeeklyResults[0].IsTaxable.Should().BeTrue();
+            response.WeeklyResults[0].NIDeducted.Should().Be(0m);
+            response.WeeklyResults[0].NetEntitlement.Should().Be(110.52m);
+            response.WeeklyResults[0].NewEmploymentDeducted.Should().Be(60m);
+            response.WeeklyResults[0].NotionalBenefitDeducted.Should().Be(0m);
+            response.WeeklyResults[0].NotionalTaxDeducted.Should().Be(0m);
+            response.WeeklyResults[0].TaxDeducted.Should().Be(27.63m);
+            response.WeeklyResults[0].WageIncreaseDeducted.Should().Be(0m);
+            response.WeeklyResults[0].PreferentialClaim.Should().Be(0m);
+            response.WeeklyResults[0].NonPreferentialClaim.Should().Be(response.WeeklyResults[0].NetEntitlement);
+            response.WeeklyResults[0].WeekNumber.Should().Be(1);
+
+            response.WeeklyResults[1].BenefitsDeducted.Should().Be(0m);
+            response.WeeklyResults[1].EmployerEntitlement.Should().Be(330.25m);
+            response.WeeklyResults[1].GrossEntitlement.Should().Be(190.25m);
+            response.WeeklyResults[1].NIDeducted.Should().Be(3.39m);
+            response.WeeklyResults[1].NetEntitlement.Should().Be(148.81m);
+            response.WeeklyResults[1].NewEmploymentDeducted.Should().Be(140m);
+            response.WeeklyResults[1].NotionalBenefitDeducted.Should().Be(0m);
+            response.WeeklyResults[1].NotionalTaxDeducted.Should().Be(0m);
+            response.WeeklyResults[1].TaxDeducted.Should().Be(38.05m);
+            response.WeeklyResults[1].WageIncreaseDeducted.Should().Be(0m);
+            response.WeeklyResults[1].PreferentialClaim.Should().Be(0m);
+            response.WeeklyResults[1].NonPreferentialClaim.Should().Be(response.WeeklyResults[1].NetEntitlement);
+            response.WeeklyResults[1].WeekNumber.Should().Be(2);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformCalculationAsync_ForWageIncreaseWithNoEndDate()
+        {
+            var request = new CompensatoryNoticePayCalculationRequestModel
+            {
+                InsolvencyEmploymentStartDate = new DateTime(2016, 02, 01),
+                InsolvencyDate = new DateTime(2018, 6, 1),
+                DismissalDate = new DateTime(2018, 06, 05),
+                DateNoticeGiven = new DateTime(2018, 06, 01),
+                WeeklyWage = 330.25m,
+                ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                IsTaxable = true,
+                DateOfBirth = new DateTime(1990, 1, 1),
+                DeceasedDate = null,
+                WageIncreases = new List<CompensatoryNoticePayWageIncrease>()
+                {
+                    new CompensatoryNoticePayWageIncrease()
+                    {
+                        WageIncreaseStartDate = new DateTime(2018, 06, 05),
+                        WageIncreaseAmount = 220
+                    }
+                }
+            };
+
+            var response = await _service.PerformCompensatoryNoticePayCalculationAsync(request, _options);
+
+            response.CompensationEndDate.Should().Be(new DateTime(2018, 6, 15));
+            response.DaysInClaim.Should().Be(8);
+            response.NoticeStartDate.Should().Be(new DateTime(2018, 6, 2));
+            response.NoticeWeeksDue.Should().Be(2);
+            response.MaxCNPEntitlement.Should().Be(660.5m);
+            response.StatutoryMax.Should().Be(508m);
+            response.ProjectedNoticeDate.Should().Be(new DateTime(2018, 6, 15));
+            response.WeeklyResults.Count.Should().Be(2);
+
+            response.WeeklyResults[0].BenefitsDeducted.Should().Be(0m);
+            response.WeeklyResults[0].EmployerEntitlement.Should().Be(198.15m);
+            response.WeeklyResults[0].GrossEntitlement.Should().Be(138.15m);
+            response.WeeklyResults[0].IsTaxable.Should().BeTrue();
+            response.WeeklyResults[0].NIDeducted.Should().Be(0m);
+            response.WeeklyResults[0].NetEntitlement.Should().Be(110.52m);
+            response.WeeklyResults[0].NewEmploymentDeducted.Should().Be(0m);
+            response.WeeklyResults[0].NotionalBenefitDeducted.Should().Be(0m);
+            response.WeeklyResults[0].NotionalTaxDeducted.Should().Be(0m);
+            response.WeeklyResults[0].TaxDeducted.Should().Be(27.63m);
+            response.WeeklyResults[0].WageIncreaseDeducted.Should().Be(60m);
+            response.WeeklyResults[0].PreferentialClaim.Should().Be(0m);
+            response.WeeklyResults[0].NonPreferentialClaim.Should().Be(response.WeeklyResults[0].NetEntitlement);
+            response.WeeklyResults[0].WeekNumber.Should().Be(1);
+
+            response.WeeklyResults[1].BenefitsDeducted.Should().Be(0m);
+            response.WeeklyResults[1].EmployerEntitlement.Should().Be(330.25m);
+            response.WeeklyResults[1].GrossEntitlement.Should().Be(190.25m);
+            response.WeeklyResults[1].NIDeducted.Should().Be(3.39m);
+            response.WeeklyResults[1].NetEntitlement.Should().Be(148.81m);
+            response.WeeklyResults[1].NewEmploymentDeducted.Should().Be(0m);
+            response.WeeklyResults[1].NotionalBenefitDeducted.Should().Be(0m);
+            response.WeeklyResults[1].NotionalTaxDeducted.Should().Be(0m);
+            response.WeeklyResults[1].TaxDeducted.Should().Be(38.05m);
+            response.WeeklyResults[1].WageIncreaseDeducted.Should().Be(140m);
+            response.WeeklyResults[1].PreferentialClaim.Should().Be(0m);
+            response.WeeklyResults[1].NonPreferentialClaim.Should().Be(response.WeeklyResults[1].NetEntitlement);
+            response.WeeklyResults[1].WeekNumber.Should().Be(2);
+        }
     }
 }
