@@ -21,7 +21,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             }
             if (data.TupeStatus == false && data.TotalClaimedInFourMonth > 0.0m)
             {
-                apportionmentPercentage = (data.TotalClaimedInFourMonth <= 800m) ? 1m :
+                apportionmentPercentage = (data.TotalClaimedInFourMonth <= preferentialLimit) ? 1m :
                     data.GrossPaidInFourMonth / data.TotalClaimedInFourMonth;
 
                 preferentialClaim = (data.TotalClaimedInFourMonth > preferentialLimit
