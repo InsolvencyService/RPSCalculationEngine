@@ -188,5 +188,28 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             result.TupeStatus.Should().Be(request.TupeStatus == true);
 
         }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task ReturnsCorrectApportionmentPercentage_WhenTotalClaimedIsLessThanOrEqualTo800()
+        {
+            // Arrange
+            var request = new ApportionmentCalculationRequestModel()
+            {
+                GrossPaidInFourMonth = 799.99m,
+                GrossEntitlement = 800m,
+                TotalClaimedInFourMonth = 800m,
+                TupeStatus = false
+            };
+
+            // Act
+            var result = await _service.PerformApportionmentCalculationAsync(request, _options);
+
+            // Assert
+            Math.Round(result.PrefClaim, 2).Should().Be(799.99m);
+            Math.Round(result.NonPrefClaim, 2).Should().Be(0.01m);
+            result.ApportionmentPercentage.Should().Be(100.0m);
+            result.TupeStatus.Should().Be(false);
+        }
     }
 }
