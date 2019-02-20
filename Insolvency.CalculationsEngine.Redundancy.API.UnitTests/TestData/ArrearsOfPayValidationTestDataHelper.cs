@@ -70,10 +70,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 "'Unpaid Period From' Date can not be after the 'Unpaid Period To'"
             };
             yield return new object[] {
-                ArrearsOfPayTestsDataGenerator.GetRequestWithUnpaidPeriodToMoreThan7MOnthsAfterUnpaidPeriodFrom(),
-                "'Unpaid Period To' Date can not be moe than 7 months after the 'Unpaid Period From'"
-            };
-            yield return new object[] {
                 ArrearsOfPayTestsDataGenerator.GetRequestWithZeroWeeklyWage(),
                 "'Weekly wage' is invalid; value must not be 0 or negative"
             };
