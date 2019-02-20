@@ -47,9 +47,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
             RuleFor(req => req.UnpaidPeriodFrom.Date).LessThanOrEqualTo(model => model.UnpaidPeriodTo.Date)
                 .WithMessage($"'Unpaid Period From' Date can not be after the 'Unpaid Period To'");
 
-            RuleFor(req => req.UnpaidPeriodTo.Date).LessThanOrEqualTo(model => model.UnpaidPeriodFrom.Date.AddMonths(7))
-                .WithMessage($"'Unpaid Period To' Date can not be moe than 7 months after the 'Unpaid Period From'");
-
             RuleFor(req => req.WeeklyWage)
                 .GreaterThan(0)
                 .WithMessage($"'Weekly wage' is invalid; value must not be 0 or negative");
