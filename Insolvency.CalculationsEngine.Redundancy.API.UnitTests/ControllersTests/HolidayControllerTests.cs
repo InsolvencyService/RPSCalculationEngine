@@ -184,5 +184,94 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var okObjectRequest = result.Should().BeOfType<OkObjectResult>().Subject;
             okObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.OK);
         }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PostAsync_Succeeds_WithNoHTNPData()
+        {
+            //Arrange
+            var request = new HolidayCalculationRequestModel
+            {
+                Hpa = new HolidayPayAccruedCalculationRequestModel
+                {
+                    InsolvencyDate = new DateTime(2017, 03, 22),
+                    EmpStartDate = new DateTime(2016, 12, 19),
+                    DismissalDate = new DateTime(2017, 03, 20),
+                    ContractedHolEntitlement = 25,
+                    HolidayYearStart = new DateTime(2017, 01, 01),
+                    IsTaxable = true,
+                    PayDay = (int)DayOfWeek.Saturday,
+                    ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                    WeeklyWage = 243.25m,
+                    DaysCFwd = 5.5m,
+                    DaysTaken = 3.5m,
+                    IpConfirmedDays = 25
+                },
+                Htnp = new List<HolidayTakenNotPaidCalculationRequestModel>()
+            };
+            var response = new HolidayCalculationResponseDTO();
+
+            _service.Setup(m => m.PerformHolidayCalculationAsync(request, _confOptions)).ReturnsAsync(response);
+            var controller = new HolidayController(_service.Object, _mockLogger.Object, _confOptions);
+
+            //Act
+            var result = await controller.PostAsync(request);
+
+            //Assert
+            var okObjectRequest = result.Should().BeOfType<OkObjectResult>().Subject;
+            okObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.OK);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PostAsync_Succeeds_WithNoRP14aDataAndOverride()
+        {
+            //Arrange
+            var request = new HolidayCalculationRequestModel
+            {
+                Rp14aNotRequired = true,
+                Hpa = new HolidayPayAccruedCalculationRequestModel
+                {
+                    InsolvencyDate = new DateTime(2017, 03, 22),
+                    EmpStartDate = new DateTime(2016, 12, 19),
+                    DismissalDate = new DateTime(2017, 03, 20),
+                    ContractedHolEntitlement = 25,
+                    HolidayYearStart = new DateTime(2017, 01, 01),
+                    IsTaxable = true,
+                    PayDay = (int)DayOfWeek.Saturday,
+                    ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                    WeeklyWage = 243.25m,
+                    DaysCFwd = 5.5m,
+                    DaysTaken = 3.5m,
+                    IpConfirmedDays = 25
+                },
+                Htnp = new List<HolidayTakenNotPaidCalculationRequestModel>()
+                {
+                    new HolidayTakenNotPaidCalculationRequestModel()
+                    {
+                        InputSource = InputSource.Rp1,
+                        InsolvencyDate = new DateTime(2018, 01, 10),
+                        DismissalDate = new DateTime(2018, 01, 03),
+                        UnpaidPeriodFrom = new DateTime(2017, 12, 12),
+                        UnpaidPeriodTo = new DateTime(2017, 12, 29),
+                        WeeklyWage = 306.85m,
+                        ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                        PayDay = 6,
+                        IsTaxable = true
+                    },
+                }
+            };
+            var response = new HolidayCalculationResponseDTO();
+
+            _service.Setup(m => m.PerformHolidayCalculationAsync(request, _confOptions)).ReturnsAsync(response);
+            var controller = new HolidayController(_service.Object, _mockLogger.Object, _confOptions);
+
+            //Act
+            var result = await controller.PostAsync(request);
+
+            //Assert
+            var okObjectRequest = result.Should().BeOfType<OkObjectResult>().Subject;
+            okObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.OK);
+        }
     }
 }

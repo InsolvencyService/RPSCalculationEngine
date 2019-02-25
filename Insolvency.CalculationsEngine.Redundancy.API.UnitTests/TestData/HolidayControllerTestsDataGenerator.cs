@@ -39,6 +39,18 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                         ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
                         PayDay = 6,
                         IsTaxable = true
+                    },
+                    new HolidayTakenNotPaidCalculationRequestModel()
+                    {
+                        InputSource = InputSource.Rp14a,
+                        InsolvencyDate = new DateTime(2018, 01, 10),
+                        DismissalDate = new DateTime(2018, 01, 03),
+                        UnpaidPeriodFrom = new DateTime(2017, 12, 12),
+                        UnpaidPeriodTo = new DateTime(2017, 12, 29),
+                        WeeklyWage = 306.85m,
+                        ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                        PayDay = 6,
+                        IsTaxable = true
                     }
                 }
             };
