@@ -5,6 +5,9 @@ using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
 using Microsoft.Extensions.Options;
 using Xunit;
 using Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData;
+using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Holiday;
+using System;
+using System.Collections.Generic;
 
 namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
 {
@@ -89,6 +92,38 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(184.85m);
             outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
             outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformHolidayPayAccruedCalculationAsync_Return_WhenHolidayStartDate12MonthsBeforeInsolvencyDate()
+        {
+            // Arrange
+            var inputData = new HolidayPayAccruedCalculationRequestModel
+            {
+                InsolvencyDate = new DateTime(2019, 1, 14),
+                EmpStartDate = new DateTime(2016, 1, 1),
+                DismissalDate = new DateTime(2018, 11, 30),
+                ContractedHolEntitlement = 28,
+                HolidayYearStart = new DateTime(2018, 01, 01),
+                IsTaxable = true,
+                PayDay = (int)DayOfWeek.Saturday,
+                ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                WeeklyWage = 575.34m,
+                DaysCFwd = 8m,
+                DaysTaken = 10m,
+                IpConfirmedDays = 41
+            };
+
+            // Act
+            var outputData = await Task.FromResult(_holidayPayAccruedCalculationService.PerformHolidayPayAccruedCalculationAsync(inputData, _options));
+
+            // Assert
+            outputData.Result.StatutoryMax.Should().Be(508m);
+            outputData.Result.HolidaysOwed.Should().Be(28);
+            outputData.Result.BusinessDaysInClaim.Should().Be(261.00m);
+            outputData.Result.WorkingDaysInClaim.Should().Be(230m);
+            outputData.Result.ProRataAccruedDays.Should().Be(22.6743m);
         }
     }
 }

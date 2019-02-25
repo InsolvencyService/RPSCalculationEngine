@@ -30,7 +30,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             var statMaxWeeklyPay = ConfigValueLookupHelper.GetStatutoryMax(options, data.DismissalDate);
 
             // Calculate totals for holiday pay accrued
-            int totalBusinessDaysInClaim = await adjHolYearStart.GetNumBusinessDaysInRange(holYearEndDate, shiftPattern);
+            int totalBusinessDaysInClaim = await data.HolidayYearStart.GetNumBusinessDaysInRange(holYearEndDate, shiftPattern);
 
             int totalWorkingDaysInClaim = 0;
             totalWorkingDaysInClaim = await totalWorkingDaysInClaim.GetTotalWorkingDaysInHolidayClaim(
