@@ -32,6 +32,11 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                .When(req => req.Htnp != null);
 
             RuleFor(req => req)
+               .Must(RP1DataPresent)
+               .WithMessage($"No Holiday Taken Not Paid RP1 data has not been provided")
+               .When(req => req.Htnp != null);
+
+            RuleFor(req => req)
                .Must(RP14aDataPresent)
                .WithMessage($"No Holiday Taken Not Paid RP14a data has not been provided")
                .When(req => req.Htnp != null);
@@ -60,6 +65,12 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                 }
             }
             return true;
+        }
+
+        private bool RP1DataPresent(HolidayCalculationRequestModel data)
+        {
+            return data.Htnp.Count(x => x.InputSource == InputSource.Rp14a) == 0 ||
+                data.Htnp.Count(x => x.InputSource == InputSource.Rp1) > 0;
         }
 
         private bool RP14aDataPresent(HolidayCalculationRequestModel data)
