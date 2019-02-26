@@ -195,7 +195,11 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var controller = new NoticeController(_service.Object, _mockLogger.Object, _confOptions);
             var data = new NoticePayCompositeCalculationRequestModel()
                         { Cnp = CompensatoryNoticePayControllerTestsDataGenerator.GetValidRequest(),
-                        Nwnp = new List<NoticeWorkedNotPaidCalculationRequestModel>() { NoticeWorkedNotPaidControllerTestsDataGenerator.GetValidRequest() }
+                        Nwnp = new List<NoticeWorkedNotPaidCalculationRequestModel>()
+                        {
+                            NoticeWorkedNotPaidControllerTestsDataGenerator.GetValidRP1Request(),
+                            NoticeWorkedNotPaidControllerTestsDataGenerator.GetValidRP14aRequest()
+                        }
             };
             var response = new NoticePayCompositeCalculationResponseDTO();
             _service.Setup(s => s.PerformNoticePayCompositeCalculationAsync(data, _confOptions))

@@ -71,6 +71,42 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                     {
                         new HolidayTakenNotPaidCalculationRequestModel()
                         {
+                            InputSource = InputSource.Rp14a,
+                            InsolvencyDate = new DateTime(2018, 01, 10),
+                            DismissalDate = new DateTime(2018, 01, 03),
+                            UnpaidPeriodFrom = new DateTime(2017, 12, 12),
+                            UnpaidPeriodTo = new DateTime(2017, 12, 29),
+                            WeeklyWage = 306.85m,
+                            ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                            PayDay = 6,
+                            IsTaxable = true
+                        },
+                    }
+                },
+                "No Holiday Taken Not Paid RP1 data has not been provided" };
+            yield return new object[] {
+                new HolidayCalculationRequestModel
+                {
+                    Rp14aNotRequired = false,
+                    Hpa = new HolidayPayAccruedCalculationRequestModel
+                    {
+                        InsolvencyDate = new DateTime(2017, 03, 22),
+                        EmpStartDate = new DateTime(2016, 12, 19),
+                        DismissalDate = new DateTime(2017, 03, 20),
+                        ContractedHolEntitlement = 25,
+                        HolidayYearStart = new DateTime(2017, 01, 01),
+                        IsTaxable = true,
+                        PayDay = (int)DayOfWeek.Saturday,
+                        ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                        WeeklyWage = 243.25m,
+                        DaysCFwd = 5.5m,
+                        DaysTaken = 3.5m,
+                        IpConfirmedDays = 25
+                    },
+                    Htnp = new List<HolidayTakenNotPaidCalculationRequestModel>()
+                    {
+                        new HolidayTakenNotPaidCalculationRequestModel()
+                        {
                             InputSource = InputSource.Rp1,
                             InsolvencyDate = new DateTime(2018, 01, 10),
                             DismissalDate = new DateTime(2018, 01, 03),

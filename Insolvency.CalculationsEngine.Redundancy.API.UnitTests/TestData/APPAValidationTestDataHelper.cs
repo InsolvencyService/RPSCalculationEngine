@@ -112,6 +112,48 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 {
                     new ArrearsOfPayCalculationRequestModel()
                     {
+                        InputSource = InputSource.Rp14a,
+                        InsolvencyDate = new DateTime(2018, 10, 20),
+                        EmploymentStartDate = new DateTime(2016, 04, 06),
+                        DismissalDate = new DateTime(2018, 10, 20),
+                        DateNoticeGiven = new DateTime(2018, 10, 6),
+                        UnpaidPeriodFrom = new DateTime(2018, 10, 1),
+                        UnpaidPeriodTo = new DateTime(2018, 10, 9),
+                        ApClaimAmount = 700M,
+                        IsTaxable = true,
+                        PayDay = 6,
+                        ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                        WeeklyWage = 400m
+                    },
+                    new ArrearsOfPayCalculationRequestModel()
+                    {
+                        InputSource = InputSource.Rp14a,
+                        InsolvencyDate = new DateTime(2018, 10, 20),
+                        EmploymentStartDate = new DateTime(2016, 04, 06),
+                        DismissalDate = new DateTime(2018, 10, 20),
+                        DateNoticeGiven = new DateTime(2018, 10, 14),
+                        UnpaidPeriodFrom = new DateTime(2018, 10, 10),
+                        UnpaidPeriodTo = new DateTime(2018, 10, 18),
+                        ApClaimAmount = 600M,
+                        IsTaxable = true,
+                        PayDay = 6,
+                        ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                        WeeklyWage = 400m
+                    }
+                },
+                    Pa = null
+                },
+                "No Arrears Of Pay RP1 data has been not provided"
+            };
+            yield return new object[]
+            {
+                new APPACalculationRequestModel
+                {
+                    Rp14aNotRequired = false,
+                    Ap = new List<ArrearsOfPayCalculationRequestModel>()
+                {
+                    new ArrearsOfPayCalculationRequestModel()
+                    {
                         InputSource = InputSource.Rp1,
                         InsolvencyDate = new DateTime(2018, 10, 20),
                         EmploymentStartDate = new DateTime(2016, 04, 06),

@@ -27,6 +27,20 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 {
                     new NoticeWorkedNotPaidCalculationRequestModel()
                     {
+                        InputSource = InputSource.Rp1,
+                        EmploymentStartDate = new DateTime(2015, 8, 2),
+                        InsolvencyDate = new DateTime(2018, 7, 27),
+                        DateNoticeGiven = new DateTime(2018, 7, 20),
+                        DismissalDate = new DateTime(2018, 8, 8),
+                        UnpaidPeriodFrom = new DateTime(2018, 7, 21),
+                        UnpaidPeriodTo = new DateTime(2018, 8, 8),
+                        WeeklyWage = 320,
+                        ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                        PayDay = 6,
+                        IsTaxable = true
+                    },
+                    new NoticeWorkedNotPaidCalculationRequestModel()
+                    {
                         InputSource = InputSource.Rp14a,
                         EmploymentStartDate = new DateTime(2015, 8, 2),
                         InsolvencyDate = new DateTime(2018, 7, 27),

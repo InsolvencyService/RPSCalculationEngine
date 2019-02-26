@@ -7,12 +7,31 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
 {
     public static class NoticeWorkedNotPaidControllerTestsDataGenerator
     {
-        public static NoticeWorkedNotPaidCalculationRequestModel GetValidRequest()
+        public static NoticeWorkedNotPaidCalculationRequestModel GetValidRP14aRequest()
         {
             //voilates model validation weekly wage is negative amount
             return new NoticeWorkedNotPaidCalculationRequestModel()
             {
                 InputSource = InputSource.Rp14a,
+                EmploymentStartDate = new DateTime(2015, 8, 2),
+                InsolvencyDate = new DateTime(2018, 7, 27),
+                DateNoticeGiven = new DateTime(2018, 7, 20),
+                DismissalDate = new DateTime(2018, 8, 8),
+                UnpaidPeriodFrom = new DateTime(2018, 7, 21),
+                UnpaidPeriodTo = new DateTime(2018, 8, 8),
+                WeeklyWage = 320,
+                ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                PayDay = 6,
+                IsTaxable = true
+            };
+        }
+
+        public static NoticeWorkedNotPaidCalculationRequestModel GetValidRP1Request()
+        {
+            //voilates model validation weekly wage is negative amount
+            return new NoticeWorkedNotPaidCalculationRequestModel()
+            {
+                InputSource = InputSource.Rp1,
                 EmploymentStartDate = new DateTime(2015, 8, 2),
                 InsolvencyDate = new DateTime(2018, 7, 27),
                 DateNoticeGiven = new DateTime(2018, 7, 20),
@@ -47,21 +66,21 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
 
         public static NoticeWorkedNotPaidCalculationRequestModel GetRequestWithNullInputSource()
         {
-            var request = GetValidRequest();
+            var request = GetValidRP14aRequest();
             request.InputSource = null;
             return request;
         }
 
         public static NoticeWorkedNotPaidCalculationRequestModel GetRequestWithEmptyInputSource()
         {
-            var request = GetValidRequest();
+            var request = GetValidRP14aRequest();
             request.InputSource = string.Empty;
             return request;
         }
 
         public static NoticeWorkedNotPaidCalculationRequestModel GetRequestWithInvalidInputSource()
         {
-            var request = GetValidRequest();
+            var request = GetValidRP14aRequest();
             request.InputSource = "Wibble";
             return request;
         }
