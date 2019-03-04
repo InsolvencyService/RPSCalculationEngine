@@ -190,5 +190,72 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
                 It.IsAny<Func<object, Exception, string>>()
             ));
         }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PostAsync_Fails_IfClaimReceptDateIsNotPresent()
+        {
+            //Arrange
+            var requestData = new RedundancyPaymentCalculationRequestModel
+            {
+                EmploymentStartDate = new DateTime(2015, 10, 11),
+                DismissalDate = new DateTime(2016, 08, 05),
+                DateNoticeGiven = new DateTime(2016, 08, 05),
+                DateOfBirth = new DateTime(1995, 03, 11),
+                WeeklyWage = 203.64m,
+                EmployerPartPayment = 0,
+                EmploymentBreaks = 0
+            };
+
+            //Act
+            var redundancyPayController =
+                new RedundancyPaymentController(_mockService.Object, _mockLogger.Object, _confOptions);
+
+            //Assert
+            var result = await redundancyPayController.PostAsync(requestData);
+            var badRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
+            var statusCode = badRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
+            _mockLogger.Verify(x => x.Log(
+                LogLevel.Error,
+                It.IsAny<EventId>(),
+                It.Is<object>(v => v.ToString().Contains("Claim Receipt Date is not provided or it is an invalid date")),
+                null,
+                It.IsAny<Func<object, Exception, string>>()
+            ));
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PostAsync_Fails_IfClaimReceptDateIsAfterDismissalDatePlus6Months()
+        {
+            //Arrange
+            var requestData = new RedundancyPaymentCalculationRequestModel
+            {
+                EmploymentStartDate = new DateTime(2015, 10, 11),
+                DismissalDate = new DateTime(2016, 08, 05),
+                DateNoticeGiven = new DateTime(2016, 08, 05),
+                ClaimReceiptDate = new DateTime(2017, 2, 06),
+                DateOfBirth = new DateTime(1995, 03, 11),
+                WeeklyWage = 203.64m,
+                EmployerPartPayment = 0,
+                EmploymentBreaks = 0
+            };
+
+            //Act
+            var redundancyPayController =
+                new RedundancyPaymentController(_mockService.Object, _mockLogger.Object, _confOptions);
+
+            //Assert
+            var result = await redundancyPayController.PostAsync(requestData);
+            var badRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
+            var statusCode = badRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
+            _mockLogger.Verify(x => x.Log(
+                LogLevel.Error,
+                It.IsAny<EventId>(),
+                It.Is<object>(v => v.ToString().Contains("Claim Receipt Date must be within 6 months of the dismissal date")),
+                null,
+                It.IsAny<Func<object, Exception, string>>()
+            ));
+        }
     }
 }

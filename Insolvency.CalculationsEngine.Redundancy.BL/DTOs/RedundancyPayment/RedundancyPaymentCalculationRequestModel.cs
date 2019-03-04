@@ -28,7 +28,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.RedundancyPayment
         [Required(ErrorMessage = "You must provide the date notice given to the employee")]
         [DataType(DataType.Date)]
         public DateTime DateNoticeGiven { get; set; }
-        
+
+        [DataType(DataType.Date)]
+        public DateTime ClaimReceiptDate { get; set; }
+
         [Required(ErrorMessage = "You must provide the date of birth")]
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
