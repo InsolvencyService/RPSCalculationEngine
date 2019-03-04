@@ -82,6 +82,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 HolidayPayAccruedTestsDataGenerator.GetRequestWithNegativeDaysTaken(),
                 "Days taken must be 0 or greater" };
             yield return new object[] {
+                HolidayPayAccruedTestsDataGenerator.GetRequestWithNullIpConfirmedDays(),
+                "Ip Confirmed Days is not provided" };
+            yield return new object[] {
                 HolidayPayAccruedTestsDataGenerator.GetRequestWithNegativeIpConfirmedDays(),
                 "Ip Confirmed Days must be greater than or equal to 0" };
         }
