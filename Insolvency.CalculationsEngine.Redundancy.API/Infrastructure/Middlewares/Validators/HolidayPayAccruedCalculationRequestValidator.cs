@@ -84,6 +84,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                 .WithMessage($"Days taken must be 0 or greater");
 
             RuleFor(req => req.IpConfirmedDays)
+                .NotNull()
+                .WithMessage($"Ip Confirmed Days is not provided")
                 .GreaterThanOrEqualTo(0)
                 .WithMessage($"Ip Confirmed Days must be greater than or equal to 0");
 

@@ -248,13 +248,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
             return request;
         }
 
-        public static HolidayPayAccruedCalculationRequestModel GetRequestWithZeroIpConfirmedDays()
-        {
-            var request = GetValidRequestData();
-            request.IpConfirmedDays = 0m;
-            return request;
-        }
-
         public static HolidayPayAccruedCalculationRequestModel GetRequestWithNegativeIpConfirmedDays()
         {
             var request = GetValidRequestData();
