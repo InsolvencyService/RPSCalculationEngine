@@ -9,8 +9,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Notice
            
         }
 
-        public bool Rp14aNotRequired { get; set; }
-
         public List<NoticeWorkedNotPaidCalculationRequestModel> Nwnp { get; set; }
 
         public CompensatoryNoticePayCalculationRequestModel Cnp { get; set; }
