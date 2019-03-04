@@ -30,6 +30,15 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                 .GreaterThan(DateTime.MinValue)
                 .WithMessage($"Dismissal date is not a valid date");
 
+            RuleFor(req => req.ClaimReceiptDate.Date)
+                .Must(CommonValidation.BeValidDate)
+                .WithMessage($"Claim Receipt Date is not provided or it is an invalid date");
+
+            RuleFor(req => req)
+                .Must(ClaimReceitDateLessThatDismissalDatePlus6Months)
+                .WithName("ClaimReceiptDate")
+                .WithMessage($"Claim Receipt Date must be within 6 months of the dismissal date");
+
             RuleFor(req => req.DateOfBirth.Date)
                 .NotNull()
                 .WithMessage($"Date of birth is not provided")
@@ -74,6 +83,11 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
             YearsOfService = Math.Max(YearsOfService, totalYearsOfService);
 
             return await Task.FromResult(totalYearsOfService >= 2);
+        }
+
+        private bool ClaimReceitDateLessThatDismissalDatePlus6Months(RedundancyPaymentCalculationRequestModel data)
+       {
+            return data.ClaimReceiptDate.Date <= data.DismissalDate.Date.AddMonths(6);
         }
     }
 }

@@ -56,6 +56,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 EmploymentStartDate = new DateTime(2016, 02, 01),
                 DismissalDate = new DateTime(2018, 06, 03),
                 DateNoticeGiven = new DateTime(2018, 06, 03),
+                ClaimReceiptDate = new DateTime(2018, 06, 05),
                 DateOfBirth = new DateTime(1975, 03, 15) ,
                 WeeklyWage = 400 ,
                 EmployerPartPayment = 0,
