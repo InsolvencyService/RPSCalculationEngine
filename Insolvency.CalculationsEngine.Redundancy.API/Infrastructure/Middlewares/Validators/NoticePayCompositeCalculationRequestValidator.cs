@@ -35,11 +35,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                .Must(RP1DataPresent)
                .WithMessage($"No Notice Worked Not Paid RP1 data has been not provided")
                .When(req => req.Nwnp != null);
-
-            RuleFor(req => req)
-               .Must(RP14aDataPresent)
-               .WithMessage($"No Notice Worked Not Paid RP14a data has been not provided")
-               .When(req => req.Nwnp != null);
         }
 
         private bool NoOverlappingPeriodsForRp1OrRp14a(List<NoticeWorkedNotPaidCalculationRequestModel> list)
@@ -71,13 +66,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
         {
             return data.Nwnp.Count(x => x.InputSource == InputSource.Rp14a) == 0 ||
                 data.Nwnp.Count(x => x.InputSource == InputSource.Rp1) > 0;
-        }
-
-        private bool RP14aDataPresent(NoticePayCompositeCalculationRequestModel data)
-        {
-            return data.Nwnp.Count(x => x.InputSource == InputSource.Rp1) == 0 ||
-                data.Nwnp.Count(x => x.InputSource == InputSource.Rp14a) > 0 ||
-                data.Rp14aNotRequired;
         }
     }
 }
