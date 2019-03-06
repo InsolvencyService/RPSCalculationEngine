@@ -137,11 +137,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.Extensions
         {
             int numDays = 0;
 
-            if (endDate >= startDate)
+            DateTime start = startDate.Date;
+            DateTime end = endDate.Date;
+
+            if (end >= start)
             {
                 string weekDayNames = await shiftPattern.GetShiftDayNames();
 
-                for (var date = startDate; date <= endDate; date = date.AddDays(1))
+                for (var date = start; date <= end; date = date.AddDays(1))
                 {
                     if (weekDayNames.Contains(date.DayOfWeek.ToString()))
                         numDays++;
