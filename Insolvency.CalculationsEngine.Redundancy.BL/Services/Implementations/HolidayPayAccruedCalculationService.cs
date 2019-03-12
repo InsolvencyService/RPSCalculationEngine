@@ -107,8 +107,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                                 partWeekDays = 0;
                             }
                         }
-                        else if (partWeekDays > 0)
+                        else if (partWeekDays >= 1)
                             maxDays++;
+                       
 
                         if (weekDayNumber == 6)
                         {
