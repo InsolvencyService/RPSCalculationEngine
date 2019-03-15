@@ -80,6 +80,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithNegativeNewEmploymentWage(),
                 "'New Employment Wage' is invalid; value must not be negative or zero" };
             yield return new object[] {
+                CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithZeroNewEmploymentWage(),
+                "'New Employment Wage' is invalid; value must not be negative or zero" };
+            yield return new object[] {
                 CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithNonZeroNewEmploymentWeeklyWageAndZeroNewEmploymentWage(),
                 "'New Employment Weekly Wage' must be zero if New Employment Wage is zero" };
             yield return new object[] {
