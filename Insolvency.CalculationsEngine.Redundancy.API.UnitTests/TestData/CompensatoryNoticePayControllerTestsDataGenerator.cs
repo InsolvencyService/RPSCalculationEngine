@@ -456,6 +456,13 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
             return request;
         }
 
+        public static CompensatoryNoticePayCalculationRequestModel GetRequestWithZeroNewEmploymentWage()
+        {
+            var request = GetValidRequest();
+            request.NewEmployments[0].NewEmploymentWage = 0m;
+            return request;
+        }
+
         public static CompensatoryNoticePayCalculationRequestModel GetRequestWithNegativeNewEmploymentWeeklyWage()
         {
             var request = GetValidRequest();

@@ -109,13 +109,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                 RuleFor(req => req.NewEmploymentWage)
                     .NotNull()
                     .WithMessage($"'New Employment Wage' is not provided")
-                    .GreaterThanOrEqualTo(0)
-                    .WithMessage($"'New Employment Wage' is invalid; value must not be negative");
-
-                RuleFor(req => req.NewEmploymentWage)
-                    .Equal(0m)
-                    .WithMessage($"'New Employment Wage' must be zero if New Employment Weekly Wage is zero")
-                    .When(req => req.NewEmploymentWeeklyWage.HasValue && req.NewEmploymentWeeklyWage == 0m);
+                    .GreaterThan(0)
+                    .WithMessage($"'New Employment Wage' is invalid; value must not be negative or zero");                
 
                 RuleFor(req => req.NewEmploymentWeeklyWage)
                     .GreaterThanOrEqualTo(0)
