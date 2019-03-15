@@ -75,13 +75,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 "'New Employment Start Date' is not provided or it is an invalid date" };
             yield return new object[] {
                 CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithNewEmploymentEndDateBeforeNewEmploymentStartDate(),
-                "'New Employment End Date' cannot be before the New Employment Start Date" };
-            yield return new object[] {
-                CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithNonZeroNewEmploymentWageAndZeroNewEmploymentWeeklyWage(),
-                "'New Employment Wage' must be zero if New Employment Weekly Wage is zero" };
+                "'New Employment End Date' cannot be before the New Employment Start Date" };            
             yield return new object[] {
                 CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithNegativeNewEmploymentWage(),
-                "'New Employment Wage' is invalid; value must not be negative" };
+                "'New Employment Wage' is invalid; value must not be negative or zero" };
             yield return new object[] {
                 CompensatoryNoticePayControllerTestsDataGenerator.GetRequestWithNonZeroNewEmploymentWeeklyWageAndZeroNewEmploymentWage(),
                 "'New Employment Weekly Wage' must be zero if New Employment Wage is zero" };
