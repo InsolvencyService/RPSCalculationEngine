@@ -53,7 +53,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.TestData
                    new RedundancyPaymentCalculationRequestModel(
                     new DateTime(2011,04,14), new DateTime(2016,04,14), new DateTime(2016,02,13),
                     new DateTime(1995,04,14), 257m, 102.35m, 0),
-                   new RedundancyPaymentResponseDto(new DateTime(2011,04,14), 4,new DateTime(2016,04,14), 5, 0, 0, 2.5m, 540.15m, 102.35m, 540.15m)
+                   new RedundancyPaymentResponseDto(new DateTime(2011,04,14), 4,new DateTime(2016,04,14), 5, 0, 0, 2.5m, 642.5m, 102.35m, 540.15m)
                 };
 
                 yield return new object[]
@@ -62,7 +62,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.TestData
                    new RedundancyPaymentCalculationRequestModel(
                     new DateTime(1997,10,1), new DateTime(2018,10,1), new DateTime(2018,10,1),
                     new DateTime(1956,9,1), 300m, 10000m, 0),
-                   new RedundancyPaymentResponseDto(new DateTime(1997,10,1), 12, new DateTime(2018,12,24), 0, 0, 20, 30m, 0m, 10000m, 0m)
+                   new RedundancyPaymentResponseDto(new DateTime(1997,10,1), 12, new DateTime(2018,12,24), 0, 0, 20, 30m, 9000m, 10000m, 0m)
                 };
             }
             IEnumerator IEnumerable.GetEnumerator()

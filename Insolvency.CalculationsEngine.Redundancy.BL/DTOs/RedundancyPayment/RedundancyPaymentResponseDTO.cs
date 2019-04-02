@@ -33,5 +33,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.RedundancyPayment
         public decimal NetEntitlement { get; set; }
         public decimal PreferentialClaim { get; set; }
         public decimal NonPreferentialClaim { get; set; }
+        public decimal StatutoryMaximum { get; set; }
     }
 }
