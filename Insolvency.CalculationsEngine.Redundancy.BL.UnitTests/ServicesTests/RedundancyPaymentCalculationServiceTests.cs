@@ -47,7 +47,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             actualResult.EmployerPartPayment.Should().Be(expectedResult.EmployerPartPayment);
             actualResult.NetEntitlement.Should().Be(expectedResult.NetEntitlement);
             actualResult.PreferentialClaim.Should().Be(0m);
-            actualResult.NonPreferentialClaim.Should().Be(expectedResult.GrossEntitlement);
+            actualResult.NonPreferentialClaim.Should().Be(expectedResult.NetEntitlement);
         }
     }
 }
