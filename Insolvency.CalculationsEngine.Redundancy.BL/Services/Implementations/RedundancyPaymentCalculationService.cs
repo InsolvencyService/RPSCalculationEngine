@@ -62,6 +62,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             var redundancyPayWeeks = decimal.Multiply(yearsOfServiceUpto21 , 0.5m) + yearsOfService22To41 + decimal.Multiply(yearsOfServiceOver41, 1.5m);
             var grossEntitlement = redundancyPayWeeks * appliedRateOfPay;
 
+            var grossEntitlementFinal = Math.Max(0m, Math.Round(grossEntitlement, 2));
+            var employerPartPaymentFinal = Math.Round(data.EmployerPartPayment, 2);
+            var netEntitlementFinal = Math.Max(0m, (grossEntitlementFinal - employerPartPaymentFinal));
+
             calculationResult.AdjEmploymentStartDate = adjStartDate;
             calculationResult.NoticeDateForRedundancyPay = relevantDismissalDate;
             calculationResult.NoticeEntitlementWeeks = noticeEntitlementWeeks;
@@ -69,9 +73,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             calculationResult.YearsOfServiceUpto21 = yearsOfServiceUpto21;
             calculationResult.YearsOfServiceFrom22To41 = yearsOfService22To41;
             calculationResult.YearsServiceOver41 = yearsOfServiceOver41;
-            calculationResult.GrossEntitlement = Math.Max(0m, Math.Round(grossEntitlement, 2) - Math.Round(data.EmployerPartPayment, 2));
-            calculationResult.EmployerPartPayment = Math.Round(data.EmployerPartPayment, 2);
-            calculationResult.NetEntitlement = Math.Max(0m, Math.Round(grossEntitlement, 2) - Math.Round(data.EmployerPartPayment, 2));
+            calculationResult.GrossEntitlement = grossEntitlementFinal;
+            calculationResult.EmployerPartPayment = employerPartPaymentFinal;
+            calculationResult.NetEntitlement = netEntitlementFinal;
             calculationResult.PreferentialClaim = 0m;
             calculationResult.NonPreferentialClaim = netEntitlementFinal;
             calculationResult.StatutoryMaximum = statutoryMax;
