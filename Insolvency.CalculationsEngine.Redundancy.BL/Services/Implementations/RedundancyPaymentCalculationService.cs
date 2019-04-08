@@ -77,7 +77,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             calculationResult.EmployerPartPayment = employerPartPaymentFinal;
             calculationResult.NetEntitlement = netEntitlementFinal;
             calculationResult.PreferentialClaim = 0m;
-            calculationResult.NonPreferentialClaim = grossEntitlementFinal;
+            calculationResult.NonPreferentialClaim = netEntitlementFinal;
             calculationResult.StatutoryMaximum = statutoryMax;
             return calculationResult;
         }
