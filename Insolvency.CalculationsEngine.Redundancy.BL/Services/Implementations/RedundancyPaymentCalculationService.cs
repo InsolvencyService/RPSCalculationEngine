@@ -29,7 +29,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
             var relevantDismissalDate = await data.DismissalDate.GetRelevantDismissalDate(projectedNoticeDate);
 
-            var statutoryMax = ConfigValueLookupHelper.GetStatutoryMax(options, relevantDismissalDate);
+            var statutoryMax = ConfigValueLookupHelper.GetStatutoryMax(options, projectedNoticeDate);
 
             var totalYearsOfService = await adjStartDate.GetServiceYearsAsync(relevantDismissalDate);
             YearsOfService = Math.Max(YearsOfService, totalYearsOfService);
