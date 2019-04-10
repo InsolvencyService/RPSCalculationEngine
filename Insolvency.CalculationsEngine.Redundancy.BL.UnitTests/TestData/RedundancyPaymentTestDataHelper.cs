@@ -53,7 +53,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.TestData
                    new RedundancyPaymentCalculationRequestModel(
                     new DateTime(2011,04,14), new DateTime(2016,04,14), new DateTime(2016,02,13),
                     new DateTime(1995,04,14), 257m, 102.35m, 0),
-                   new RedundancyPaymentResponseDto(new DateTime(2011,04,14), 4,new DateTime(2016,04,14), 5, 0, 0, 2.5m, 642.5m, 102.35m, 540.15m, 479)
+                   new RedundancyPaymentResponseDto(new DateTime(2011,04,14), 4,new DateTime(2016,04,14), 5, 0, 0, 2.5m, 642.5m, 102.35m, 540.15m, 475)
                 };
 
                 yield return new object[]
