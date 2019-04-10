@@ -309,5 +309,56 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var okObjectRequest = result.Should().BeOfType<OkObjectResult>().Subject;
             okObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.OK);
         }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PostAsync_Succeeds_WithCnpAndNwnpRP14aDataAndRp1NotRequiredOverride()
+        {
+            //Arrange
+            var request = new NoticePayCompositeCalculationRequestModel
+            {
+                Rp1NotRequired = true,
+                Cnp = new CompensatoryNoticePayCalculationRequestModel
+                {
+                    InsolvencyEmploymentStartDate = new DateTime(2016, 02, 01),
+                    InsolvencyDate = new DateTime(2018, 6, 1),
+                    DismissalDate = new DateTime(2018, 06, 05),
+                    DateNoticeGiven = new DateTime(2018, 06, 01),
+                    WeeklyWage = 330.25m,
+                    ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                    IsTaxable = true,
+                    DateOfBirth = new DateTime(1990, 1, 1),
+                    DeceasedDate = null
+                },
+                Nwnp = new List<NoticeWorkedNotPaidCalculationRequestModel>()
+                    {                        
+                        new NoticeWorkedNotPaidCalculationRequestModel()
+                        {
+                             InputSource = InputSource.Rp14a,
+                             EmploymentStartDate = new DateTime(2015, 8, 2),
+                             InsolvencyDate = new DateTime(2018, 7, 20),
+                             DateNoticeGiven = new DateTime(2018, 7, 20),
+                             DismissalDate = new DateTime(2018, 7, 20),
+                             UnpaidPeriodFrom = new DateTime(2018, 7, 8),
+                             UnpaidPeriodTo = new DateTime(2018, 7, 10),
+                             WeeklyWage = 320,
+                             ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                             PayDay = 6,
+                             IsTaxable = true
+                         }
+                    }
+            };
+            var response = new NoticePayCompositeCalculationResponseDTO();
+
+            _service.Setup(m => m.PerformNoticePayCompositeCalculationAsync(request, _confOptions)).ReturnsAsync(response);
+            var controller = new NoticeController(_service.Object, _mockLogger.Object, _confOptions);
+
+            //Act
+            var result = await controller.PostAsync(request);
+
+            //Assert
+            var okObjectRequest = result.Should().BeOfType<OkObjectResult>().Subject;
+            okObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.OK);
+        }
     }
 }

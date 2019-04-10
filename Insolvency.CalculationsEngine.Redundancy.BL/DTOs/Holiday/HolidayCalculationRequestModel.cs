@@ -9,6 +9,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Holiday
             Htnp = new List<HolidayTakenNotPaidCalculationRequestModel>();
         }
 
+        public bool Rp1NotRequired { get; set; }
+
         public bool Rp14aNotRequired { get; set; }
 
         public HolidayPayAccruedCalculationRequestModel Hpa { get; set; }

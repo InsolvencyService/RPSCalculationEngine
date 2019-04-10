@@ -83,7 +83,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                         },
                     }
                 },
-                "No Holiday Taken Not Paid RP1 data has not been provided" };
+                "Holiday Taken Not Paid RP1 data has not been provided" };
             yield return new object[] {
                 new HolidayCalculationRequestModel
                 {
@@ -119,7 +119,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                         },
                     }
                 },
-                "No Holiday Taken Not Paid RP14a data has not been provided" };
+                "Holiday Taken Not Paid RP14a data has not been provided" };
         }
 
 

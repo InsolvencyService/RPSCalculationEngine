@@ -313,5 +313,73 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var okObjectRequest = result.Should().BeOfType<OkObjectResult>().Subject;
             okObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.OK);
         }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PostAsync_Succeeds_WithRP14aDataAndRp1NotRequiredOverride()
+        {
+            //Arrange
+            var request = new APPACalculationRequestModel
+            {
+                Rp1NotRequired = true,
+                Rp14aNotRequired = false,
+                Ap = new List<ArrearsOfPayCalculationRequestModel>()
+                {
+                    new ArrearsOfPayCalculationRequestModel()
+                    {
+                        InputSource = InputSource.Rp14a,
+                        InsolvencyDate = new DateTime(2018, 10, 20),
+                        EmploymentStartDate = new DateTime(2016, 04, 06),
+                        DismissalDate = new DateTime(2018, 10, 20),
+                        DateNoticeGiven = new DateTime(2018, 10, 6),
+                        UnpaidPeriodFrom = new DateTime(2018, 10, 1),
+                        UnpaidPeriodTo = new DateTime(2018, 10, 9),
+                        ApClaimAmount = 700M,
+                        IsTaxable = true,
+                        PayDay = 6,
+                        ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                        WeeklyWage = 400m
+                    },
+                    new ArrearsOfPayCalculationRequestModel()
+                    {
+                        InputSource = InputSource.Rp14a,
+                        InsolvencyDate = new DateTime(2018, 10, 20),
+                        EmploymentStartDate = new DateTime(2016, 04, 06),
+                        DismissalDate = new DateTime(2018, 10, 20),
+                        DateNoticeGiven = new DateTime(2018, 10, 14),
+                        UnpaidPeriodFrom = new DateTime(2018, 10, 10),
+                        UnpaidPeriodTo = new DateTime(2018, 10, 18),
+                        ApClaimAmount = 600M,
+                        IsTaxable = true,
+                        PayDay = 6,
+                        ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                        WeeklyWage = 400m
+                    }
+                },
+                Pa = new ProtectiveAwardCalculationRequestModel()
+                {
+                    InsolvencyDate = new DateTime(2018, 10, 20),
+                    EmploymentStartDate = new DateTime(2016, 4, 6),
+                    DismissalDate = new DateTime(2018, 10, 20),
+                    TribunalAwardDate = new DateTime(2018, 10, 21),
+                    ProtectiveAwardStartDate = new DateTime(2018, 10, 22),
+                    ProtectiveAwardDays = 90,
+                    PayDay = 6,
+                    WeeklyWage = 400M,
+                    ShiftPattern = new List<string> { "1", "2", "3", "4", "5" }
+                }
+            };
+            var response = new APPACalculationResponseDTO();
+
+            _service.Setup(m => m.PerformCalculationAsync(request, _confOptions)).ReturnsAsync(response);
+            var controller = new APPAController(_service.Object, _mockLogger.Object, _confOptions);
+
+            //Act
+            var result = await controller.PostAsync(request);
+
+            //Assert
+            var okObjectRequest = result.Should().BeOfType<OkObjectResult>().Subject;
+            okObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.OK);
+        }
     }
 }

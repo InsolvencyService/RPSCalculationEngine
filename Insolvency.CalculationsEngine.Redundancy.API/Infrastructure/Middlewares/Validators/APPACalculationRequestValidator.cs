@@ -34,12 +34,12 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
 
             RuleFor(req => req)
                .Must(RP1DataPresent)
-               .WithMessage($"No Arrears Of Pay RP1 data has been not provided")
+               .WithMessage($"Arrears Of Pay RP1 data has been not provided")
                .When(req => req.Ap != null);
 
             RuleFor(req => req)
                 .Must(RP14aDataPresent)
-                .WithMessage($"No Arrears Of Pay RP14a data has been not provided")
+                .WithMessage($"Arrears Of Pay RP14a data has been not provided")
                 .When(req => req.Ap != null);
         }
 
@@ -71,7 +71,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
         private bool RP1DataPresent(APPACalculationRequestModel appa)
         {
             return appa.Ap.Count(x => x.InputSource == InputSource.Rp14a) == 0 ||
-                appa.Ap.Count(x => x.InputSource == InputSource.Rp1) > 0;
+                appa.Ap.Count(x => x.InputSource == InputSource.Rp1) > 0 ||
+                appa.Rp1NotRequired;
         }
 
         private bool RP14aDataPresent(APPACalculationRequestModel appa)
