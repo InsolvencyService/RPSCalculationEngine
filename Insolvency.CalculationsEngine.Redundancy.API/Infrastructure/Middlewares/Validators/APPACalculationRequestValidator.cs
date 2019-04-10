@@ -34,12 +34,12 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
 
             RuleFor(req => req)
                .Must(RP1DataPresent)
-               .WithMessage($"Arrears Of Pay RP1 data has been not provided")
+               .WithMessage($"Arrears Of Pay RP1 data has not been provided")
                .When(req => req.Ap != null);
 
             RuleFor(req => req)
                 .Must(RP14aDataPresent)
-                .WithMessage($"Arrears Of Pay RP14a data has been not provided")
+                .WithMessage($"Arrears Of Pay RP14a data has not been provided")
                 .When(req => req.Ap != null);
         }
 
