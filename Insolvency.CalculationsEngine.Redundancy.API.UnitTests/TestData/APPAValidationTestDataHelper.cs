@@ -143,7 +143,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 },
                     Pa = null
                 },
-                "Arrears Of Pay RP1 data has been not provided"
+                "Arrears Of Pay RP1 data has not been provided"
             };
             yield return new object[]
             {
@@ -185,7 +185,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 },
                     Pa = null
                 },
-                "Arrears Of Pay RP14a data has been not provided"
+                "Arrears Of Pay RP14a data has not been provided"
             };
         }
     
