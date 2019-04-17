@@ -33,7 +33,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
 
             RuleFor(req => req)
                .Must(RP1DataPresent)
-               .WithMessage($"Notice Worked Not Paid RP1 data has been not provided")
+               .WithMessage($"Notice Worked Not Paid RP1 data has not been provided")
                .When(req => req.Nwnp != null);
         }
 
