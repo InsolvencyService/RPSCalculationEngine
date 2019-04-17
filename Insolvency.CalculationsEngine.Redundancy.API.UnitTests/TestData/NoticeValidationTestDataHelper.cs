@@ -132,7 +132,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                         }
                     }
                 },
-                "Notice Worked Not Paid RP1 data has been not provided" };
+                "Notice Worked Not Paid RP1 data has not been provided" };
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
