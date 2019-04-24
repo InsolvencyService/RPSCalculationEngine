@@ -43,7 +43,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             actualResult.YearsOfServiceUpto21.Should().Be(expectedResult.YearsOfServiceUpto21);
             actualResult.YearsOfServiceFrom22To41.Should().Be(expectedResult.YearsOfServiceFrom22To41);
             actualResult.YearsServiceOver41.Should().Be(expectedResult.YearsServiceOver41);
-            actualResult.GrossEntitlement.Should().Be(expectedResult.GrossEntitlement);
+            actualResult.GrossEntitlement.Should().Be(expectedResult.NetEntitlement);
             actualResult.EmployerPartPayment.Should().Be(expectedResult.EmployerPartPayment);
             actualResult.NetEntitlement.Should().Be(expectedResult.NetEntitlement);
             actualResult.PreferentialClaim.Should().Be(0m);
