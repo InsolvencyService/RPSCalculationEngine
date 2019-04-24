@@ -73,7 +73,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             calculationResult.YearsOfServiceUpto21 = yearsOfServiceUpto21;
             calculationResult.YearsOfServiceFrom22To41 = yearsOfService22To41;
             calculationResult.YearsServiceOver41 = yearsOfServiceOver41;
-            calculationResult.GrossEntitlement = grossEntitlementFinal;
+            //calculationResult.GrossEntitlement = grossEntitlementFinal;
+            calculationResult.GrossEntitlement = netEntitlementFinal; //TEMP CHANGE: Gross entitlement set to Net entitlement as quick fix for CMS message to BW
             calculationResult.EmployerPartPayment = employerPartPaymentFinal;
             calculationResult.NetEntitlement = netEntitlementFinal;
             calculationResult.PreferentialClaim = 0m;
