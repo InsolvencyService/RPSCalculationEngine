@@ -19,10 +19,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.TestData
                 8.3m,
                 new HolidayTakenNotPaidResponseDTO(InputSource.Rp14a, 489, weeklyResult: new List<HolidayTakenNotPaidWeeklyResult>()
                 {
-                    new HolidayTakenNotPaidWeeklyResult(1, new DateTime(2017, 12, 16), 489m, 245.48M, 245.48M, true, 49.10m, 10.02m, 186.36m, 7, 4m, 489m, 245.48m, 245.48m, false),
+                    new HolidayTakenNotPaidWeeklyResult(1, new DateTime(2017, 12, 16), 489m, 245.48M, 245.48M, true, 49.10m, 9.54m, 186.84m, 7, 4m, 489m, 245.48m, 245.48m, false),
                     new HolidayTakenNotPaidWeeklyResult(2, new DateTime(2017, 12, 23), 489M, 42.96M, 42.96M,   true, 8.59m, 0m, 34.37M, 7, 0.7m, 489m, 42.96M, 42.96M, false),
-                    new HolidayTakenNotPaidWeeklyResult(3, new DateTime(2017, 12, 23), 489M, 263.89M, 263.89M, true, 52.78m, 12.23m, 198.88m, 7, 4.3m, 489m, 263.89M, 263.89M, true),
-                    new HolidayTakenNotPaidWeeklyResult(4, new DateTime(2017, 12, 30), 489M, 245.48M, 245.48M, true, 49.10m, 10.02m, 186.36m, 7, 4m, 489m, 245.48m, 245.48m, true)
+                    new HolidayTakenNotPaidWeeklyResult(3, new DateTime(2017, 12, 23), 489M, 263.89M, 263.89M, true, 52.78m, 11.75m, 199.36m, 7, 4.3m, 489m, 263.89M, 263.89M, true),
+                    new HolidayTakenNotPaidWeeklyResult(4, new DateTime(2017, 12, 30), 489M, 245.48M, 245.48M, true, 49.10m, 9.54m, 186.84m, 7, 4m, 489m, 245.48m, 245.48m, true)
                 })
             };
             yield return new object[]
@@ -56,7 +56,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.TestData
                 10m,
                 new HolidayTakenNotPaidResponseDTO(InputSource.Rp14a, 508m, weeklyResult: new List<HolidayTakenNotPaidWeeklyResult>()
                 {
-                    new HolidayTakenNotPaidWeeklyResult(1, new DateTime(2018, 7, 7), 508m, 216M, 216M, true, 43.20m, 6.48m, 166.32m, 7, 3m, 508m, 216M, 216M, false),
+                    new HolidayTakenNotPaidWeeklyResult(1, new DateTime(2018, 7, 7), 508m, 216M, 216M, true, 43.20m, 6.00m, 166.80m, 7, 3m, 508m, 216M, 216M, false),
                 })
             };
             yield return new object[]
@@ -81,9 +81,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.TestData
                 30m,
                 new HolidayTakenNotPaidResponseDTO(InputSource.Rp14a, 489, weeklyResult: new List<HolidayTakenNotPaidWeeklyResult>()
                 {
-                    new HolidayTakenNotPaidWeeklyResult(1, new DateTime(2017, 12, 16), 489m, 245.48M, 245.48M, true, 49.10m, 10.02m, 186.36m, 7, 4m, 489m, 245.48m, 245.48m, true),
-                    new HolidayTakenNotPaidWeeklyResult(2, new DateTime(2017, 12, 23), 489M, 306.85M, 306.85M, true, 61.37m, 17.38m, 228.10M, 7, 5m, 489m, 306.85M, 306.85M, true),
-                    new HolidayTakenNotPaidWeeklyResult(3, new DateTime(2017, 12, 30), 489M, 245.48M, 245.48M, true, 49.10m, 10.02m, 186.36m, 7, 4m, 489m, 245.48m, 245.48m, true)
+                    new HolidayTakenNotPaidWeeklyResult(1, new DateTime(2017, 12, 16), 489m, 245.48M, 245.48M, true, 49.10m, 9.54m, 186.84m, 7, 4m, 489m, 245.48m, 245.48m, true),
+                    new HolidayTakenNotPaidWeeklyResult(2, new DateTime(2017, 12, 23), 489M, 306.85M, 306.85M, true, 61.37m, 16.90m, 228.58M, 7, 5m, 489m, 306.85M, 306.85M, true),
+                    new HolidayTakenNotPaidWeeklyResult(3, new DateTime(2017, 12, 30), 489M, 245.48M, 245.48M, true, 49.10m, 9.54m, 186.84m, 7, 4m, 489m, 245.48m, 245.48m, true)
                 })
             };
         }

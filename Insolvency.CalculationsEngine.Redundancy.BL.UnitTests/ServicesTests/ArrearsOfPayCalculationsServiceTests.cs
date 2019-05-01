@@ -115,10 +115,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             var expectedCalculationResult = new ArrearsOfPayResponseDTO(InputSource.Rp1, 489M, false, false, weeklyResult: new List<ArrearsOfPayWeeklyResult>()
                 {
                     new ArrearsOfPayWeeklyResult(1, new DateTime(2018, 03, 03),304.68m, 489M, 0.0M, 0.0M,true,0.0M, 0.0M, 0.0M,7, 0, 489M, 0.0M, 0.0M),
-                    new ArrearsOfPayWeeklyResult(2, new DateTime(2018, 03, 10),304.68m, 489M, 304.68M, 304.68M, true,60.94M, 17.12M, 226.62M, 7, 5, 489M, 304.68M, 304.68M),
-                    new ArrearsOfPayWeeklyResult(3, new DateTime(2018, 03, 17),304.68m, 489M, 304.68M, 304.68M,true, 60.94M, 17.12M, 226.62M, 7, 5, 489M, 304.68M, 304.68M),
-                    new ArrearsOfPayWeeklyResult(4, new DateTime(2018, 03, 24),304.68m,489M, 304.68M, 304.68M, true,60.94M, 17.12M, 226.62M, 7, 5,489M, 304.68M, 304.68M),
-                    new ArrearsOfPayWeeklyResult(5, new DateTime(2018, 03, 31),304.68m,489M, 304.68M, 304.68M,true, 60.94M, 17.12M, 226.62M, 7, 5,489M, 304.68M, 304.68M)
+                    new ArrearsOfPayWeeklyResult(2, new DateTime(2018, 03, 10),304.68m, 489M, 304.68M, 304.68M, true,60.94M, 16.64M, 227.10M, 7, 5, 489M, 304.68M, 304.68M),
+                    new ArrearsOfPayWeeklyResult(3, new DateTime(2018, 03, 17),304.68m, 489M, 304.68M, 304.68M,true, 60.94M, 16.64M, 227.10M, 7, 5, 489M, 304.68M, 304.68M),
+                    new ArrearsOfPayWeeklyResult(4, new DateTime(2018, 03, 24),304.68m,489M, 304.68M, 304.68M, true,60.94M, 16.64M, 227.10M, 7, 5,489M, 304.68M, 304.68M),
+                    new ArrearsOfPayWeeklyResult(5, new DateTime(2018, 03, 31),304.68m,489M, 304.68M, 304.68M,true, 60.94M, 16.64M, 227.10M, 7, 5,489M, 304.68M, 304.68M)
                 });
 
             var actualResult = await _arrearsOfPayCalculationsService.PerformCalculationAsync(aopRequest, _options);
@@ -184,8 +184,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             };
             var expectedCalculationResult = new ArrearsOfPayResponseDTO(InputSource.Rp1, 508M, true, true, weeklyResult: new List<ArrearsOfPayWeeklyResult>()
                 {
-                    new ArrearsOfPayWeeklyResult(1, new DateTime(2018, 10, 13),700m, 508M, 700M, 508M,true,101.60M, 41.52M, 364.88M,7, 5, 508M, 700M, 508M),
-                    new ArrearsOfPayWeeklyResult(2, new DateTime(2018, 10, 20),700m, 508M, 380M, 380M,true,76M, 26.16M, 277.84M, 7, 5, 508M, 380M, 380M),
+                    new ArrearsOfPayWeeklyResult(1, new DateTime(2018, 10, 13),700m, 508M, 700M, 508M,true,101.60M, 41.04M, 365.36M,7, 5, 508M, 700M, 508M),
+                    new ArrearsOfPayWeeklyResult(2, new DateTime(2018, 10, 20),700m, 508M, 380M, 380M,true,76M, 25.68M, 278.32M, 7, 5, 508M, 380M, 380M),
                 });
 
             var actualResult = await _arrearsOfPayCalculationsService.PerformCalculationAsync(aopRequest, _options);
@@ -254,8 +254,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             };
             var expectedCalculationResult = new ArrearsOfPayResponseDTO(InputSource.Rp1, 508M, true, false, weeklyResult: new List<ArrearsOfPayWeeklyResult>()
                 {
-                    new ArrearsOfPayWeeklyResult(1, new DateTime(2018, 10, 13),350M, 508M, 350M, 350M,true,70M, 22.56M, 257.44M,7, 5, 508M, 350M, 350M),
-                    new ArrearsOfPayWeeklyResult(2, new DateTime(2018, 10, 20),350M, 508M, 350M, 350M,true,70M, 22.56M, 257.44M, 7, 5, 508M, 350M, 350M),
+                    new ArrearsOfPayWeeklyResult(1, new DateTime(2018, 10, 13),350M, 508M, 350M, 350M,true,70M, 22.08M, 257.92M,7, 5, 508M, 350M, 350M),
+                    new ArrearsOfPayWeeklyResult(2, new DateTime(2018, 10, 20),350M, 508M, 350M, 350M,true,70M, 22.08M, 257.92M, 7, 5, 508M, 350M, 350M),
                 });
 
             var actualResult = await _arrearsOfPayCalculationsService.PerformCalculationAsync(aopRequest, _options);
@@ -343,8 +343,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
 
             var expectedCalculationResult = new ArrearsOfPayResponseDTO(InputSource.Rp1, 508M, true, true, weeklyResult: new List<ArrearsOfPayWeeklyResult>()
             {
-                    new ArrearsOfPayWeeklyResult(1, new DateTime(2018, 10, 6),500m, 508M, 500M, 500M,true,100M, 40.56M, 359.44M,7, 5, 508M, 500M, 500M),
-                    new ArrearsOfPayWeeklyResult(2, new DateTime(2018, 10, 13),500m, 508M, 297.14M, 297.14M,true,59.43M, 16.22M, 221.49M, 7, 5, 508M, 297.14M, 297.14M),
+                    new ArrearsOfPayWeeklyResult(1, new DateTime(2018, 10, 6),500m, 508M, 500M, 500M,true,100M, 40.08M, 359.92M,7, 5, 508M, 500M, 500M),
+                    new ArrearsOfPayWeeklyResult(2, new DateTime(2018, 10, 13),500m, 508M, 297.14M, 297.14M,true,59.43M, 15.74M, 221.97M, 7, 5, 508M, 297.14M, 297.14M),
                     new ArrearsOfPayWeeklyResult(3, new DateTime(2018, 10, 20),428.57M, 508M, 22.86M, 22.86M,true,4.57M, 0M, 18.29M, 7, 4, 508M, 22.86M, 22.86M),
             });
 
@@ -432,7 +432,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
 
             var expectedCalculationResult = new ArrearsOfPayResponseDTO(InputSource.Rp1, 508M, true, true, weeklyResult: new List<ArrearsOfPayWeeklyResult>()
             {
-                new ArrearsOfPayWeeklyResult(1, new DateTime(2018, 10, 6),500m, 508M, 500M, 500M,true,100M, 40.56M, 359.44M,7, 5, 508M, 500M, 500M),
+                new ArrearsOfPayWeeklyResult(1, new DateTime(2018, 10, 6),500m, 508M, 500M, 500M,true,100M, 40.08M, 359.92M,7, 5, 508M, 500M, 500M),
                 new ArrearsOfPayWeeklyResult(2, new DateTime(2018, 10, 13),500m, 508M, 40M, 40M,true,8M, 0M, 32M, 7, 2, 508M, 40M, 40M),
             });
 

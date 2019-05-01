@@ -95,8 +95,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ExtensionsTests
                                         GrossEntitlement = 272.12m,//recalculated -min of MaximumEntitlement & EmployerEntitlement
                                         IsTaxable = true,
                                         TaxDeducted = 54.42m,//recalculated based on new GrossEntitlement
-                                        NiDeducted = 13.21m,//recalculated based on new GrossEntitlement
-                                        NetEntitlement = 204.49m,//recalculated based on new GrossEntitlement, ni & tax
+                                        NiDeducted = 12.73m,//recalculated based on new GrossEntitlement
+                                        NetEntitlement = 204.97m,//recalculated based on new GrossEntitlement, ni & tax
                                         MaximumDays = 6, //max of week 0 & 1 from the input data
                                         EmploymentDays = 4,//sum of week 0 & 1 from the input data
                                         MaximumEntitlementIn4MonthPeriod = 0m,//max of week 0 & 1 from the input data
