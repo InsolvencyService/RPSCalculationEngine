@@ -85,9 +85,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.TestData
         {
             public IEnumerator<object[]> GetEnumerator()
             {
-                yield return new object[] { new DateTime(2015, 10, 23), 162m };
-                yield return new object[] { new DateTime(2016, 04, 12), 162m };
-                yield return new object[] { new DateTime(2000, 06, 19), 162m };
+                yield return new object[] { new DateTime(2015, 10, 23), 166m };
+                yield return new object[] { new DateTime(2016, 04, 12), 166m };
+                yield return new object[] { new DateTime(2000, 06, 19), 166m };
             }
 
             IEnumerator IEnumerable.GetEnumerator()
@@ -100,9 +100,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.TestData
         {
             public IEnumerator<object[]> GetEnumerator()
             {
-                yield return new object[] { new DateTime(2015, 10, 23), 892m };
-                yield return new object[] { new DateTime(2016, 04, 12), 892m };
-                yield return new object[] { new DateTime(2000, 06, 19), 892m };
+                yield return new object[] { new DateTime(2015, 10, 23), 962m };
+                yield return new object[] { new DateTime(2016, 04, 12), 962m };
+                yield return new object[] { new DateTime(2000, 06, 19), 962m };
             }
 
             IEnumerator IEnumerable.GetEnumerator()

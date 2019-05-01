@@ -50,6 +50,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="ConfigLookups.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
     <Content Update="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -78,7 +78,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
                 {
                     StartDate = new DateTime(1900, 01, 01),
                     EndDate = new DateTime(9999, 12, 31),
-                    NIThreshold = 162m
+                    NIThreshold = 166m
                 }
             };
         }
@@ -91,7 +91,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
                 {
                     StartDate = new DateTime(1900, 01, 01),
                     EndDate = new DateTime(9999, 12, 31),
-                    NIThreshold = 892m
+                    NIThreshold = 962m
                 }
             };
         }

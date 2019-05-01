@@ -133,14 +133,14 @@
     {
       "StartDate": "1900-01-01",
       "EndDate": "9999-12-31",
-      "NIThreshold": "162"
+      "NIThreshold": "166"
     }
   ],
   "NIUpperThresholdLookup": [
     {
       "StartDate": "1900-01-01",
       "EndDate": "9999-12-31",
-      "NIThreshold": "892"
+      "NIThreshold": "962"
     }
   ],
   "NIRateLookup": [
