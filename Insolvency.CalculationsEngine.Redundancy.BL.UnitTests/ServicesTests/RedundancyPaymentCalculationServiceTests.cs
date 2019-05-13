@@ -48,7 +48,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             actualResult.NetEntitlement.Should().Be(expectedResult.NetEntitlement);
             actualResult.PreferentialClaim.Should().Be(0m);
             actualResult.NonPreferentialClaim.Should().Be(expectedResult.NetEntitlement);
-            actualResult.StatutoryMaximum.Should().Be(expectedResult.StatutoryMaximum);
+            actualResult.StatutoryMax.Should().Be(expectedResult.StatutoryMax);
         }
     }
 }
