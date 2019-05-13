@@ -20,7 +20,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.RedundancyPayment
             GrossEntitlement = gross;
             EmployerPartPayment = empPartPayment;
             NetEntitlement = net;
-            StatutoryMaximum = statutoryMaximum;
+            StatutoryMax = statutoryMaximum;
         }
         public DateTime AdjEmploymentStartDate { get; set; }
         public int NoticeEntitlementWeeks { get; set; }
@@ -34,6 +34,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.RedundancyPayment
         public decimal NetEntitlement { get; set; }
         public decimal PreferentialClaim { get; set; }
         public decimal NonPreferentialClaim { get; set; }
-        public decimal StatutoryMaximum { get; set; }
+        public decimal StatutoryMax { get; set; }
     }
 }
