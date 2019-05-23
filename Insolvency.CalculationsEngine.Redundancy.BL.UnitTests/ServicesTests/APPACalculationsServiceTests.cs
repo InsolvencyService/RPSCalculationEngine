@@ -115,6 +115,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             var paResponse = new ProtectiveAwardResponseDTO()
             {
                 IsTaxable = true,
+                StatutoryMax = 508m,
                 PayLines = new List<ProtectiveAwardPayLine>()
                 {
                     new ProtectiveAwardPayLine(1, new DateTime(2018, 10, 27), 0M, 400M, 80M, 28.56M, 291.44M, 0M, 0M, 0M),
@@ -239,6 +240,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             var paResponse = new ProtectiveAwardResponseDTO()
             {
                 IsTaxable = true,
+                StatutoryMax = 508m,
                 PayLines = new List<ProtectiveAwardPayLine>()
                 {
                     new ProtectiveAwardPayLine(1, new DateTime(2018, 10, 27), 0M, 400M, 80M, 28.56M, 291.44M, 0M, 0M, 0M),
@@ -373,6 +375,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             var paResponse = new ProtectiveAwardResponseDTO()
             {
                 IsTaxable = true,
+                StatutoryMax = 508m,
                 PayLines = new List<ProtectiveAwardPayLine>()
                 {
                     new ProtectiveAwardPayLine(1, new DateTime(2018, 10, 6), 200M, 200M, 40M, 0M, 180M, 508M, 200M, 200M),
@@ -527,6 +530,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             var paResponse = new ProtectiveAwardResponseDTO()
             {
                 IsTaxable = true,
+                StatutoryMax = 508m,
                 PayLines = new List<ProtectiveAwardPayLine>()
                 {
                     new ProtectiveAwardPayLine(1, new DateTime(2018, 10, 27), 0M, 400M, 80M, 28.56M, 291.44M, 0M, 0M, 0M),

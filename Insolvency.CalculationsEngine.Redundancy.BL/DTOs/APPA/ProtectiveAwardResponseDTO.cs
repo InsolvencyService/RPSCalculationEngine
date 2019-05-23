@@ -11,6 +11,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.APPA
 
         public bool IsTaxable { get; set; }
 
+        public decimal StatutoryMax { get; set; }
+
         public List<ProtectiveAwardPayLine> PayLines { get; set; }
     }
 }
