@@ -138,6 +138,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             var result = new ProtectiveAwardResponseDTO()
             {
                 IsTaxable = isTaxable,
+                StatutoryMax = statutoryMax,
                 PayLines = payLines
             };
             return await Task.FromResult(result);
