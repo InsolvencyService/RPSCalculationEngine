@@ -10,6 +10,7 @@ using Insolvency.CalculationsEngine.Redundancy.Common.Extensions;
 using Microsoft.Extensions.Options;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
 using Insolvency.CalculationsEngine.Redundancy.Common.Exceptions;
+using Insolvency.CalculationsEngine.Redundancy.BL.Calculations.RedundancyPaymentCalculation.Extensions;
 
 namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 {
@@ -34,6 +35,12 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             int weekNumber = 1;
 
             var statutoryMax = ConfigValueLookupHelper.GetStatutoryMax(options, data.DismissalDate);
+
+            var relevantNoticeDate = await data.DateNoticeGiven.GetRelevantNoticeDate(data.DismissalDate);
+            var noticeEntitlementWeeks = await data.EmploymentStartDate.GetNoticeEntitlementWeeks(relevantNoticeDate);    //not adjusted start date      
+            var projectedNoticeEndDate = await relevantNoticeDate.GetProjectedNoticeDate(noticeEntitlementWeeks);
+
+
             var adjustedPeriodFrom = await data.UnpaidPeriodFrom.Date.GetAdjustedPeriodFromAsync(data.InsolvencyDate.Date);
             var adjustedPeriodTo = await data.UnpaidPeriodTo.Date.GetAdjustedPeriodToAsync(data.InsolvencyDate.Date, data.DismissalDate.Date);
            
@@ -43,8 +50,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             var payDays = await adjustedPeriodFrom.Date.GetDaysInRange(extendedAdjustedPeriodTo.Date, (DayOfWeek)data.PayDay);
 
             decimal adjustedWeeklyWage = await data.WeeklyWage.GetAdjustedWeeklyWageAsync(data.ShiftPattern, adjustedPeriodFrom, adjustedPeriodTo, data.ApClaimAmount);
+            decimal WeeklyWageBetweenNoticeGivenAndNoticeEnd = (adjustedWeeklyWage > data.WeeklyWage) ?  adjustedWeeklyWage - data.WeeklyWage : decimal.Zero;
             decimal postDNGAdjustedWeeklyWage = (adjustedWeeklyWage >= data.WeeklyWage) ? adjustedWeeklyWage - data.WeeklyWage : adjustedWeeklyWage;
-
+            
             DateTime prefPeriodStartDate = data.InsolvencyDate.Date.AddMonths(-4);
             prefPeriodStartDate = (prefPeriodStartDate <= data.EmploymentStartDate.Date) ? data.EmploymentStartDate.Date : prefPeriodStartDate.Date;
             DateTime prefPeriodEndDate = (data.DismissalDate < data.InsolvencyDate) ? data.DismissalDate.Date : data.InsolvencyDate.Date;
@@ -53,7 +61,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             foreach (var payWeekEnd in payDays)
             {
                 var employmentDays = 0;
-                var employmentDaysPostDNG = 0;
+                var employmentDaysBetweenNoticeGivenAndNoticeEndDate = 0;               
                 var maximumEntitlement = 0.0m;
                 var employmentDaysInPrefPeriod = 0;
                 var employmentDaysInPrefPeriodPostDNG = 0;
@@ -66,16 +74,18 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
                     //is this day a working day?
                     if (await date.IsEmploymentDay(data.ShiftPattern))
-                    {
+                    {                        
+
                         if (date >= adjustedPeriodFrom.Date && date <= adjustedPeriodTo.Date)
                         {
-                            if (date > data.DateNoticeGiven.Date)
+                            if (date >= data.DateNoticeGiven.Date && date <= projectedNoticeEndDate.Date)
                             {
-                                employmentDaysPostDNG++;
+                                employmentDaysBetweenNoticeGivenAndNoticeEndDate++;
 
                                 if (date >= prefPeriodStartDate && date <= prefPeriodEndDate)
                                     employmentDaysInPrefPeriodPostDNG++;
                             }
+                           
                             else
                             {
                                 employmentDays++;
@@ -93,7 +103,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
                 //calculate Employer Liability for week
                 var employerEntitlement = adjustedWeeklyWage / data.ShiftPattern.Count * employmentDays +
-                                            postDNGAdjustedWeeklyWage / data.ShiftPattern.Count * employmentDaysPostDNG;
+                                            WeeklyWageBetweenNoticeGivenAndNoticeEnd / data.ShiftPattern.Count * employmentDaysBetweenNoticeGivenAndNoticeEndDate;
 
                 employerEntitlementInPrefPeriod = adjustedWeeklyWage / data.ShiftPattern.Count * employmentDaysInPrefPeriod +
                                                     postDNGAdjustedWeeklyWage / data.ShiftPattern.Count * employmentDaysInPrefPeriodPostDNG;
