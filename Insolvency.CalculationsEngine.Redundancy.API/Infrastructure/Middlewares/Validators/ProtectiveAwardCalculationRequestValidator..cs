@@ -69,64 +69,31 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                 .WithMessage(
                     $"Invalid shift pattern correct values are 0,1,2,3,4,5,6 Note: [0 = Sunday, 1 = Mon, 2 = Tues, 3 = Wed, 4 = Thurs, 5 = Fri, 6 = Sat]");
 
-            RuleForEach(x => x.Benefits).SetValidator(new ProtectiveAwardBenefitValidator());
+            RuleFor(req => req.paBenefitStartDate.Date)
+                    .Must(CommonValidation.NotBeInTheFuture)
+                    .WithMessage($"'Benefit Start Date' can not be in the future");
+
+            RuleFor(req => req.paBenefitAmount)
+                    .NotNull()
+                    .WithMessage($"'Benefit Amount' is not provided")
+                    .GreaterThanOrEqualTo(0)
+                    .WithMessage($"'Benefit Amount' is invalid; value must not be negative");
 
             RuleFor(x => x)
-                .Must(BenefitStartAndEndDateBeAfterDismissalDate)
-                .WithName(GetBenefitStartAndEndDateFailingPropertyName)
-                .WithMessage("'Benefit Start Date' or 'Benefit End Date' can not be before Date of Dismissal");
+                .Must(BenefitStartDateBeAfterDismissalDate)
+                .WithMessage("'Benefit Start Date' can not be before Date of Dismissal");
         }
 
-        private bool BenefitStartAndEndDateBeAfterDismissalDate(ProtectiveAwardCalculationRequestModel model)
+        private bool BenefitStartDateBeAfterDismissalDate(ProtectiveAwardCalculationRequestModel model)
         {
-            if (model.Benefits.Count > 0)
+            if (model.paBenefitAmount > 0)
             {
-                for (int i = 0; i < model.Benefits.Count; i++)
-                {
-                    if (model.Benefits[i].BenefitStartDate.Date < model.DismissalDate || model.Benefits[i].BenefitEndDate.Date < model.DismissalDate)
+                    if (model.paBenefitStartDate.Date < model.DismissalDate)
                         return false;
-                }
             }
             return true;
         }
 
-        private string GetBenefitStartAndEndDateFailingPropertyName(ProtectiveAwardCalculationRequestModel model)
-        {
-            if (model.Benefits.Count > 0)
-            {
-                for (int i = 0; i < model.Benefits.Count; i++)
-                {
-                    if (model.Benefits[i].BenefitStartDate.Date < model.DismissalDate || model.Benefits[i].BenefitEndDate.Date < model.DismissalDate)
-                        return $"Benefits[{i}]";
-                }
-            }
-            return null;
-        }
-
-        public class ProtectiveAwardBenefitValidator : AbstractValidator<ProtectiveAwardBenefit>
-        {
-            public ProtectiveAwardBenefitValidator()
-            {
-
-                RuleFor(req => req.BenefitStartDate.Date)
-                    .Must(CommonValidation.BeValidDate)
-                    .WithMessage($"'Benefit Start Date' is not provided or it is an invalid date")
-                    .Must(CommonValidation.NotBeInTheFuture)
-                    .WithMessage($"'Benefit Start Date' can not be in the future");
-
-                RuleFor(req => req.BenefitEndDate.Date).Must(CommonValidation.BeValidDate)
-                    .WithMessage($"'Benefit End Date' is not provided or it is an invalid date")
-                    .Must(CommonValidation.NotBeInTheFuture)
-                    .WithMessage($"'Benefit End Date' can not be in the future")
-                    .GreaterThanOrEqualTo(model => model.BenefitStartDate.Date)
-                    .WithMessage($"'Benefit End Date' cannot be before the Benefit Start Date");
-
-                RuleFor(req => req.BenefitAmount)
-                    .NotNull()
-                    .WithMessage($"'Benefit Amount' is not provided")
-                    .GreaterThan(0)
-                    .WithMessage($"'Benefit Amount' is invalid; value must not be 0 or negative");
-            }
-        }
+        
     }
 }

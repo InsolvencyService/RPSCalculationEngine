@@ -54,7 +54,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                     ProtectiveAwardDays = 90,
                     PayDay = 6,
                     WeeklyWage = 400M,
-                    ShiftPattern = new List<string> { "1", "2", "3", "4", "5" }
+                    ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                    paBenefitStartDate = DateTime.MinValue,
+                    paBenefitAmount = decimal.Zero
                 }
             };
         }

@@ -19,14 +19,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 PayDay = 6,
                 WeeklyWage = 320m,
                 ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
-                Benefits = new List<ProtectiveAwardBenefit>(){
-                    new ProtectiveAwardBenefit()
-                    {
-                        BenefitStartDate = new DateTime(2018, 08, 13),
-                        BenefitEndDate = new DateTime(2018, 10, 07),
-                        BenefitAmount = 120m
-                    }
-                }
+                paBenefitStartDate = new DateTime(2018, 08, 13),               
+                paBenefitAmount = 120m
+                
             };
         }
 
@@ -227,58 +222,35 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
         public static ProtectiveAwardCalculationRequestModel GetRequestWithInvalidBenefitStartDate()
         {
             var request = GetValidRequest();
-            request.Benefits[0].BenefitStartDate = DateTime.MinValue;
+            request.paBenefitStartDate = DateTime.MinValue;
             return request;
         }
 
         public static ProtectiveAwardCalculationRequestModel GetRequestWithFutureBenefitStartDate()
         {
             var request = GetValidRequest();
-            request.Benefits[0].BenefitStartDate = DateTime.Now.AddDays(1);
-            return request;
-        }
-
-        public static ProtectiveAwardCalculationRequestModel GetRequestWithInvalidBenefitEndDate()
-        {
-            var request = GetValidRequest();
-            request.Benefits[0].BenefitEndDate = DateTime.MinValue;
-            return request;
-        }
-
-        public static ProtectiveAwardCalculationRequestModel GetRequestWithFutureBenefitEndDate()
-        {
-            var request = GetValidRequest();
-            request.Benefits[0].BenefitEndDate = DateTime.Now.AddDays(1);
+            request.paBenefitStartDate = DateTime.Now.AddDays(1);
             return request;
         }
 
         public static ProtectiveAwardCalculationRequestModel GetRequestWithBenefitStartDateBeforeDimissalDate()
         {
             var request = GetValidRequest();
-            request.Benefits[0].BenefitStartDate = new DateTime(2016, 08, 08);
-            request.Benefits[0].BenefitEndDate = new DateTime(2017, 01, 01);
+            request.paBenefitStartDate = new DateTime(2016, 08, 08);           
             return request;
         }
-        public static ProtectiveAwardCalculationRequestModel GetRequestWithBenefitEndDateBeforeDismissalDate()
-        {
-            var request = GetValidRequest();
-            request.Benefits[0].BenefitStartDate = new DateTime(2016, 01, 01);
-            request.Benefits[0].BenefitEndDate = new DateTime(2016, 08, 08);
-            return request;
-        }
-
-
+       
         public static ProtectiveAwardCalculationRequestModel GetRequestWithZeroBenefitAmount()
         {
             var request = GetValidRequest();
-            request.Benefits[0].BenefitAmount = 0;
+            request.paBenefitAmount = 0;
             return request;
         }
 
         public static ProtectiveAwardCalculationRequestModel GetRequestWithNegativeBenefitAmount()
         {
             var request = GetValidRequest();
-            request.Benefits[0].BenefitAmount = -1m;
+            request.paBenefitAmount = -1m;
             return request;
         }
     }

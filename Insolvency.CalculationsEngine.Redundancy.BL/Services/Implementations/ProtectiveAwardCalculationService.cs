@@ -21,6 +21,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 statMaxDate = data.InsolvencyDate.Date;
             if (data.TribunalAwardDate.Date > statMaxDate)
                 statMaxDate = data.TribunalAwardDate.Date;
+                      
 
             var statutoryMax = ConfigValueLookupHelper.GetStatutoryMax(options, statMaxDate);
             var taxRate = ConfigValueLookupHelper.GetTaxRate(options, data.DismissalDate);
@@ -34,6 +35,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             //calculate paAwardEndDate e.g. paAwardStartDate + 30 days
             var protectiveAwardEndDate = data.ProtectiveAwardStartDate.Date.AddDays(data.ProtectiveAwardDays.Value - 1);
 
+            var paBenefitsEndDate = protectiveAwardEndDate;
+
             // get pay weeks in PA Award
             var endDate = protectiveAwardEndDate;
             if (endDate.DayOfWeek != payDay)
@@ -43,6 +46,17 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             DateTime prefPeriodStartDate = data.InsolvencyDate.Date.AddMonths(-4);
 
             var payDays = await data.ProtectiveAwardStartDate.Date.GetDaysInRange(endDate, payDay);
+
+            //calculate daily benefit rate if benefit amount is provided
+            decimal benefitDailyRate = decimal.Zero;
+
+            if (data.paBenefitAmount > decimal.Zero)
+            {
+                benefitDailyRate = await data.paBenefitAmount.GetDailyAmount(
+                           data.paBenefitStartDate.Date,
+                           paBenefitsEndDate.Date);
+            }
+           
 
             //step through payWeek
             var counter = 1;
@@ -54,6 +68,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 var benefitClaimedAmount = 0.00m;
                 var employmentDaysInPrefPeriod = 0;
                 var maximumDaysInPrefPeriod = 0;
+                
 
                 for (int j = 6; j >= 0; j--)
                 {
@@ -75,18 +90,12 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                         if (day >= prefPeriodStartDate && day <= data.InsolvencyDate)
                             maximumDaysInPrefPeriod++;
                     }
-
-                    // determine benefits claimed in week
-                    foreach (var benefit in data.Benefits)
-                    {
-                        if (day >= benefit.BenefitStartDate.Date && day <= benefit.BenefitEndDate.Date)
-                        {
-                            decimal benefitDailyRate = await benefit.BenefitAmount.GetDailyAmount(
-                                benefit.BenefitStartDate.Date,
-                                benefit.BenefitEndDate.Date);
-                            benefitClaimedAmount += benefitDailyRate;
-                        }
+                   
+                    if (day >= data.paBenefitStartDate.Date && day <= paBenefitsEndDate.Date)
+                    {                        
+                        benefitClaimedAmount += benefitDailyRate;
                     }
+                 
                 }
 
                 // calculate Employer Liability for week
