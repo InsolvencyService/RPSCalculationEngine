@@ -1,9 +1,11 @@
 ﻿using FluentAssertions;
+using Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData;
 using Insolvency.CalculationsEngine.Redundancy.BL.Calculations.Notice.Extensions;
 using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Common;
 using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Holiday;
 using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Notice;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
+using Insolvency.CalculationsEngine.Redundancy.Common.Extensions;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -21,6 +23,60 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ExtensionsTests
             _options = Options.Create(testConfigLookupDataHelper.PopulateConfigLookupRoot());
 
         }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task GetAdjustedWeeklyWage_Returns_AdjustedWeeklyWage_When_NoticeWorkedNotPaidClaimAmount_Is_NotZero_RP14a()
+        {
+            //Arrange
+            //N.B weekly wage in request data is 150 NOT zero
+            var requestData = NoticeWorkedNotPaidControllerTestsDataGenerator.GetValidRP14aRequest();
+            //Act
+            var result = await requestData.WeeklyWage.GetAdjustedWeeklyWageAsync
+            (requestData.ShiftPattern, requestData.UnpaidPeriodFrom, requestData.UnpaidPeriodTo,
+                requestData.ApClaimAmount);
+
+            //Assert
+            result.Should().Be(38.461538461538461538461538462M);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task GetAdjustedWeeklyWage_Returns_AdjustedWeeklyWage_When_NoticeWorkedNotPaidClaimAmount_Is_NotZero_RP1()
+        {
+            //Arrange
+            //N.B weekly wage in request data is 150 NOT zero
+            var requestData = NoticeWorkedNotPaidControllerTestsDataGenerator.GetValidRP1Request();
+            //Act
+            var result = await requestData.WeeklyWage.GetAdjustedWeeklyWageAsync
+            (requestData.ShiftPattern, requestData.UnpaidPeriodFrom, requestData.UnpaidPeriodTo,
+                requestData.ApClaimAmount);
+
+            //Assert
+            result.Should().Be(38.461538461538461538461538462M);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task GetAdjustedWeeklyWage_Returns_AdjustedWeeklyWage_When_NoticeWorkedNotPaidClaimAmountIsZero_RP14A()
+        {
+            //Arrange
+            var requestData = NoticeWorkedNotPaidControllerTestsDataGenerator.GetValidRP14aRequest();
+            var apClaimAmount = 0.0m;
+            var adjustedPeriodFrom =
+                await requestData.UnpaidPeriodFrom.GetAdjustedPeriodFromAsync(requestData.InsolvencyDate);
+            var adjustedPeriodTo =
+                await requestData.UnpaidPeriodFrom.GetAdjustedPeriodToAsync(requestData.InsolvencyDate,
+                    requestData.DismissalDate);
+
+            //Act
+            var result = await requestData.WeeklyWage.GetAdjustedWeeklyWageAsync(requestData.ShiftPattern,
+                adjustedPeriodFrom, adjustedPeriodTo, apClaimAmount);
+
+            //Assert
+            result.Should().Be(requestData.WeeklyWage);
+        }       
+
         [Fact]
         [Trait("Category", "UnitTest")]
         public async Task MergePayWeeksTests()

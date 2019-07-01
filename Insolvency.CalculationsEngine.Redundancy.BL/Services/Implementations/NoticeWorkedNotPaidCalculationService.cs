@@ -1,4 +1,5 @@
-﻿using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Notice;
+﻿using Insolvency.CalculationsEngine.Redundancy.BL.Calculations.Notice.Extensions;
+using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Notice;
 using Insolvency.CalculationsEngine.Redundancy.BL.Services.Interfaces;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
 using Insolvency.CalculationsEngine.Redundancy.Common.Extensions;
@@ -85,9 +86,15 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                     }
                     weekDatesListIndex--;
                 }
+
+                var adjustedPeriodFrom = await data.UnpaidPeriodFrom.Date.GetAdjustedPeriodFromAsync(data.InsolvencyDate.Date);
+                var adjustedPeriodTo = await data.UnpaidPeriodTo.Date.GetAdjustedPeriodToAsync(data.InsolvencyDate.Date, data.DismissalDate.Date);
+
+                decimal adjustedWeeklyWage = await data.WeeklyWage.GetAdjustedWeeklyWageAsync(data.ShiftPattern, adjustedPeriodFrom, adjustedPeriodTo, data.ApClaimAmount);
+
                 //calculate Employer Liability for week
-                var employerEntitlement = data.WeeklyWage / data.ShiftPattern.Count * employmentDays;
-                var employerEntitlementInPrefPeriod = data.WeeklyWage / data.ShiftPattern.Count * employmentDaysInPrefPeriod;
+                var employerEntitlement = adjustedWeeklyWage / data.ShiftPattern.Count * employmentDays;
+                var employerEntitlementInPrefPeriod = adjustedWeeklyWage / data.ShiftPattern.Count * employmentDaysInPrefPeriod;
                 var maximumEntitlementInPrefPeriod = statutoryMax / 7 * maximumDaysInPrefPeriod;
 
                 //calculate Statutory Maximum liability for week

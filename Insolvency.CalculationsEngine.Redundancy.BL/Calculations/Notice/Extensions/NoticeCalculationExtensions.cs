@@ -58,5 +58,29 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Calculations.Notice.Extens
             return nwnpList;
         }
 
+        public static async Task<decimal> GetAdjustedWeeklyWageAsync(this decimal weeklyWage, List<string> shiftPattern,
+            DateTime adjustedPeriodFrom, DateTime adjustedPeriodTo, decimal aPClaimAmount)
+        {
+            var adjustedWeeklyWage = 0.0m;
+            var weeksWorkedInClaim = 0.0m;
+
+            var daysWorkedInClaim = (decimal)(await adjustedPeriodFrom.Date.GetNumBusinessDaysInRange(adjustedPeriodTo.Date, shiftPattern));
+
+            weeksWorkedInClaim = daysWorkedInClaim / shiftPattern.Count;
+           
+            if (aPClaimAmount == 0)
+            {
+                adjustedWeeklyWage = weeklyWage;
+            }
+            else
+            {
+                if (weeksWorkedInClaim > 0) adjustedWeeklyWage = aPClaimAmount / weeksWorkedInClaim;
+            }
+
+            adjustedWeeklyWage = adjustedWeeklyWage >= weeklyWage ? weeklyWage : adjustedWeeklyWage;
+
+            return await Task.FromResult(adjustedWeeklyWage);
+        }
+
     }
 }
