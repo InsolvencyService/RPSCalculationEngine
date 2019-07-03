@@ -9,7 +9,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.APPA
         public ProtectiveAwardCalculationRequestModel()
         {
             PayDay = -1;
-            Benefits = new List<ProtectiveAwardBenefit>();
+            //Benefits = new List<ProtectiveAwardBenefit>();
         }
 
         [DataType(DataType.DateTime)]
@@ -35,6 +35,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.APPA
 
         public List<string> ShiftPattern { get; set; }
 
-        public List<ProtectiveAwardBenefit> Benefits { get; set; }
+        //public List<ProtectiveAwardBenefit> Benefits { get; set; }
+
+        public DateTime paBenefitStartDate { get; set; }
+
+        public decimal paBenefitAmount { get; set; }
     }
 }

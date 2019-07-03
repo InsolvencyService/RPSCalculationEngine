@@ -40,7 +40,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 WeeklyWage = 320,
                 ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
                 PayDay = 6,
-                IsTaxable = true
+                IsTaxable = true,
+                ApClaimAmount = 100
             };
 
             var expectedResults = new NoticeWorkedNotPaidResponseDTO(InputSource.Rp14a, 508, weeklyResult: new List<NoticeWorkedNotPaidWeeklyResult>()
@@ -50,16 +51,16 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                     WeekNumber = 1,
                     PayDate = new DateTime(2018, 8, 03),
                     MaximumEntitlement = 508m,
-                    EmployerEntitlement = 320m,
-                    GrossEntitlement = 320m,
+                    EmployerEntitlement = 55.56M,
+                    GrossEntitlement = 55.56M,
                     IsTaxable = true,
-                    TaxDeducted = 64m,
-                    NiDeducted = 18.48m,
-                    NetEntitlement = 237.52m,
+                    TaxDeducted = 11.11M,
+                    NiDeducted = 0m,
+                    NetEntitlement = 44.45M,
                     MaximumDays = 7,
                     EmploymentDays = 5,
-                    MaximumEntitlementIn4MonthPeriod = 0m,
-                    EmployerEntitlementIn4MonthPeriod = 0m,
+                    MaximumEntitlementIn4MonthPeriod = 0M,
+                    EmployerEntitlementIn4MonthPeriod = 0M,
                     GrossEntitlementIn4Months = 0m
                 },
                 new NoticeWorkedNotPaidWeeklyResult()
@@ -67,15 +68,15 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                     WeekNumber = 2,
                     PayDate = new DateTime(2018, 8, 10),
                     MaximumEntitlement = 362.86m,
-                    EmployerEntitlement = 192m,
-                    GrossEntitlement = 192m,
+                    EmployerEntitlement = 33.33M,
+                    GrossEntitlement = 33.33M,
                     IsTaxable = true,
-                    TaxDeducted = 38.4m,
-                    NiDeducted = 3.12m,
-                    NetEntitlement = 150.48m,
+                    TaxDeducted = 6.67M,
+                    NiDeducted = 0m,
+                    NetEntitlement = 26.66M,
                     MaximumDays = 5,
                     EmploymentDays = 3,
-                    MaximumEntitlementIn4MonthPeriod = 0m,
+                    MaximumEntitlementIn4MonthPeriod = 0M,
                     EmployerEntitlementIn4MonthPeriod = 0m,
                     GrossEntitlementIn4Months = 0m
                 }
@@ -100,7 +101,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 WeeklyWage = 320,
                 ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
                 PayDay = 6,
-                IsTaxable = true
+                IsTaxable = true,
+                ApClaimAmount = 100
             };
 
             var expectedResults = new NoticeWorkedNotPaidResponseDTO(InputSource.Rp14a, 508, weeklyResult: new List<NoticeWorkedNotPaidWeeklyResult>()
@@ -110,46 +112,46 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                     WeekNumber = 1,
                     PayDate = new DateTime(2018, 7, 27),
                     MaximumEntitlement = 508m,
-                    EmployerEntitlement = 320m,
-                    GrossEntitlement = 320m,
+                    EmployerEntitlement = 35.71m,
+                    GrossEntitlement = 35.71m,
                     IsTaxable = true,
-                    TaxDeducted = 64m,
-                    NiDeducted = 18.48m,
-                    NetEntitlement = 237.52m,
+                    TaxDeducted = 7.14m,
+                    NiDeducted = 0m,
+                    NetEntitlement = 28.57m,
                     MaximumDays = 7,
                     EmploymentDays = 5,
                     MaximumEntitlementIn4MonthPeriod = 508m,
-                    EmployerEntitlementIn4MonthPeriod = 320m,
-                    GrossEntitlementIn4Months = 320m
+                    EmployerEntitlementIn4MonthPeriod = 35.71m,
+                    GrossEntitlementIn4Months = 35.71m
                 },
                 new NoticeWorkedNotPaidWeeklyResult()
                 {
                     WeekNumber = 2,
                     PayDate = new DateTime(2018, 8, 03),
                     MaximumEntitlement = 508m,
-                    EmployerEntitlement = 320m,
-                    GrossEntitlement = 320m,
+                    EmployerEntitlement = 35.71m,
+                    GrossEntitlement = 35.71m,
                     IsTaxable = true,
-                    TaxDeducted = 64m,
-                    NiDeducted = 18.48m,
-                    NetEntitlement = 237.52m,
+                    TaxDeducted = 7.14m,
+                    NiDeducted = 0m,
+                    NetEntitlement = 28.57m,
                     MaximumDays = 7,
                     EmploymentDays = 5,
                     MaximumEntitlementIn4MonthPeriod = 217.71m,
-                    EmployerEntitlementIn4MonthPeriod = 64m,
-                    GrossEntitlementIn4Months = 64m
+                    EmployerEntitlementIn4MonthPeriod = 7.14m,
+                    GrossEntitlementIn4Months = 7.14m
                 },
                 new NoticeWorkedNotPaidWeeklyResult()
                 {
                     WeekNumber = 3,
                     PayDate = new DateTime(2018, 8, 10),
                     MaximumEntitlement = 362.86m,
-                    EmployerEntitlement = 192m,
-                    GrossEntitlement = 192m,
+                    EmployerEntitlement = 21.43m,
+                    GrossEntitlement = 21.43m,
                     IsTaxable = true,
-                    TaxDeducted = 38.4m,
-                    NiDeducted = 3.12m,
-                    NetEntitlement = 150.48m,
+                    TaxDeducted = 4.29m,
+                    NiDeducted = 0m,
+                    NetEntitlement = 17.14m,
                     MaximumDays = 5,
                     EmploymentDays = 3,
                     MaximumEntitlementIn4MonthPeriod = 0m,

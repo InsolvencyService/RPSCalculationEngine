@@ -38,5 +38,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Notice
         public int? PayDay { get; set; }
 
         public bool IsTaxable { get; set; }
+
+        public decimal ApClaimAmount { get; set; }
     }
 }

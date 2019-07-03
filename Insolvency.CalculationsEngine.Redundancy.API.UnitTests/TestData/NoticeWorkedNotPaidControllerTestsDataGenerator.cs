@@ -22,7 +22,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 WeeklyWage = 320,
                 ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
                 PayDay = 6,
-                IsTaxable = true
+                IsTaxable = true,
+                ApClaimAmount = 100
             };
         }
 
@@ -41,7 +42,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 WeeklyWage = 320,
                 ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
                 PayDay = 6,
-                IsTaxable = true
+                IsTaxable = true,
+                ApClaimAmount = 100
             };
         }
 

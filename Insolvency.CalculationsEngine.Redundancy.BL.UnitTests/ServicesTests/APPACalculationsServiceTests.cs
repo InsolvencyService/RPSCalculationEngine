@@ -361,15 +361,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 PayDay = 6,
                 WeeklyWage = 400M,
                 ShiftPattern = shiftPattern,
-                Benefits = new List<ProtectiveAwardBenefit>()
-                {
-                    new ProtectiveAwardBenefit()
-                    {
-                        BenefitStartDate = new DateTime(2018, 10, 1),
-                        BenefitEndDate = new DateTime(2018, 10, 5),
-                        BenefitAmount = 200M
-                    }
-                }
+                paBenefitStartDate = new DateTime(2018, 10, 1),               
+                paBenefitAmount = 200M
             };
 
             var paResponse = new ProtectiveAwardResponseDTO()

@@ -148,7 +148,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             calculationResult.InputSource = data.InputSource;
             calculationResult.StatutoryMax = Math.Round(statutoryMax, 2);
             calculationResult.DngApplied = (adjustedPeriodTo > data.DateNoticeGiven.Date);
-            calculationResult.RunNWNP = (adjustedPeriodTo > data.DateNoticeGiven.Date && adjustedWeeklyWage >= data.WeeklyWage);
+            calculationResult.RunNWNP = (adjustedPeriodTo > data.DateNoticeGiven.Date);
             calculationResult.WeeklyResult = weeklyresult;
             return await Task.FromResult(calculationResult);
         }
