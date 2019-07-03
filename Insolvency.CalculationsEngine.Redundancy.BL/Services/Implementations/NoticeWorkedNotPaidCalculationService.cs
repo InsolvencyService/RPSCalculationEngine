@@ -90,7 +90,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 var adjustedPeriodFrom = await data.UnpaidPeriodFrom.Date.GetAdjustedPeriodFromAsync(data.InsolvencyDate.Date);
                 var adjustedPeriodTo = await data.UnpaidPeriodTo.Date.GetAdjustedPeriodToAsync(data.InsolvencyDate.Date, data.DismissalDate.Date);
 
-                decimal adjustedWeeklyWage = await data.WeeklyWage.GetAdjustedWeeklyWageAsync(data.ShiftPattern, adjustedPeriodFrom, adjustedPeriodTo, data.ApClaimAmount);
+                decimal adjustedWeeklyWage = await data.WeeklyWage.GetAdjustedWeeklyWageAsync(data.ShiftPattern, data.UnpaidPeriodFrom, data.UnpaidPeriodTo, data.ApClaimAmount);
 
                 //calculate Employer Liability for week
                 var employerEntitlement = adjustedWeeklyWage / data.ShiftPattern.Count * employmentDays;

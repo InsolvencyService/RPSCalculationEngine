@@ -59,12 +59,12 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Calculations.Notice.Extens
         }
 
         public static async Task<decimal> GetAdjustedWeeklyWageAsync(this decimal weeklyWage, List<string> shiftPattern,
-            DateTime adjustedPeriodFrom, DateTime adjustedPeriodTo, decimal aPClaimAmount)
+            DateTime unpaidperiodfrom, DateTime unpaidperiodto, decimal aPClaimAmount)
         {
             var adjustedWeeklyWage = 0.0m;
             var weeksWorkedInClaim = 0.0m;
 
-            var daysWorkedInClaim = (decimal)(await adjustedPeriodFrom.Date.GetNumBusinessDaysInRange(adjustedPeriodTo.Date, shiftPattern));
+            var daysWorkedInClaim = (decimal)(await unpaidperiodfrom.Date.GetNumBusinessDaysInRange(unpaidperiodto.Date, shiftPattern));
 
             weeksWorkedInClaim = daysWorkedInClaim / shiftPattern.Count;
            
