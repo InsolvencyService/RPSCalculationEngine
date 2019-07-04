@@ -34,3 +34,30 @@
 2019-02-25 11:40:29.8505 Info Found 40 configuration items
 2019-02-25 11:40:29.8715 Info Configuration initialized.
 2019-02-25 11:40:29.8824 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2019-07-01 15:01:11.3904 Info Message Template Auto Format enabled
+2019-07-01 15:01:11.4104 Info Loading assembly: NLog.Web.AspNetCore
+2019-07-01 15:01:11.5692 Info Adding target File Target[allfile]
+2019-07-01 15:01:11.5692 Info Adding target Console Target[console]
+2019-07-01 15:01:11.5883 Info Configured from an XML element in D:\Work\inss\RPSCalculationEngine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\netcoreapp2.2\NLog.config...
+2019-07-01 15:01:11.6077 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2019-07-01 15:01:11.6227 Info Found 40 configuration items
+2019-07-01 15:01:11.6516 Info Configuration initialized.
+2019-07-01 15:01:11.6672 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2019-07-01 15:03:16.3114 Info Message Template Auto Format enabled
+2019-07-01 15:03:16.3284 Info Loading assembly: NLog.Web.AspNetCore
+2019-07-01 15:03:16.4336 Info Adding target File Target[allfile]
+2019-07-01 15:03:16.4387 Info Adding target Console Target[console]
+2019-07-01 15:03:16.4387 Info Configured from an XML element in D:\Work\inss\RPSCalculationEngine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\netcoreapp2.2\NLog.config...
+2019-07-01 15:03:16.4701 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2019-07-01 15:03:16.4701 Info Found 40 configuration items
+2019-07-01 15:03:16.5107 Info Configuration initialized.
+2019-07-01 15:03:16.5185 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2019-07-02 15:08:03.1331 Info Message Template Auto Format enabled
+2019-07-02 15:08:03.1485 Info Loading assembly: NLog.Web.AspNetCore
+2019-07-02 15:08:03.2263 Info Adding target File Target[allfile]
+2019-07-02 15:08:03.2394 Info Adding target Console Target[console]
+2019-07-02 15:08:03.2517 Info Configured from an XML element in D:\Work\inss\RPSCalculationEngine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\netcoreapp2.2\NLog.config...
+2019-07-02 15:08:03.2700 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2019-07-02 15:08:03.2818 Info Found 40 configuration items
+2019-07-02 15:08:03.3066 Info Configuration initialized.
+2019-07-02 15:08:03.3066 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
