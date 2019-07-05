@@ -77,7 +77,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Calculations.Notice.Extens
                 if (weeksWorkedInClaim > 0) adjustedWeeklyWage = aPClaimAmount / weeksWorkedInClaim;
             }
 
-            adjustedWeeklyWage = adjustedWeeklyWage >= weeklyWage ? weeklyWage : adjustedWeeklyWage;
+           
 
             return await Task.FromResult(adjustedWeeklyWage);
         }
