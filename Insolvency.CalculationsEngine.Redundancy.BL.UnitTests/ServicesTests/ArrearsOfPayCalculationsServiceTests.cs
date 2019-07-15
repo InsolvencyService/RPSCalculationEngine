@@ -479,5 +479,76 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                         expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].GrossEntitlementIn4Months);
             }
         }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformCalculationAsync_WhenInsolvencyDayBeforePay()
+        {
+            var aopRequest = new ArrearsOfPayCalculationRequestModel()
+            {
+                InputSource = InputSource.Rp1,
+                InsolvencyDate = new DateTime(2018, 8, 22),
+                EmploymentStartDate = new DateTime(2018, 04, 06),
+                DismissalDate = new DateTime(2018, 8, 22),
+                DateNoticeGiven = new DateTime(2018, 8, 22),
+                UnpaidPeriodFrom = new DateTime(2018, 8, 10),
+                UnpaidPeriodTo = new DateTime(2018, 8, 22),
+                ApClaimAmount = 621M,
+                IsTaxable = true,
+                // 4 = Thursday
+                PayDay = 4,
+                ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                WeeklyWage = 345m
+            };
+            var expectedCalculationResult = new ArrearsOfPayResponseDTO(InputSource.Rp1, 508M, false, false, weeklyResult: new List<ArrearsOfPayWeeklyResult>()
+                {
+                    new ArrearsOfPayWeeklyResult(1, new DateTime(2018, 8, 16), 345M, 508M, 345M, 345M,true, 69M, 21.48M, 254.52M,7, 5, 508M, 345M, 345M),
+                    new ArrearsOfPayWeeklyResult(2, new DateTime(2018, 8, 23), 345M, 435.43M, 276M, 276M,true, 55.2M, 13.2M, 207.6M, 6, 4, 435.43M, 276M, 276M),
+                });
+
+            var actualResult = await _arrearsOfPayCalculationsService.PerformCalculationAsync(aopRequest, _options);
+
+
+            actualResult.InputSource.Should().Be(expectedCalculationResult.InputSource);
+            actualResult.StatutoryMax.Should().Be(expectedCalculationResult.StatutoryMax);
+            actualResult.DngApplied.Should().Be(expectedCalculationResult.DngApplied);
+            actualResult.RunNWNP.Should().Be(expectedCalculationResult.RunNWNP);
+
+            for (var expectedCalcResultIndex = 0;
+                expectedCalcResultIndex < expectedCalculationResult.WeeklyResult.Count;
+                expectedCalcResultIndex++)
+            {
+                actualResult.WeeklyResult[expectedCalcResultIndex].WeekNumber.Should()
+                    .Be(expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].WeekNumber);
+                actualResult.WeeklyResult[expectedCalcResultIndex].PayDate.Should()
+                    .Be(expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].PayDate);
+                actualResult.WeeklyResult[expectedCalcResultIndex].ApPayRate.Should()
+                    .Be(expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].ApPayRate);
+                actualResult.WeeklyResult[expectedCalcResultIndex].MaximumEntitlement.Should().Be(
+                    expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].MaximumEntitlement);
+                actualResult.WeeklyResult[expectedCalcResultIndex].EmployerEntitlement.Should().Be(
+                    expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].EmployerEntitlement);
+                actualResult.WeeklyResult[expectedCalcResultIndex].GrossEntitlement.Should().Be(
+                    expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].GrossEntitlement);
+                actualResult.WeeklyResult[expectedCalcResultIndex].IsTaxable.Should()
+                    .Be(expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].IsTaxable);
+                actualResult.WeeklyResult[expectedCalcResultIndex].TaxDeducted.Should().Be(
+                    expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].TaxDeducted);
+                actualResult.WeeklyResult[expectedCalcResultIndex].NIDeducted.Should().Be(
+                    expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].NIDeducted);
+                actualResult.WeeklyResult[expectedCalcResultIndex].NetEntitlement.Should().Be(
+                        expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].NetEntitlement);
+                actualResult.WeeklyResult[expectedCalcResultIndex].MaximumDays.Should().Be(
+                        expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].MaximumDays);
+                actualResult.WeeklyResult[expectedCalcResultIndex].EmploymentDays.Should().Be(
+                        expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].EmploymentDays);
+                actualResult.WeeklyResult[expectedCalcResultIndex].MaximumEntitlementIn4MonthPeriod.Should().Be(
+                        expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].MaximumEntitlementIn4MonthPeriod);
+                actualResult.WeeklyResult[expectedCalcResultIndex].EmployerEntitlementIn4MonthPeriod.Should().Be(
+                        expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].EmployerEntitlementIn4MonthPeriod);
+                actualResult.WeeklyResult[expectedCalcResultIndex].GrossEntitlementIn4Months.Should().Be(
+                        expectedCalculationResult.WeeklyResult[expectedCalcResultIndex].GrossEntitlementIn4Months);
+            }
+        }
     }
 }
