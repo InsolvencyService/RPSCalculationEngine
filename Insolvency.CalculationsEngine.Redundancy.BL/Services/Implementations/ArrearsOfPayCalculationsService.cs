@@ -78,7 +78,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
                         if (date >= adjustedPeriodFrom.Date && date <= adjustedPeriodTo.Date)
                         {
-                            if (date >= data.DateNoticeGiven.Date && date <= projectedNoticeEndDate.Date)
+                            if (date > data.DateNoticeGiven.Date && date <= projectedNoticeEndDate.Date)
                             {
                                 employmentDaysBetweenNoticeGivenAndNoticeEndDate++;
 
