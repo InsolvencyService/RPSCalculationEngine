@@ -163,6 +163,50 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             await TestCalculation(request, expectedResults);
         }
 
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformCalculationAsync_WhenNoticeGivenDuringArrearsOfPay_AndLessThatOneYearsService()
+        {
+            var request = new NoticeWorkedNotPaidCalculationRequestModel()
+            {
+                InputSource = InputSource.Rp14a,
+                EmploymentStartDate = new DateTime(2018, 9, 3),
+                InsolvencyDate = new DateTime(2019, 4, 3),
+                DateNoticeGiven = new DateTime(2019, 3, 12),
+                DismissalDate = new DateTime(2019, 3, 28),
+                UnpaidPeriodFrom = new DateTime(2019, 3, 1),
+                UnpaidPeriodTo = new DateTime(2019, 3, 31),
+                WeeklyWage = 302.58m,
+                ShiftPattern = new List<string> { "0", "1", "2", "4", "6" },
+                PayDay = 6,
+                IsTaxable = true,
+                ApClaimAmount = 1452.38M
+            };
+
+            var expectedResults = new NoticeWorkedNotPaidResponseDTO(InputSource.Rp14a, 508, weeklyResult: new List<NoticeWorkedNotPaidWeeklyResult>()
+            {
+                new NoticeWorkedNotPaidWeeklyResult()
+                {
+                    WeekNumber = 1,
+                    PayDate = new DateTime(2019, 3, 19),
+                    MaximumEntitlement = 508m,
+                    EmployerEntitlement = 330.09m,
+                    GrossEntitlement = 330.09m,
+                    IsTaxable = true,
+                    TaxDeducted = 66.02m,
+                    NiDeducted = 19.69m,
+                    NetEntitlement = 244.38m,
+                    MaximumDays = 7,
+                    EmploymentDays = 5,
+                    MaximumEntitlementIn4MonthPeriod = 508m,
+                    EmployerEntitlementIn4MonthPeriod = 330.09m,
+                    GrossEntitlementIn4Months = 330.09m
+                }
+            });
+
+            await TestCalculation(request, expectedResults);
+        }
+
         private async Task TestCalculation(
             NoticeWorkedNotPaidCalculationRequestModel request, NoticeWorkedNotPaidResponseDTO expectedResult)
         {
