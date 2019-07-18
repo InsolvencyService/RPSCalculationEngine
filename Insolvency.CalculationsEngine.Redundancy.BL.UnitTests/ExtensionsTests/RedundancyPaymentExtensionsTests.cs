@@ -77,6 +77,51 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ExtensionsTests
 
         [Fact]
         [Trait("Category", "UnitTest")]
+        public async Task GetNoticeEntitlementWeeks_Returns_Equal_Zero_When_LessThanOneCalendarMonth()
+        {
+            //Arrange
+            var empStartDate = new DateTime(2018, 10, 06);
+            var relNoticeDate = new DateTime(2018, 11, 05);
+
+            //Act
+            var result = await empStartDate.GetNoticeEntitlementWeeks(relNoticeDate);
+
+            //Asset
+            result.Should().Be(0);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task GetNoticeEntitlementWeeks_Returns_Equal_One_When_GreaterThanOneCalendarMonth()
+        {
+            //Arrange
+            var empStartDate = new DateTime(2018, 10, 06);
+            var relNoticeDate = new DateTime(2018, 11, 06);
+
+            //Act
+            var result = await empStartDate.GetNoticeEntitlementWeeks(relNoticeDate);
+
+            //Asset
+            result.Should().Be(1);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task GetNoticeEntitlementWeeks_Returns_Equal_One_When_GreaterThanOneCalendarMonthDecToJan()
+        {
+            //Arrange
+            var empStartDate = new DateTime(2018, 12, 24);
+            var relNoticeDate = new DateTime(2019, 1, 24);
+
+            //Act
+            var result = await empStartDate.GetNoticeEntitlementWeeks(relNoticeDate);
+
+            //Asset
+            result.Should().Be(1);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
         public async Task GetRelevantDismissalDate_Returns_DismissalDate()
         {
             //Arrange
