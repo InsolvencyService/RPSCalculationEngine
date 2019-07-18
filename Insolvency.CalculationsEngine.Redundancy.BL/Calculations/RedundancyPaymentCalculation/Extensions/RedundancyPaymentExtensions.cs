@@ -10,14 +10,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Calculations.RedundancyPay
         public static async Task<int> GetNoticeEntitlementWeeks(this DateTime empStartDate, DateTime empEndDate)
         {
             var yearsOfService = await empStartDate.GetServiceYearsAsync(empEndDate);
-            if (yearsOfService > 12)
+
+            if (yearsOfService == 0 && empStartDate.AddMonths(1) <= empEndDate)
             {
-                return (12);
+                //If they have worked at least one calendar month, they get a minimum of one weeks notice
+                return 1;
             }
-            else
-            {
-                return (yearsOfService);
-            }
+
+            return yearsOfService > 12 ? 12 : yearsOfService;
         }
 
         public static async Task<DateTime> GetAdjustedEmploymentStartDate(this DateTime employmentStartDate, int totalDaysLost)
