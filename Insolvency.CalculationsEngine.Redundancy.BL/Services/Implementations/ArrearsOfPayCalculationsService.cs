@@ -105,8 +105,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 var employerEntitlement = adjustedWeeklyWage / data.ShiftPattern.Count * employmentDays +
                                             WeeklyWageBetweenNoticeGivenAndNoticeEnd / data.ShiftPattern.Count * employmentDaysBetweenNoticeGivenAndNoticeEndDate;
 
-                employerEntitlementInPrefPeriod = adjustedWeeklyWage / data.ShiftPattern.Count * employmentDaysInPrefPeriod +
-                                                    postDNGAdjustedWeeklyWage / data.ShiftPattern.Count * employmentDaysInPrefPeriodPostDNG;
+                employerEntitlementInPrefPeriod = adjustedWeeklyWage / data.ShiftPattern.Count * employmentDaysInPrefPeriod;
                 employerEntitlementInPrefPeriod = Math.Round(employerEntitlementInPrefPeriod, 2);
 
                 //calculate Statutory Maximum liability for week
