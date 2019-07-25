@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.APPA;
@@ -9,7 +8,6 @@ using Insolvency.CalculationsEngine.Redundancy.BL.Calculations.APPA.Extensions;
 using Insolvency.CalculationsEngine.Redundancy.Common.Extensions;
 using Microsoft.Extensions.Options;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
-using Insolvency.CalculationsEngine.Redundancy.Common.Exceptions;
 using Insolvency.CalculationsEngine.Redundancy.BL.Calculations.RedundancyPaymentCalculation.Extensions;
 
 namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
@@ -51,7 +49,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
             decimal adjustedWeeklyWage = await data.WeeklyWage.GetAdjustedWeeklyWageAsync(data.ShiftPattern, adjustedPeriodFrom, adjustedPeriodTo, data.ApClaimAmount);
             decimal WeeklyWageBetweenNoticeGivenAndNoticeEnd = decimal.Zero; 
-            decimal postDNGAdjustedWeeklyWage = (adjustedWeeklyWage >= data.WeeklyWage) ? adjustedWeeklyWage - data.WeeklyWage : adjustedWeeklyWage;
             
             DateTime prefPeriodStartDate = data.InsolvencyDate.Date.AddMonths(-4);
             prefPeriodStartDate = (prefPeriodStartDate <= data.EmploymentStartDate.Date) ? data.EmploymentStartDate.Date : prefPeriodStartDate.Date;
