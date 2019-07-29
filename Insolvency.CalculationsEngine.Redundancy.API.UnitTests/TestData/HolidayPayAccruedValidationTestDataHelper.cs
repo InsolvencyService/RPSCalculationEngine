@@ -38,10 +38,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 "Holiday year start date is not provided or is not a valid date" };
             yield return new object[] {
                 HolidayPayAccruedTestsDataGenerator.GetRequestWithHolidayYearStartAfterDismissalDate(),
-                "Holiday year start date must be before the DismissalDate date" };
+                "Holiday year start date cannot be after DismissalDate date" };
             yield return new object[] {
                 HolidayPayAccruedTestsDataGenerator.GetRequestWithHolidayYearStartAfterInsolvencyDate(),
-                "Holiday year start date must be before the Insolvency date" };
+                "Holiday year start date cannot be after Insolvency date" };
             yield return new object[] {
                 HolidayPayAccruedTestsDataGenerator.GetRequestWithHolidayYearStart12MonthsBeforeDismissalDate(),
                 "Holiday year start date must be no more than a year prior to the dismissal date/insolvency date" };

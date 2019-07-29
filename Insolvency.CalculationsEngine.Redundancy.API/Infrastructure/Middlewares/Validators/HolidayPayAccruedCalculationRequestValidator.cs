@@ -29,7 +29,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                 .GreaterThan(r => r.InsolvencyDate.AddYears(-1))
                     .WithMessage($"Dismissal date must be no more than a year prior to the insolvency date")
                     .When(r => r.InsolvencyDate != DateTime.MinValue && r.DismissalDate != DateTime.MinValue);
-                
+
             RuleFor(req => req.ContractedHolEntitlement)
                 .NotNull()
                 .WithMessage($"Contracted Holiday Entitlement is not provided")
@@ -37,12 +37,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                 .WithMessage($"Contracted Hoiday Entitlement must be greated than or equal to 0");
 
             RuleFor(req => req.HolidayYearStart)
-                .GreaterThan(DateTime.MinValue)
-                    .WithMessage($"Holiday year start date is not provided or is not a valid date")
+                 .GreaterThan(DateTime.MinValue)
+                 .WithMessage($"Holiday year start date is not provided or is not a valid date");
+
+            RuleFor(req => req.HolidayYearStart.Date)
                 .LessThanOrEqualTo(r => r.InsolvencyDate.Date)
-                    .WithMessage($"Holiday year start date must be before the Insolvency date")
+                .WithMessage($"Holiday year start date cannot be after Insolvency date")
                 .LessThanOrEqualTo(r => r.DismissalDate.Date)
-                    .WithMessage($"Holiday year start date must be before the DismissalDate date");
+                .WithMessage($"Holiday year start date cannot be after DismissalDate date");
 
             RuleFor(req => req.HolidayYearStart.Date)
                 .GreaterThan(r => GetMinFromDismissalDateAndInsolvencyDate(r).AddYears(-1))
