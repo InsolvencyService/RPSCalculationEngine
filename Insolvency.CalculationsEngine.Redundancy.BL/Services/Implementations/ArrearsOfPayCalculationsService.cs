@@ -95,9 +95,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 }
 
                 var weekStartDate = payWeekEnd.AddDays(-6);
-                var maximumDays = await weekStartDate.GetNumDaysInIntersectionOfTwoRanges(payWeekEnd, data.EmploymentStartDate.Date, data.DismissalDate.Date);
-                var maximumDaysInPrefPeriod = await weekStartDate.GetNumDaysInIntersectionOfTwoRanges(payWeekEnd, prefPeriodStartDate, prefPeriodEndDate);
-
+                var maximumDays = await weekStartDate.GetNumDaysInIntersectionOfTwoRanges(payWeekEnd, data.EmploymentStartDate.Date, data.DismissalDate.Date, data.DateNoticeGiven.Date);
+                var maximumDaysInPrefPeriod = await weekStartDate.GetNumDaysInIntersectionOfTwoRanges(payWeekEnd, prefPeriodStartDate, prefPeriodEndDate, data.DateNoticeGiven.Date);
+                
                 //calculate Employer Liability for week
                 var employerEntitlement = adjustedWeeklyWage / data.ShiftPattern.Count * employmentDays +
                                             WeeklyWageBetweenNoticeGivenAndNoticeEnd / data.ShiftPattern.Count * employmentDaysBetweenNoticeGivenAndNoticeEndDate;
