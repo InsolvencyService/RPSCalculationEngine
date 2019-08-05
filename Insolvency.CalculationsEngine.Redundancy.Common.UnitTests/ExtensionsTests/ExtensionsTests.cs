@@ -750,6 +750,42 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.ExtensionsTe
 
         [Fact]
         [Trait("Category", "UnitTest")]
+        public async Task GetNumDaysInIntersectionOfTwoRanges_Returns2WhenDateNoticeGivenLessThanEndDate()
+        {
+            // Arrange
+            var startDate1 = new DateTime(2018, 10, 1);
+            var endDate1 = new DateTime(2018, 10, 7);
+            var startDate2 = new DateTime(2018, 10, 5);
+            var endDate2 = new DateTime(2018, 10, 10);
+            var dateNoticeGiven = new DateTime(2018, 10, 6);
+
+            // Act
+            var result = await startDate1.GetNumDaysInIntersectionOfTwoRanges(endDate1, startDate2, endDate2, dateNoticeGiven);
+
+            // Assert
+            result.Should().Be(2);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task GetNumDaysInIntersectionOfTwoRanges_Returns3WhenDateNoticeGivenLessThanStartDate()
+        {
+            // Arrange
+            var startDate1 = new DateTime(2018, 10, 1);
+            var endDate1 = new DateTime(2018, 10, 7);
+            var startDate2 = new DateTime(2018, 10, 5);
+            var endDate2 = new DateTime(2018, 10, 10);
+            var dateNoticeGiven = new DateTime(2018, 10, 4);
+
+            // Act
+            var result = await startDate1.GetNumDaysInIntersectionOfTwoRanges(endDate1, startDate2, endDate2, dateNoticeGiven);
+
+            // Assert
+            result.Should().Be(3);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
         public async Task DoRangesIntersect_ReturnsFalseWhenRange2BeforeRange1()
         {
             // Arrange

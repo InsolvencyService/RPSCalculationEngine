@@ -154,7 +154,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.Extensions
             return await Task.FromResult(numDays);
         }
 
-        public static async Task<int> GetNumDaysInIntersectionOfTwoRanges(this DateTime startDate1, DateTime endDate1, DateTime startDate2, DateTime endDate2)
+        public static async Task<int> GetNumDaysInIntersectionOfTwoRanges(this DateTime startDate1, DateTime endDate1, DateTime startDate2, DateTime endDate2, DateTime? dateNoticeGiven = null)
         {
             // handle non-intersects
             if (endDate2.Date < startDate1.Date || startDate2.Date > endDate1.Date)
@@ -162,6 +162,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.Extensions
 
             var intersectStart = (startDate1.Date > startDate2.Date) ? startDate1.Date : startDate2.Date;
             var intersectEnd = (endDate1.Date < endDate2.Date) ? endDate1.Date : endDate2.Date;
+
+            //FCGH-234 if the date notice given is in that week and is before the dismissal date use date notice given
+            if (dateNoticeGiven.HasValue && dateNoticeGiven.Value.Date > intersectStart.Date && dateNoticeGiven.Value.Date < intersectEnd.Date)
+                intersectEnd = dateNoticeGiven.Value.Date;
 
             return await Task.FromResult((intersectEnd - intersectStart).Days + 1);
         }
