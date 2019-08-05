@@ -164,7 +164,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.Extensions
             var intersectEnd = (endDate1.Date < endDate2.Date) ? endDate1.Date : endDate2.Date;
 
             //FCGH-234 if the date notice given is in that week and is before the dismissal date use date notice given
-            if (dateNoticeGiven.HasValue) intersectEnd = (dateNoticeGiven.Value.Date < intersectEnd.Date) ? dateNoticeGiven.Value.Date : intersectEnd;
+            if (dateNoticeGiven.HasValue && dateNoticeGiven.Value.Date > intersectStart.Date && dateNoticeGiven.Value.Date < intersectEnd.Date)
+                intersectEnd = dateNoticeGiven.Value.Date;
 
             return await Task.FromResult((intersectEnd - intersectStart).Days + 1);
         }
