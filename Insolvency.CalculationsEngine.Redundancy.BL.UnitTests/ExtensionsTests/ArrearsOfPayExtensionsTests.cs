@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData;
@@ -28,7 +29,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ExtensionsTests
                 requestData.ApClaimAmount);
 
             //Assert
-            result.Should().Be(68.181818181818181818181818182M);
+            result.Should().Be(68.181818181818181818181818180M);
         }
 
         [Fact]
@@ -50,6 +51,24 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ExtensionsTests
 
             //Assert
             result.Should().Be(requestData.WeeklyWage);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task GetAdjustedWeeklyWage_Returns_AdjustedWeeklyWage_When_OneDayWorked()
+        {
+            //Arrange
+            var shiftPattern = new List<string> {"1", "2", "3", "4", "5"};
+            var adjustedPeriodFrom = new DateTime(2019, 2, 22);
+            var adjustedPeriodTo = new DateTime(2019, 3, 29);
+            var apClaimAmount = 1628.64M;
+            var weeklyWage = 313.20m;
+
+            //Act
+            var result = await weeklyWage.GetAdjustedWeeklyWageAsync(shiftPattern, adjustedPeriodFrom, adjustedPeriodTo, apClaimAmount);
+
+            //Assert
+            result.Should().Be(313.20m);
         }
 
         [Fact]

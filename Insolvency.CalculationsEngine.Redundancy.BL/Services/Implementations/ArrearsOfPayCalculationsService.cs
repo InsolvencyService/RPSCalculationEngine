@@ -47,7 +47,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 extendedAdjustedPeriodTo = adjustedPeriodTo.AddDays(7);
             var payDays = await adjustedPeriodFrom.Date.GetDaysInRange(extendedAdjustedPeriodTo.Date, (DayOfWeek)data.PayDay);
 
-            decimal adjustedWeeklyWage = await data.WeeklyWage.GetAdjustedWeeklyWageAsync(data.ShiftPattern, adjustedPeriodFrom, adjustedPeriodTo, data.ApClaimAmount);
+            decimal adjustedWeeklyWage = await data.WeeklyWage.GetAdjustedWeeklyWageAsync(data.ShiftPattern, data.UnpaidPeriodFrom, data.UnpaidPeriodTo, data.ApClaimAmount);
             decimal WeeklyWageBetweenNoticeGivenAndNoticeEnd = decimal.Zero; 
             
             DateTime prefPeriodStartDate = data.InsolvencyDate.Date.AddMonths(-4);
