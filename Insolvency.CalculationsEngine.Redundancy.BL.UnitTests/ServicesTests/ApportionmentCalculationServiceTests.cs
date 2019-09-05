@@ -41,7 +41,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             Math.Round(result.PrefClaim, 2).Should()
                 .Be(ConfigValueLookupHelper.GetPreferentialLimit(_options, DateTime.Now));
             Math.Round(result.NonPrefClaim, 2).Should()
-                .Be(Math.Round(request.TotalClaimedInFourMonth, 2) - Math.Round(result.PrefClaim, 2));
+                .Be(Math.Round(request.GrossPaidInFourMonth, 2) - Math.Round(result.PrefClaim, 2));
             result.TupeStatus.Should().Be(request.TupeStatus);
             result.ApportionmentPercentage.Should().Be(100.0m);
 
@@ -65,7 +65,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             // Assert
             Math.Round(result.PrefClaim, 2).Should().Be(689.04m);
             Math.Round(result.NonPrefClaim, 2).Should()
-                .Be(Math.Round(request.TotalClaimedInFourMonth, 2) - Math.Round(result.PrefClaim, 2));
+                .Be(Math.Round(request.GrossPaidInFourMonth, 2) - Math.Round(result.PrefClaim, 2));
             result.TupeStatus.Should().Be(request.TupeStatus);
             result.ApportionmentPercentage.Should().Be(100.0m);
         }
@@ -88,7 +88,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             // Assert
             Math.Round(result.PrefClaim, 2).Should().Be(160m);
             Math.Round(result.NonPrefClaim, 2).Should()
-                .Be(Math.Round(request.TotalClaimedInFourMonth, 2) - Math.Round(result.PrefClaim, 2));
+                .Be(Math.Round(request.GrossPaidInFourMonth, 2) - Math.Round(result.PrefClaim, 2));
             result.TupeStatus.Should().Be(request.TupeStatus);
             result.ApportionmentPercentage.Should().Be(20);
         }
@@ -112,7 +112,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             // Assert
             Math.Round(result.PrefClaim, 2).Should().Be(284.83m);
             Math.Round(result.NonPrefClaim, 2).Should()
-                .Be(Math.Round(request.TotalClaimedInFourMonth, 2) - Math.Round(result.PrefClaim, 2));
+                .Be(Math.Round(request.GrossPaidInFourMonth, 2) - Math.Round(result.PrefClaim, 2));
             result.TupeStatus.Should().Be(request.TupeStatus);
             result.ApportionmentPercentage.Should().Be(35.6043m);
         }
@@ -161,7 +161,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             // Assert
             Math.Round(result.PrefClaim, 2).Should().Be(0.00m);
             Math.Round(result.NonPrefClaim, 2).Should()
-                .Be(Math.Round(request.TotalClaimedInFourMonth, 2));
+                .Be(Math.Round(request.GrossPaidInFourMonth, 2));
             result.TupeStatus.Should().Be(request.TupeStatus);
             result.ApportionmentPercentage.Should().Be(100.0m);
         }
@@ -183,7 +183,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
 
             // Assert
             Math.Round(result.PrefClaim, 2).Should().Be(800.0m);
-            Math.Round(result.NonPrefClaim, 2).Should().Be(1798.0m);
+            Math.Round(result.NonPrefClaim, 2).Should().Be(125.0m);
             result.ApportionmentPercentage.Should().Be(100.0m);    
             result.TupeStatus.Should().Be(request.TupeStatus == true);
 
@@ -207,8 +207,31 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
 
             // Assert
             Math.Round(result.PrefClaim, 2).Should().Be(799.99m);
-            Math.Round(result.NonPrefClaim, 2).Should().Be(0.01m);
+            Math.Round(result.NonPrefClaim, 2).Should().Be(0.00m);
             result.ApportionmentPercentage.Should().Be(100.0m);
+            result.TupeStatus.Should().Be(false);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task ReturnsCorrectNonPreferentialClaimAmount_WhenApportionmentPercentageIs56()
+        {
+            // Arrange
+            var request = new ApportionmentCalculationRequestModel()
+            {
+                GrossPaidInFourMonth = 2249.71m,
+                GrossEntitlement = 2249.71m,
+                TotalClaimedInFourMonth = 4000m,
+                TupeStatus = false
+            };
+
+            // Act
+            var result = await _service.PerformApportionmentCalculationAsync(request, _options);
+
+            // Assert
+            Math.Round(result.PrefClaim, 2).Should().Be(449.94m);
+            Math.Round(result.NonPrefClaim, 2).Should().Be(1799.77m);
+            result.ApportionmentPercentage.Should().Be(56.2428m);
             result.TupeStatus.Should().Be(false);
         }
     }
