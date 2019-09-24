@@ -15,12 +15,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Calculations.APPA.Extensio
 
             var daysWorkedInClaim = (decimal)(await unpaidPeriodFrom.Date.GetNumBusinessDaysInRange(unpaidPeriodTo.Date, shiftPattern));
 
-            decimal adjustedWeeklyWage;
-            if (aPClaimAmount == 0)
-            {
-                adjustedWeeklyWage = weeklyWage;
-            }
-            else
+            decimal adjustedWeeklyWage = 0;
+            if (aPClaimAmount != 0)
             {
                 adjustedWeeklyWage = (aPClaimAmount / daysWorkedInClaim) * shiftPattern.Count;
             }

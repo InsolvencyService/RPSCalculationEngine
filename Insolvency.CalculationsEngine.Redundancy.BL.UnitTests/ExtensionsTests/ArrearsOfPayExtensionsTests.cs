@@ -50,7 +50,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ExtensionsTests
                 adjustedPeriodFrom, adjustedPeriodTo, apClaimAmount);
 
             //Assert
-            result.Should().Be(requestData.WeeklyWage);
+            //result.Should().Be(requestData.WeeklyWage);
+            result.Should().Be(0);
         }
 
         [Fact]
