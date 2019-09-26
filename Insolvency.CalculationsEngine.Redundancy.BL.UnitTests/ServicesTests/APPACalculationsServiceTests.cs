@@ -612,6 +612,182 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
               It.IsAny<ProtectiveAwardCalculationRequestModel>(),
               It.IsAny<IOptions<ConfigLookupRoot>>()), Times.Never);
         }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformCalculationAsync_SelectRp14WhenZero()
+        {
+            // Arrange
+            var shiftPattern = new List<string> { "1", "2", "3", "4", "5" };
+
+            var apRequests = new List<ArrearsOfPayCalculationRequestModel>()
+            {
+                new ArrearsOfPayCalculationRequestModel()
+                {
+                    InputSource = InputSource.Rp1,
+                    InsolvencyDate = new DateTime(2018, 10, 20),
+                    EmploymentStartDate = new DateTime(2016, 04, 06),
+                    DismissalDate = new DateTime(2018, 10, 20),
+                    DateNoticeGiven = new DateTime(2018, 10, 14),
+                    UnpaidPeriodFrom = new DateTime(2018, 10, 10),
+                    UnpaidPeriodTo = new DateTime(2018, 10, 18),
+                    ApClaimAmount = 600M,
+                    IsTaxable = true,
+                    PayDay = 6,
+                    ShiftPattern = shiftPattern,
+                    WeeklyWage = 400m
+                },
+                new ArrearsOfPayCalculationRequestModel()
+                {
+                    InputSource = InputSource.Rp14a,
+                    InsolvencyDate = new DateTime(2018, 10, 20),
+                    EmploymentStartDate = new DateTime(2016, 04, 06),
+                    DismissalDate = new DateTime(2018, 10, 20),
+                    DateNoticeGiven = new DateTime(2018, 10, 14),
+                    UnpaidPeriodFrom = new DateTime(2018, 10, 10),
+                    UnpaidPeriodTo = new DateTime(2018, 10, 18),
+                    ApClaimAmount = 0M,
+                    IsTaxable = true,
+                    PayDay = 6,
+                    ShiftPattern = shiftPattern,
+                    WeeklyWage = 400m
+                }
+            };
+
+            var apResponseRP1 = new ArrearsOfPayResponseDTO()
+            {
+                StatutoryMax = 508m,
+                InputSource = InputSource.Rp1,
+                DngApplied = true,
+                RunNWNP = true,
+                WeeklyResult = new List<ArrearsOfPayWeeklyResult>()
+                {
+                    new ArrearsOfPayWeeklyResult(1, new DateTime(2018, 10, 13),428.57M, 508M, 257.14M, 257.14M,true,51.43M, 11.42M, 194.29M, 7, 3, 508M, 257.14M, 257.14M),
+                    new ArrearsOfPayWeeklyResult(2, new DateTime(2018, 10, 20),428.57M, 508M, 22.86M, 22.86M,true,4.57M, 0M, 18.29M, 7, 4, 508M, 22.86M, 22.86M),
+                }
+            };
+
+            var apResponseRP14a = new ArrearsOfPayResponseDTO()
+            {
+                StatutoryMax = 508m,
+                InputSource = InputSource.Rp14a,
+                DngApplied = true,
+                RunNWNP = true,
+                WeeklyResult = new List<ArrearsOfPayWeeklyResult>()
+                {
+                    new ArrearsOfPayWeeklyResult(1, new DateTime(2018, 10, 13),0M, 508M, 0M, 0M,true,0M, 0M, 0M, 7, 3, 508M, 0M, 0M),
+                    new ArrearsOfPayWeeklyResult(2, new DateTime(2018, 10, 20),0M, 508M, 0M, 0M,true,0M, 0M, 0M, 7, 4, 508M, 0M, 0M),
+                }
+            };
+
+            var request = new APPACalculationRequestModel()
+            {
+                Ap = apRequests,
+                Pa = null
+            };
+
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options)).ReturnsAsync(apResponseRP1);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options)).ReturnsAsync(apResponseRP14a);
+
+            // Act
+            var results = await _service.PerformCalculationAsync(request, _options);
+
+            // Assert
+            results.Ap.Should().NotBeNull();
+            results.Pa.Should().BeNull();
+
+            results.Ap.SelectedInputSource.Should().Be(InputSource.Rp14a);
+            results.Ap.RP1ResultsList.WeeklyResult.Count(x => x.IsSelected).Should().Be(0);
+            results.Ap.RP14aResultsList.WeeklyResult.Count(x => x.IsSelected).Should().Be(2);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformCalculationAsync_SelectRp1WhenZero()
+        {
+            // Arrange
+            var shiftPattern = new List<string> { "1", "2", "3", "4", "5" };
+
+            var apRequests = new List<ArrearsOfPayCalculationRequestModel>()
+            {
+                new ArrearsOfPayCalculationRequestModel()
+                {
+                    InputSource = InputSource.Rp1,
+                    InsolvencyDate = new DateTime(2018, 10, 20),
+                    EmploymentStartDate = new DateTime(2016, 04, 06),
+                    DismissalDate = new DateTime(2018, 10, 20),
+                    DateNoticeGiven = new DateTime(2018, 10, 14),
+                    UnpaidPeriodFrom = new DateTime(2018, 10, 10),
+                    UnpaidPeriodTo = new DateTime(2018, 10, 18),
+                    ApClaimAmount = 0M,
+                    IsTaxable = true,
+                    PayDay = 6,
+                    ShiftPattern = shiftPattern,
+                    WeeklyWage = 400m
+                },
+                new ArrearsOfPayCalculationRequestModel()
+                {
+                    InputSource = InputSource.Rp14a,
+                    InsolvencyDate = new DateTime(2018, 10, 20),
+                    EmploymentStartDate = new DateTime(2016, 04, 06),
+                    DismissalDate = new DateTime(2018, 10, 20),
+                    DateNoticeGiven = new DateTime(2018, 10, 14),
+                    UnpaidPeriodFrom = new DateTime(2018, 10, 10),
+                    UnpaidPeriodTo = new DateTime(2018, 10, 18),
+                    ApClaimAmount = 600M,
+                    IsTaxable = true,
+                    PayDay = 6,
+                    ShiftPattern = shiftPattern,
+                    WeeklyWage = 400m
+                }
+            };
+
+            var apResponseRP1 = new ArrearsOfPayResponseDTO()
+            {
+                StatutoryMax = 508m,
+                InputSource = InputSource.Rp1,
+                DngApplied = true,
+                RunNWNP = true,
+                WeeklyResult = new List<ArrearsOfPayWeeklyResult>()
+                {
+                    new ArrearsOfPayWeeklyResult(1, new DateTime(2018, 10, 13),0M, 508M, 0M, 0M,true,0M, 0M, 0M, 7, 3, 508M, 0M, 0M),
+                    new ArrearsOfPayWeeklyResult(2, new DateTime(2018, 10, 20),0M, 508M, 0M, 0M,true,0M, 0M, 0M, 7, 4, 508M, 0M, 0M),
+                }
+            };
+
+            var apResponseRP14a = new ArrearsOfPayResponseDTO()
+            {
+                StatutoryMax = 508m,
+                InputSource = InputSource.Rp14a,
+                DngApplied = true,
+                RunNWNP = true,
+                WeeklyResult = new List<ArrearsOfPayWeeklyResult>()
+                {
+                    new ArrearsOfPayWeeklyResult(1, new DateTime(2018, 10, 13),428.57M, 508M, 257.14M, 257.14M,true,51.43M, 11.42M, 194.29M, 7, 3, 508M, 257.14M, 257.14M),
+                    new ArrearsOfPayWeeklyResult(2, new DateTime(2018, 10, 20),428.57M, 508M, 22.86M, 22.86M,true,4.57M, 0M, 18.29M, 7, 4, 508M, 22.86M, 22.86M),
+                }
+            };
+
+            var request = new APPACalculationRequestModel()
+            {
+                Ap = apRequests,
+                Pa = null
+            };
+
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options)).ReturnsAsync(apResponseRP1);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options)).ReturnsAsync(apResponseRP14a);
+
+            // Act
+            var results = await _service.PerformCalculationAsync(request, _options);
+
+            // Assert
+            results.Ap.Should().NotBeNull();
+            results.Pa.Should().BeNull();
+
+            results.Ap.SelectedInputSource.Should().Be(InputSource.Rp1);
+            results.Ap.RP1ResultsList.WeeklyResult.Count(x => x.IsSelected).Should().Be(2);
+            results.Ap.RP14aResultsList.WeeklyResult.Count(x => x.IsSelected).Should().Be(0);
+        }
     }
 }
 

@@ -38,7 +38,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 var rp14aAny = result.Ap.RP14aResultsList != null && result.Ap.RP14aResultsList.WeeklyResult.Any();
                 var rp14aSum = rp14aAny ? result.Ap.RP14aResultsList.WeeklyResult.Sum(x => x.NetEntitlement) : 0M;
 
-                if ((rp1Sum > 0 && (rp1Sum < rp14aSum || rp14aSum == 0)) || (rp1Any && !rp14aAny))
+                if (rp1Sum == 0 || (rp1Sum > 0 && rp1Sum < rp14aSum) || (rp1Any && !rp14aAny))
                 {
                     result.Ap.SelectedInputSource = InputSource.Rp1;
                     allWeeks.AddRange(result.Ap.RP1ResultsList.WeeklyResult);
