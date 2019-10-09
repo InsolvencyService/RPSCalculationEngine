@@ -192,7 +192,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                     NIDeducted = niDeducted,
                     NetEntitlement = netEntitlement,
                     PreferentialClaim = 0m,
-                    NonPreferentialClaim = netEntitlement
+                    NonPreferentialClaim = grossEntitlement
                 });
 
                 weekIndex++;
