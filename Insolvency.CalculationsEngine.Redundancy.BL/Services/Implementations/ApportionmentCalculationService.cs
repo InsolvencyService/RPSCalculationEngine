@@ -33,7 +33,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             {
                 ApportionmentPercentage = apportionmentPercentage,
                 PrefClaim = Math.Round(preferentialClaim, 2),
-                NonPrefClaim = Math.Round((data.GrossPaidInFourMonth - preferentialClaim), 2),
+                NonPrefClaim = Math.Round((data.GrossEntitlement - preferentialClaim), 2),
                 TupeStatus = data.TupeStatus
             };
             return await Task.FromResult(result);
