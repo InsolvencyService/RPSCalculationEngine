@@ -34,7 +34,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ExtensionsTests
             //Assert
             result.Should().NotBeNull();
             result.InputSource.Should().Be(InputSource.Rp1);
-            result.StatutoryMax.Should().Be(508M);
+            result.StatutoryMax.Should().Be(525M);
             result.DngApplied.Should().BeFalse();
             result.RunNWNP.Should().BeFalse();
         }

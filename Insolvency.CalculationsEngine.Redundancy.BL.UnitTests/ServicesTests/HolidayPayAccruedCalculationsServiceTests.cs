@@ -125,6 +125,314 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             outputData.Result.WorkingDaysInClaim.Should().Be(230m);
             outputData.Result.ProRataAccruedDays.Should().Be(22.6743m);
         }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformHolidayPayAccruedCalculationAsync_Return_PartialDay0Point99()
+        {
+            // Arrange
+            var inputData = new HolidayPayAccruedCalculationRequestModel
+            {
+                InsolvencyDate = new DateTime(2019, 10, 22),
+                EmpStartDate = new DateTime(2010, 10, 22),
+                DismissalDate = new DateTime(2019, 10, 22),
+                ContractedHolEntitlement = 28,
+                HolidayYearStart = new DateTime(2019, 01, 01),
+                IsTaxable = true,
+                PayDay = (int)DayOfWeek.Friday,
+                ShiftPattern = new List<string> { "1", "3", "4" },
+                WeeklyWage = 800m,
+                DaysCFwd = 0m,
+                DaysTaken = 0m,
+                IpConfirmedDays = 0.99m
+            };
+
+            // Act
+            var outputData = await Task.FromResult(_holidayPayAccruedCalculationService.PerformHolidayPayAccruedCalculationAsync(inputData, _options));
+
+            // Assert
+            outputData.Result.StatutoryMax.Should().Be(525m);
+            outputData.Result.HolidaysOwed.Should().Be(28);
+            outputData.Result.BusinessDaysInClaim.Should().Be(156m);
+            outputData.Result.WorkingDaysInClaim.Should().Be(126m);
+            outputData.Result.ProRataAccruedDays.Should().Be(0.99m);
+
+            outputData.Result.WeeklyResults.Count.Should().Be(1);
+            outputData.Result.WeeklyResults[0].WeekNumber.Should().Be(1);
+            outputData.Result.WeeklyResults[0].MaximumEntitlement.Should().Be(224.25m);
+            outputData.Result.WeeklyResults[0].EmployerEntitlement.Should().Be(264m);
+            outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(224.25m);
+            outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
+            outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(44.85m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(6.99m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(172.41m);
+            outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
+            outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformHolidayPayAccruedCalculationAsync_Return_PartialDay1()
+        {
+            // Arrange
+            var inputData = new HolidayPayAccruedCalculationRequestModel
+            {
+                InsolvencyDate = new DateTime(2019, 10, 22),
+                EmpStartDate = new DateTime(2010, 10, 22),
+                DismissalDate = new DateTime(2019, 10, 22),
+                ContractedHolEntitlement = 28,
+                HolidayYearStart = new DateTime(2019, 01, 01),
+                IsTaxable = true,
+                PayDay = (int)DayOfWeek.Friday,
+                ShiftPattern = new List<string> { "1", "3", "4" },
+                WeeklyWage = 800m,
+                DaysCFwd = 0m,
+                DaysTaken = 0m,
+                IpConfirmedDays = 1m
+            };
+
+            // Act
+            var outputData = await Task.FromResult(_holidayPayAccruedCalculationService.PerformHolidayPayAccruedCalculationAsync(inputData, _options));
+
+            // Assert
+            outputData.Result.StatutoryMax.Should().Be(525m);
+            outputData.Result.HolidaysOwed.Should().Be(28);
+            outputData.Result.BusinessDaysInClaim.Should().Be(156m);
+            outputData.Result.WorkingDaysInClaim.Should().Be(126m);
+            outputData.Result.ProRataAccruedDays.Should().Be(1m);
+
+            outputData.Result.WeeklyResults.Count.Should().Be(1);
+            outputData.Result.WeeklyResults[0].WeekNumber.Should().Be(1);
+            outputData.Result.WeeklyResults[0].MaximumEntitlement.Should().Be(225m);
+            outputData.Result.WeeklyResults[0].EmployerEntitlement.Should().Be(266.67m);
+            outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(225m);
+            outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
+            outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(45m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(7.08m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(172.92m);
+            outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
+            outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformHolidayPayAccruedCalculationAsync_Return_PartialDay1Point1()
+        {
+            // Arrange
+            var inputData = new HolidayPayAccruedCalculationRequestModel
+            {
+                InsolvencyDate = new DateTime(2019, 10, 22),
+                EmpStartDate = new DateTime(2010, 10, 22),
+                DismissalDate = new DateTime(2019, 10, 22),
+                ContractedHolEntitlement = 28,
+                HolidayYearStart = new DateTime(2019, 01, 01),
+                IsTaxable = true,
+                PayDay = (int)DayOfWeek.Friday,
+                ShiftPattern = new List<string> { "1", "3", "4" },
+                WeeklyWage = 800m,
+                DaysCFwd = 0m,
+                DaysTaken = 0m,
+                IpConfirmedDays = 1.1m
+            };
+
+            // Act
+            var outputData = await Task.FromResult(_holidayPayAccruedCalculationService.PerformHolidayPayAccruedCalculationAsync(inputData, _options));
+
+            // Assert
+            outputData.Result.StatutoryMax.Should().Be(525m);
+            outputData.Result.HolidaysOwed.Should().Be(28);
+            outputData.Result.BusinessDaysInClaim.Should().Be(156m);
+            outputData.Result.WorkingDaysInClaim.Should().Be(126m);
+            outputData.Result.ProRataAccruedDays.Should().Be(1.1m);
+
+            outputData.Result.WeeklyResults.Count.Should().Be(1);
+            outputData.Result.WeeklyResults[0].WeekNumber.Should().Be(1);
+            outputData.Result.WeeklyResults[0].MaximumEntitlement.Should().Be(307.5m);
+            outputData.Result.WeeklyResults[0].EmployerEntitlement.Should().Be(293.33m);
+            outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(293.33m);
+            outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
+            outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(58.67m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(15.28m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(219.38m);
+            outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
+            outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformHolidayPayAccruedCalculationAsync_Return_PartialDay1Point9()
+        {
+            // Arrange
+            var inputData = new HolidayPayAccruedCalculationRequestModel
+            {
+                InsolvencyDate = new DateTime(2019, 10, 22),
+                EmpStartDate = new DateTime(2010, 10, 22),
+                DismissalDate = new DateTime(2019, 10, 22),
+                ContractedHolEntitlement = 28,
+                HolidayYearStart = new DateTime(2019, 01, 01),
+                IsTaxable = true,
+                PayDay = (int)DayOfWeek.Friday,
+                ShiftPattern = new List<string> { "1", "3", "4" },
+                WeeklyWage = 800m,
+                DaysCFwd = 0m,
+                DaysTaken = 0m,
+                IpConfirmedDays = 1.9m
+            };
+
+            // Act
+            var outputData = await Task.FromResult(_holidayPayAccruedCalculationService.PerformHolidayPayAccruedCalculationAsync(inputData, _options));
+
+            // Assert
+            outputData.Result.StatutoryMax.Should().Be(525m);
+            outputData.Result.HolidaysOwed.Should().Be(28);
+            outputData.Result.BusinessDaysInClaim.Should().Be(156m);
+            outputData.Result.WorkingDaysInClaim.Should().Be(126m);
+            outputData.Result.ProRataAccruedDays.Should().Be(1.9m);
+
+            outputData.Result.WeeklyResults.Count.Should().Be(1);
+            outputData.Result.WeeklyResults[0].WeekNumber.Should().Be(1);
+            outputData.Result.WeeklyResults[0].MaximumEntitlement.Should().Be(367.5m);
+            outputData.Result.WeeklyResults[0].EmployerEntitlement.Should().Be(506.67m);
+            outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(367.5m);
+            outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
+            outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(73.5m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(24.18m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(269.82m);
+            outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
+            outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformHolidayPayAccruedCalculationAsync_Return_PartialDay2()
+        {
+            // Arrange
+            var inputData = new HolidayPayAccruedCalculationRequestModel
+            {
+                InsolvencyDate = new DateTime(2019, 10, 22),
+                EmpStartDate = new DateTime(2010, 10, 22),
+                DismissalDate = new DateTime(2019, 10, 22),
+                ContractedHolEntitlement = 28,
+                HolidayYearStart = new DateTime(2019, 01, 01),
+                IsTaxable = true,
+                PayDay = (int)DayOfWeek.Friday,
+                ShiftPattern = new List<string> { "1", "3", "4" },
+                WeeklyWage = 800m,
+                DaysCFwd = 0m,
+                DaysTaken = 0m,
+                IpConfirmedDays = 2m
+            };
+
+            // Act
+            var outputData = await Task.FromResult(_holidayPayAccruedCalculationService.PerformHolidayPayAccruedCalculationAsync(inputData, _options));
+
+            // Assert
+            outputData.Result.StatutoryMax.Should().Be(525m);
+            outputData.Result.HolidaysOwed.Should().Be(28);
+            outputData.Result.BusinessDaysInClaim.Should().Be(156m);
+            outputData.Result.WorkingDaysInClaim.Should().Be(126m);
+            outputData.Result.ProRataAccruedDays.Should().Be(2m);
+
+            outputData.Result.WeeklyResults.Count.Should().Be(1);
+            outputData.Result.WeeklyResults[0].WeekNumber.Should().Be(1);
+            outputData.Result.WeeklyResults[0].MaximumEntitlement.Should().Be(375m);
+            outputData.Result.WeeklyResults[0].EmployerEntitlement.Should().Be(533.33m);
+            outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(375m);
+            outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
+            outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(75m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(25.08m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(274.92m);
+            outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
+            outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformHolidayPayAccruedCalculationAsync_Return_PartialDay2Point99()
+        {
+            // Arrange
+            var inputData = new HolidayPayAccruedCalculationRequestModel
+            {
+                InsolvencyDate = new DateTime(2019, 10, 22),
+                EmpStartDate = new DateTime(2010, 10, 22),
+                DismissalDate = new DateTime(2019, 10, 22),
+                ContractedHolEntitlement = 28,
+                HolidayYearStart = new DateTime(2019, 01, 01),
+                IsTaxable = true,
+                PayDay = (int)DayOfWeek.Friday,
+                ShiftPattern = new List<string> { "1", "3", "4" },
+                WeeklyWage = 800m,
+                DaysCFwd = 0m,
+                DaysTaken = 0m,
+                IpConfirmedDays = 2.99m
+            };
+
+            // Act
+            var outputData = await Task.FromResult(_holidayPayAccruedCalculationService.PerformHolidayPayAccruedCalculationAsync(inputData, _options));
+
+            // Assert
+            outputData.Result.StatutoryMax.Should().Be(525m);
+            outputData.Result.HolidaysOwed.Should().Be(28);
+            outputData.Result.BusinessDaysInClaim.Should().Be(156m);
+            outputData.Result.WorkingDaysInClaim.Should().Be(126m);
+            outputData.Result.ProRataAccruedDays.Should().Be(2.99m);
+
+            outputData.Result.WeeklyResults.Count.Should().Be(1);
+            outputData.Result.WeeklyResults[0].WeekNumber.Should().Be(1);
+            outputData.Result.WeeklyResults[0].MaximumEntitlement.Should().Be(449.25m);
+            outputData.Result.WeeklyResults[0].EmployerEntitlement.Should().Be(797.33m);
+            outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(449.25m);
+            outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
+            outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(89.85m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(33.99m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(325.41m);
+            outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
+            outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformHolidayPayAccruedCalculationAsync_Return_PartialDay3()
+        {
+            // Arrange
+            var inputData = new HolidayPayAccruedCalculationRequestModel
+            {
+                InsolvencyDate = new DateTime(2019, 10, 22),
+                EmpStartDate = new DateTime(2010, 10, 22),
+                DismissalDate = new DateTime(2019, 10, 22),
+                ContractedHolEntitlement = 28,
+                HolidayYearStart = new DateTime(2019, 01, 01),
+                IsTaxable = true,
+                PayDay = (int)DayOfWeek.Friday,
+                ShiftPattern = new List<string> { "1", "3", "4" },
+                WeeklyWage = 800m,
+                DaysCFwd = 0m,
+                DaysTaken = 0m,
+                IpConfirmedDays = 3m
+            };
+
+            // Act
+            var outputData = await Task.FromResult(_holidayPayAccruedCalculationService.PerformHolidayPayAccruedCalculationAsync(inputData, _options));
+
+            // Assert
+            outputData.Result.StatutoryMax.Should().Be(525m);
+            outputData.Result.HolidaysOwed.Should().Be(28);
+            outputData.Result.BusinessDaysInClaim.Should().Be(156m);
+            outputData.Result.WorkingDaysInClaim.Should().Be(126m);
+            outputData.Result.ProRataAccruedDays.Should().Be(3m);
+
+            outputData.Result.WeeklyResults.Count.Should().Be(1);
+            outputData.Result.WeeklyResults[0].WeekNumber.Should().Be(1);
+            outputData.Result.WeeklyResults[0].MaximumEntitlement.Should().Be(525m);
+            outputData.Result.WeeklyResults[0].EmployerEntitlement.Should().Be(800m);
+            outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(525m);
+            outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
+            outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(105m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(43.08m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(376.92m);
+            outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
+            outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
+        }
     }
 }
 

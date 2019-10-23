@@ -89,9 +89,17 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
                 if (weekNumber > wholeWeeks)
                 {
+                    var weekDayNumber = data.PayDay;
+
                     // This must be the last (partial) week so loop through each day, checking for working days
-                    for (var weekDayNumber = 0; weekDayNumber <= 6; weekDayNumber++)
+                    for (var day = 0; day <= 6; day++)
                     {
+                        weekDayNumber++;
+                        if (weekDayNumber > (int) DayOfWeek.Saturday)
+                        {
+                            weekDayNumber = (int) DayOfWeek.Sunday;
+                        }
+
                         if (shiftPattern.Contains(weekDayNumber.ToString()))
                         {
                             if (partWeekDays > 1)
@@ -107,11 +115,11 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                                 partWeekDays = 0;
                             }
                         }
-                        else if (partWeekDays >= 1)
+                        else if (partWeekDays > 0)
                             maxDays++;
                        
 
-                        if (weekDayNumber == 6)
+                        if (day == 6)
                         {
                             maximumEntitlement = (maxDays * statMaxWeeklyPay / 7);
                             employerEntitlement = (empDays * data.WeeklyWage.GetValueOrDefault() / shiftPattern.Count);
