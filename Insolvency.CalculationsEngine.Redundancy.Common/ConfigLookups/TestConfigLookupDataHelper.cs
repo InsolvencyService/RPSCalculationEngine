@@ -187,8 +187,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
             statMaxList.Add(new StatMaxLookup
             {
                 StartDate = new DateTime(2018, 04, 06),
-                EndDate = new DateTime(9999, 12, 31),
+                EndDate = new DateTime(2019, 04, 05),
                 StatMax = 508
+            });
+            statMaxList.Add(new StatMaxLookup
+            {
+                StartDate = new DateTime(2019, 04, 06),
+                EndDate = new DateTime(9999, 12, 31),
+                StatMax = 525
             });
         }
     }

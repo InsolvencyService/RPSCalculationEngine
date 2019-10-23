@@ -791,13 +791,13 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
                 WeeklyWage = 350m
             };
-            var expectedCalculationResult = new ArrearsOfPayResponseDTO(InputSource.Rp14a, 508M, false, false, weeklyResult: new List<ArrearsOfPayWeeklyResult>()
+            var expectedCalculationResult = new ArrearsOfPayResponseDTO(InputSource.Rp14a, 525M, false, false, weeklyResult: new List<ArrearsOfPayWeeklyResult>()
                 {
-                    new ArrearsOfPayWeeklyResult(1, new DateTime(2019, 6, 29), 0M, 508M, 0M, 0M, true, 0M, 0M, 0M, 7, 5, 508M, 0M, 0M),
-                    new ArrearsOfPayWeeklyResult(2, new DateTime(2019, 7, 6), 0M, 508M, 0M, 0M, true, 0M, 0M, 0M, 7, 5, 508M, 0M, 0M),
-                    new ArrearsOfPayWeeklyResult(3, new DateTime(2019, 7, 13), 0M, 508M, 0M, 0M, true, 0M, 0M, 0M, 7, 5, 508M, 0M, 0M),
-                    new ArrearsOfPayWeeklyResult(4, new DateTime(2019, 7, 20), 0M, 508M, 0M, 0M, true, 0M, 0M, 0M, 7, 5, 508M, 0M, 0M),
-                    new ArrearsOfPayWeeklyResult(5, new DateTime(2019, 7, 27), 0M, 508M, 0M, 0M, true, 0M, 0M, 0M, 7, 3, 508M, 0M, 0M),
+                    new ArrearsOfPayWeeklyResult(1, new DateTime(2019, 6, 29), 0M, 525M, 0M, 0M, true, 0M, 0M, 0M, 7, 5, 525M, 0M, 0M),
+                    new ArrearsOfPayWeeklyResult(2, new DateTime(2019, 7, 6), 0M, 525M, 0M, 0M, true, 0M, 0M, 0M, 7, 5, 525M, 0M, 0M),
+                    new ArrearsOfPayWeeklyResult(3, new DateTime(2019, 7, 13), 0M, 525M, 0M, 0M, true, 0M, 0M, 0M, 7, 5, 525M, 0M, 0M),
+                    new ArrearsOfPayWeeklyResult(4, new DateTime(2019, 7, 20), 0M, 525M, 0M, 0M, true, 0M, 0M, 0M, 7, 5, 525M, 0M, 0M),
+                    new ArrearsOfPayWeeklyResult(5, new DateTime(2019, 7, 27), 0M, 525M, 0M, 0M, true, 0M, 0M, 0M, 7, 3, 525M, 0M, 0M),
                 });
 
             var actualResult = await _arrearsOfPayCalculationsService.PerformCalculationAsync(aopRequest, _options);
