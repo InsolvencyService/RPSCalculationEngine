@@ -102,20 +102,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
             return waitingDays;
         }
 
-        public static decimal GetNotionalBenefitsMonthlyRate(IOptions<ConfigLookupRoot> options, DateTime date, int ageInYears)
-        {
-            var lookups = (ageInYears < 25) ? options.Value.NotionalBenefitsMonthlyRateUnder25 : options.Value.NotionalBenefitsMonthlyRate25AndOver;
-
-            var notionalBenefitMonthlyRate = lookups.Where(x => x.StartDate.Date <= date.Date && x.EndDate.Date >= date.Date)
-                    .Select(x => x.Amount)
-                    .FirstOrDefault();
-
-            if (notionalBenefitMonthlyRate == 0m)
-                throw new MissingConfigurationException("unable to determine the Notional Benefits Monthly rate");
-
-            return notionalBenefitMonthlyRate;
-        }
-
         public static decimal GetNotionalBenefitsWeeklyRate(IOptions<ConfigLookupRoot> options, DateTime date, int ageInYears)
         {
             var lookups = (ageInYears < 25) ? options.Value.NotionalBenefitsWeeklyRateUnder25 : options.Value.NotionalBenefitsWeeklyRate25AndOver;
