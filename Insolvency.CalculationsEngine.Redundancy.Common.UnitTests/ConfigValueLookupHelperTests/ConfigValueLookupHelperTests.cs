@@ -228,5 +228,29 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.ConfigValueL
             //Act
             Exception ex = Assert.Throws<MissingConfigurationException>(() => ConfigValueLookupHelper.GetNotionalBenefitsMonthlyRate(_configOptions, date, age));
         }
+
+        [Theory]
+        [Trait("Category", "UnitTest")]
+        [ClassData(typeof(TestDataHelper.NotionalBenefitsWeeklyRateUnitTestData))]
+        public void GetNotionalBenefitsWeeklyRate_Returns_CorrectNotionalBenefitsWeeklyRate_ForGivenDateAndAge(
+            DateTime someDate, int age, decimal expectedWeeklyRate)
+        {
+            //Arrange 
+            //Act
+            var result = ConfigValueLookupHelper.GetNotionalBenefitsWeeklyRate(_configOptions, someDate, age);
+            //Assert
+            result.Should().Be(expectedWeeklyRate);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public void GetNotionalBenefitsWeeklyRate_ThrowsException_WhenNoConfigForDate()
+        {
+            var date = new DateTime(1899, 1, 1);
+            var age = 26;
+
+            //Act
+            Exception ex = Assert.Throws<MissingConfigurationException>(() => ConfigValueLookupHelper.GetNotionalBenefitsWeeklyRate(_configOptions, date, age));
+        }
     }
 }

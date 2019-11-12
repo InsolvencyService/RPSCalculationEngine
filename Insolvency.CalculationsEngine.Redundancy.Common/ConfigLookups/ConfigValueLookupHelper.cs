@@ -115,5 +115,19 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
 
             return notionalBenefitMonthlyRate;
         }
+
+        public static decimal GetNotionalBenefitsWeeklyRate(IOptions<ConfigLookupRoot> options, DateTime date, int ageInYears)
+        {
+            var lookups = (ageInYears < 25) ? options.Value.NotionalBenefitsWeeklyRateUnder25 : options.Value.NotionalBenefitsWeeklyRate25AndOver;
+
+            var notionalBenefitWeeklyRate = lookups.Where(x => x.StartDate.Date <= date.Date && x.EndDate.Date >= date.Date)
+                    .Select(x => x.Amount)
+                    .FirstOrDefault();
+
+            if (notionalBenefitWeeklyRate == 0m)
+                throw new MissingConfigurationException("unable to determine the Notional Benefits Weekly rate");
+
+            return notionalBenefitWeeklyRate;
+        }
     }
 }
