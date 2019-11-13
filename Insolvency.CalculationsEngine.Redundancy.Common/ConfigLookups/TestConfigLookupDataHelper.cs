@@ -110,24 +110,24 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
 
         private void PopulateNotionalBenefitLookup(ConfigLookupRoot configLookupRoot)
         {
-            configLookupRoot.NotionalBenefitsMonthlyRateUnder25 =
+            configLookupRoot.NotionalBenefitsWeeklyRateUnder25 =
                 new List<NotionalBenefitLookup>()
                 {
                     new NotionalBenefitLookup()
                     {
                         StartDate =  new DateTime(1900, 1, 1),
                         EndDate = new DateTime(9999, 12, 31),
-                        Amount = 251.77m
+                        Amount = 57.90m
                     }
                 };
-            configLookupRoot.NotionalBenefitsMonthlyRate25AndOver = 
+            configLookupRoot.NotionalBenefitsWeeklyRate25AndOver =
                 new List<NotionalBenefitLookup>()
                 {
                     new NotionalBenefitLookup()
                     {
                         StartDate =  new DateTime(1900, 1, 1),
                         EndDate = new DateTime(9999, 12, 31),
-                        Amount = 317.82m
+                        Amount = 73.10m
                     }
                 };
         }

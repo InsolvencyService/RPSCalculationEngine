@@ -143,5 +143,23 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.TestData
                 return GetEnumerator();
             }
         }
+
+        public class NotionalBenefitsWeeklyRateUnitTestData : IEnumerable<object[]>
+        {
+            public IEnumerator<object[]> GetEnumerator()
+            {
+                yield return new object[] { new DateTime(2015, 10, 23), 24, 57.90m };
+                yield return new object[] { new DateTime(2016, 04, 12), 24, 57.90m };
+                yield return new object[] { new DateTime(2000, 06, 19), 24, 57.90m };
+                yield return new object[] { new DateTime(2015, 10, 23), 25, 73.10m };
+                yield return new object[] { new DateTime(2016, 04, 12), 25, 73.10m };
+                yield return new object[] { new DateTime(2000, 06, 19), 25, 73.10m };
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+        }
     }
 }

@@ -38,9 +38,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             var niThreshold = ConfigValueLookupHelper.GetNIThreshold(options, dismissalDate);
             var niRate = ConfigValueLookupHelper.GetNIRate(options, dismissalDate);
             var waitingDays = ConfigValueLookupHelper.GetBenefitsWaitingDays(options, dismissalDate);
-            var notionalBenefitMonthlyRate = ConfigValueLookupHelper.GetNotionalBenefitsMonthlyRate(options, dismissalDate, 
+            var notionalBenefitWeeklyRate = ConfigValueLookupHelper.GetNotionalBenefitsWeeklyRate(options, dismissalDate, 
                 await request.DateOfBirth.Date.GetAge(dismissalDate));
-            decimal notionalBenefitDailyRate = notionalBenefitMonthlyRate * 12m / 365m;
+            decimal notionalBenefitDailyRate = notionalBenefitWeeklyRate * 52m / 365m;
 
             var projectedNoticeDate = noticeStartDate.AddDays(yearsOfService * 7 - 1);
 

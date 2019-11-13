@@ -207,26 +207,26 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.ConfigValueL
 
         [Theory]
         [Trait("Category", "UnitTest")]
-        [ClassData(typeof(TestDataHelper.NotionalBenefitsMonthlyRateUnitTestData))]
-        public void GetNotionalBenefitsMonthlyRate_Returns_CorrectNotionalBenefitsMonthlyRate_ForGivenDateAndAge(
-            DateTime someDate, int age, decimal expectedMonthlyRate)
+        [ClassData(typeof(TestDataHelper.NotionalBenefitsWeeklyRateUnitTestData))]
+        public void GetNotionalBenefitsWeeklyRate_Returns_CorrectNotionalBenefitsWeeklyRate_ForGivenDateAndAge(
+            DateTime someDate, int age, decimal expectedWeeklyRate)
         {
             //Arrange 
             //Act
-            var result = ConfigValueLookupHelper.GetNotionalBenefitsMonthlyRate(_configOptions, someDate, age);
+            var result = ConfigValueLookupHelper.GetNotionalBenefitsWeeklyRate(_configOptions, someDate, age);
             //Assert
-            result.Should().Be(expectedMonthlyRate);
+            result.Should().Be(expectedWeeklyRate);
         }
 
         [Fact]
         [Trait("Category", "UnitTest")]
-        public void GetNotionalBenefitsMonthlyRate_ThrowsException_WhenNoConfigForDate()
+        public void GetNotionalBenefitsWeeklyRate_ThrowsException_WhenNoConfigForDate()
         {
             var date = new DateTime(1899, 1, 1);
             var age = 26;
 
             //Act
-            Exception ex = Assert.Throws<MissingConfigurationException>(() => ConfigValueLookupHelper.GetNotionalBenefitsMonthlyRate(_configOptions, date, age));
+            Exception ex = Assert.Throws<MissingConfigurationException>(() => ConfigValueLookupHelper.GetNotionalBenefitsWeeklyRate(_configOptions, date, age));
         }
     }
 }

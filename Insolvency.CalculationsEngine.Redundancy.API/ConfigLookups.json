@@ -101,18 +101,18 @@
       "StatMax": "525"
     }
   ],
-  "NotionalBenefitsMonthlyRateUnder25": [
+  "NotionalBenefitsWeeklyRateUnder25": [
     {
       "StartDate": "1900-01-01",
       "EndDate": "9999-12-31",
-      "Amount": "251.77"
+      "Amount": "57.90"
     }
   ],
-  "NotionalBenefitsMonthlyRate25AndOver": [
+  "NotionalBenefitsWeeklyRate25AndOver": [
     {
       "StartDate": "1900-01-01",
       "EndDate": "9999-12-31",
-      "Amount": "317.82"
+      "Amount": "73.10"
     }
   ],
   "BenefitWaitingDaysLookup": [
