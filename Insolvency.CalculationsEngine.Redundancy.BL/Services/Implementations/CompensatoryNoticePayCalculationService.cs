@@ -40,7 +40,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             var waitingDays = ConfigValueLookupHelper.GetBenefitsWaitingDays(options, dismissalDate);
             var notionalBenefitWeeklyRate = ConfigValueLookupHelper.GetNotionalBenefitsWeeklyRate(options, dismissalDate, 
                 await request.DateOfBirth.Date.GetAge(dismissalDate));
-            decimal notionalBenefitDailyRate = notionalBenefitWeeklyRate * 52m / 365m;
+            decimal notionalBenefitDailyRate = notionalBenefitWeeklyRate / 7;
 
             var projectedNoticeDate = noticeStartDate.AddDays(yearsOfService * 7 - 1);
 

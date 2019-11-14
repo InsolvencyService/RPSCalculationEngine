@@ -419,12 +419,12 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
 
             response.WeeklyResults[1].BenefitsDeducted.Should().Be(0m);
             response.WeeklyResults[1].EmployerEntitlement.Should().Be(650m);
-            response.WeeklyResults[1].GrossEntitlement.Should().Be(461.68m);
+            response.WeeklyResults[1].GrossEntitlement.Should().Be(461.52m);
             response.WeeklyResults[1].NIDeducted.Should().Be(0m);
-            response.WeeklyResults[1].NetEntitlement.Should().Be(461.68m);
+            response.WeeklyResults[1].NetEntitlement.Should().Be(461.52m);
             response.WeeklyResults[1].NewEmploymentDeducted.Should().Be(0m);
-            response.WeeklyResults[1].NotionalBenefitDeducted.Should().Be(72.90m);
-            response.WeeklyResults[1].NotionalTaxDeducted.Should().Be(115.42m);
+            response.WeeklyResults[1].NotionalBenefitDeducted.Should().Be(73.10m);
+            response.WeeklyResults[1].NotionalTaxDeducted.Should().Be(115.38m);
             response.WeeklyResults[1].TaxDeducted.Should().Be(0m);
             response.WeeklyResults[1].WageIncreaseDeducted.Should().Be(0m);
             response.WeeklyResults[1].PreferentialClaim.Should().Be(0m);
@@ -680,7 +680,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             response.WeeklyResults[1].NIDeducted.Should().Be(41.04m);
             response.WeeklyResults[1].NetEntitlement.Should().Be(365.36m);
             response.WeeklyResults[1].NewEmploymentDeducted.Should().Be(0m);
-            response.WeeklyResults[1].NotionalBenefitDeducted.Should().Be(72.90m);
+            response.WeeklyResults[1].NotionalBenefitDeducted.Should().Be(73.10m);
             response.WeeklyResults[1].NotionalTaxDeducted.Should().Be(0m);
             response.WeeklyResults[1].TaxDeducted.Should().Be(101.60m);
             response.WeeklyResults[1].WageIncreaseDeducted.Should().Be(0m);
@@ -695,7 +695,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             response.WeeklyResults[2].NIDeducted.Should().Be(41.04m);
             response.WeeklyResults[2].NetEntitlement.Should().Be(365.36m);
             response.WeeklyResults[2].NewEmploymentDeducted.Should().Be(0m);
-            response.WeeklyResults[2].NotionalBenefitDeducted.Should().Be(72.90m);
+            response.WeeklyResults[2].NotionalBenefitDeducted.Should().Be(73.10m);
             response.WeeklyResults[2].NotionalTaxDeducted.Should().Be(0m);
             response.WeeklyResults[2].TaxDeducted.Should().Be(101.60m);
             response.WeeklyResults[2].WageIncreaseDeducted.Should().Be(0m);
