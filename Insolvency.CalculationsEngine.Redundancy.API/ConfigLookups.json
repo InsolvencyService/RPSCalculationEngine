@@ -104,15 +104,25 @@
   "NotionalBenefitsWeeklyRateUnder25": [
     {
       "StartDate": "1900-01-01",
-      "EndDate": "9999-12-31",
+      "EndDate": "2020-03-31",
       "Amount": "57.90"
+    },
+    {
+      "StartDate": "2020-04-01",
+      "EndDate": "9999-12-31",
+      "Amount": "58.90"
     }
   ],
   "NotionalBenefitsWeeklyRate25AndOver": [
     {
       "StartDate": "1900-01-01",
-      "EndDate": "9999-12-31",
+      "EndDate": "2020-03-31",
       "Amount": "73.10"
+    },
+    {
+      "StartDate": "2020-04-01",
+      "EndDate": "9999-12-31",
+      "Amount": "74.35"
     }
   ],
   "BenefitWaitingDaysLookup": [
