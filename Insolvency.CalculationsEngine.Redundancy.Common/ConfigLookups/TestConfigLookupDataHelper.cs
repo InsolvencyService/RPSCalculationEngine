@@ -116,12 +116,12 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
                     new NotionalBenefitLookup()
                     {
                         StartDate =  new DateTime(1900, 1, 1),
-                        EndDate = new DateTime(2020, 3, 31),
+                        EndDate = new DateTime(2020, 4, 5),
                         Amount = 57.90m
                     },
                     new NotionalBenefitLookup()
                     {
-                        StartDate =  new DateTime(2020, 4, 1),
+                        StartDate =  new DateTime(2020, 4, 6),
                         EndDate = new DateTime(9999, 12, 31),
                         Amount = 58.90m
                     }
@@ -132,12 +132,12 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
                     new NotionalBenefitLookup()
                     {
                         StartDate =  new DateTime(1900, 1, 1),
-                        EndDate = new DateTime(2020, 3, 31),
+                        EndDate = new DateTime(2020, 4, 5),
                         Amount = 73.10m
                     },
                     new NotionalBenefitLookup()
                     {
-                        StartDate =  new DateTime(2020, 4, 1),
+                        StartDate =  new DateTime(2020, 4, 6),
                         EndDate = new DateTime(9999, 12, 31),
                         Amount = 74.35m
                     }
