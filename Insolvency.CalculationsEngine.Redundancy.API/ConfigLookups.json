@@ -97,8 +97,13 @@
     },
     {
       "StartDate": "2019-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2020-04-05",
       "StatMax": "525"
+    },
+    {
+      "StartDate": "2020-04-06",
+      "EndDate": "9999-12-31",
+      "StatMax": "538"
     }
   ],
   "NotionalBenefitsWeeklyRateUnder25": [
