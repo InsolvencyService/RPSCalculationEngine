@@ -147,8 +147,13 @@
   "NIThresholdLookup": [
     {
       "StartDate": "1900-01-01",
-      "EndDate": "9999-12-31",
+      "EndDate": "2020-04-05",
       "NIThreshold": "166"
+    },
+    {
+      "StartDate": "2020-04-06",
+      "EndDate": "9999-12-31",
+      "NIThreshold": "183"
     }
   ],
   "NIUpperThresholdLookup": [
