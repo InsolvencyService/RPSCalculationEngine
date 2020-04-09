@@ -34,7 +34,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ExtensionsTests
             //Assert
             result.Should().NotBeNull();
             result.InputSource.Should().Be(InputSource.Rp1);
-            result.StatutoryMax.Should().Be(525M);
+            result.StatutoryMax.Should().Be(538M);
             result.DngApplied.Should().BeFalse();
             result.RunNWNP.Should().BeFalse();
         }
@@ -142,8 +142,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ExtensionsTests
             result.WeeklyResult[1].GrossEntitlement.Should().Be(297.14M);
             result.WeeklyResult[1].IsTaxable.Should().BeTrue();
             result.WeeklyResult[1].TaxDeducted.Should().Be(59.43M);
-            result.WeeklyResult[1].NIDeducted.Should().Be(15.74M);
-            result.WeeklyResult[1].NetEntitlement.Should().Be(221.97M);
+            result.WeeklyResult[1].NIDeducted.Should().Be(13.70M);
             result.WeeklyResult[1].MaximumDays.Should().Be(7);
             result.WeeklyResult[1].EmploymentDays.Should().Be(5);
             result.WeeklyResult[1].MaximumEntitlementIn4MonthPeriod.Should().Be(508M);

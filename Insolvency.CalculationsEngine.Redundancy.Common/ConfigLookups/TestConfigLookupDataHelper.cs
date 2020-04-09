@@ -77,8 +77,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
                 new NIThresholdLookup
                 {
                     StartDate = new DateTime(1900, 01, 01),
-                    EndDate = new DateTime(9999, 12, 31),
+                    EndDate = new DateTime(2020, 04, 05),
                     NIThreshold = 166m
+                },
+                new NIThresholdLookup
+                {
+                    StartDate = new DateTime(2020, 04, 06),
+                    EndDate = new DateTime(9999, 12, 31),
+                    NIThreshold = 183m
                 }
             };
         }
