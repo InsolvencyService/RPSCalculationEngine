@@ -47,8 +47,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(243.25m);
             outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
             outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(48.65m);
-            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(9.27m);
-            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(185.33m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(7.23m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(187.37m);
             outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
             outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
 
@@ -88,8 +88,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(243.25m);
             outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
             outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(48.65m);
-            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(9.27m);
-            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(185.33m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(7.23m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(187.37m);
             outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
             outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
         }
@@ -164,8 +164,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(224.25m);
             outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
             outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(44.85m);
-            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(6.99m);
-            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(172.41m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(4.95m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(174.45m);
             outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
             outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
         }
@@ -208,8 +208,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(225m);
             outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
             outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(45m);
-            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(7.08m);
-            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(172.92m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(5.04m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(174.96m);
             outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
             outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
         }
@@ -252,8 +252,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(293.33m);
             outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
             outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(58.67m);
-            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(15.28m);
-            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(219.38m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(13.24m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(221.42m);
             outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
             outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
         }
@@ -296,8 +296,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(367.5m);
             outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
             outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(73.5m);
-            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(24.18m);
-            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(269.82m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(22.14m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(271.86m);
             outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
             outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
         }
@@ -340,8 +340,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(375m);
             outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
             outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(75m);
-            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(25.08m);
-            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(274.92m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(23.04m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(276.96m);
             outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
             outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
         }
@@ -384,8 +384,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(449.25m);
             outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
             outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(89.85m);
-            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(33.99m);
-            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(325.41m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(31.95m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(327.45m);
             outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
             outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
         }
@@ -428,8 +428,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(525m);
             outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
             outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(105m);
-            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(43.08m);
-            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(376.92m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(41.04m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(378.96m);
             outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
             outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
         }
