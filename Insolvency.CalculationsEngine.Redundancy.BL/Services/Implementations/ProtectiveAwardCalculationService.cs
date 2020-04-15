@@ -25,8 +25,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
             var statutoryMax = ConfigValueLookupHelper.GetStatutoryMax(options, statMaxDate);
             var taxRate = ConfigValueLookupHelper.GetTaxRate(options, data.DismissalDate);
-            var niThreshold = ConfigValueLookupHelper.GetNIThreshold(options, data.DismissalDate);
-            var niRate = ConfigValueLookupHelper.GetNIRate(options, data.DismissalDate);
+            var niThreshold = ConfigValueLookupHelper.GetNIThreshold(options, DateTime.Now);
+            var niRate = ConfigValueLookupHelper.GetNIRate(options, DateTime.Now);
 
             DayOfWeek payDay = (DayOfWeek)data.PayDay;
 
