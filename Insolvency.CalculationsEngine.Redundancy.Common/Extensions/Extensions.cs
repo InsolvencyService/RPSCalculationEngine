@@ -150,11 +150,11 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.Extensions
                         numDays++;
                 }
             }
-
+             
             return await Task.FromResult(numDays);
         }
 
-        public static async Task<int> GetNumDaysInIntersectionOfTwoRanges(this DateTime startDate1, DateTime endDate1, DateTime startDate2, DateTime endDate2, DateTime? dateNoticeGiven = null)
+        public static async Task<int> GetNumDaysInIntersectionOfTwoRanges(this DateTime startDate1, DateTime endDate1, DateTime startDate2, DateTime endDate2)
         {
             // handle non-intersects
             if (endDate2.Date < startDate1.Date || startDate2.Date > endDate1.Date)
@@ -163,9 +163,21 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.Extensions
             var intersectStart = (startDate1.Date > startDate2.Date) ? startDate1.Date : startDate2.Date;
             var intersectEnd = (endDate1.Date < endDate2.Date) ? endDate1.Date : endDate2.Date;
 
-            //FCGH-234 if the date notice given is in that week and is before the dismissal date use date notice given
-            if (dateNoticeGiven.HasValue && dateNoticeGiven.Value.Date > intersectStart.Date && dateNoticeGiven.Value.Date < intersectEnd.Date)
-                intersectEnd = dateNoticeGiven.Value.Date;
+            return await Task.FromResult((intersectEnd - intersectStart).Days + 1);
+        }
+
+        public static async Task<int> GetNumDaysInIntersectionOfTwoRangesWithLimit(this DateTime startDate1, DateTime endDate1, DateTime startDate2, DateTime endDate2, DateTime dateNoticeGiven, DateTime insolvencyDate)
+        {
+            // handle non-intersects
+            if (endDate2.Date < startDate1.Date || startDate2.Date > endDate1.Date)
+                return await Task.FromResult(0);
+
+            var intersectStart = (startDate1.Date > startDate2.Date) ? startDate1.Date : startDate2.Date;
+            var intersectEnd = (endDate1.Date < endDate2.Date) ? endDate1.Date : endDate2.Date;
+
+            var endLimit = new[] {dateNoticeGiven, insolvencyDate}.OrderBy(x => x).First();
+            if (endLimit.Date > intersectStart.Date && endLimit < intersectEnd.Date)
+                intersectEnd = endLimit.Date;
 
             return await Task.FromResult((intersectEnd - intersectStart).Days + 1);
         }

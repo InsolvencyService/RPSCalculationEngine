@@ -750,7 +750,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.ExtensionsTe
 
         [Fact]
         [Trait("Category", "UnitTest")]
-        public async Task GetNumDaysInIntersectionOfTwoRanges_Returns2WhenDateNoticeGivenLessThanEndDate()
+        public async Task GetNumDaysInIntersectionOfTwoRanges_Returns2WhenDateNoticeGivenLessThanEndDateButBeforeInsolvencyDate()
         {
             // Arrange
             var startDate1 = new DateTime(2018, 10, 1);
@@ -758,9 +758,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.ExtensionsTe
             var startDate2 = new DateTime(2018, 10, 5);
             var endDate2 = new DateTime(2018, 10, 10);
             var dateNoticeGiven = new DateTime(2018, 10, 6);
+            var insolvencyDate = new DateTime(2018, 10, 11);
 
             // Act
-            var result = await startDate1.GetNumDaysInIntersectionOfTwoRanges(endDate1, startDate2, endDate2, dateNoticeGiven);
+            var result = await startDate1.GetNumDaysInIntersectionOfTwoRangesWithLimit(endDate1, startDate2, endDate2, dateNoticeGiven, insolvencyDate);
 
             // Assert
             result.Should().Be(2);
@@ -768,7 +769,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.ExtensionsTe
 
         [Fact]
         [Trait("Category", "UnitTest")]
-        public async Task GetNumDaysInIntersectionOfTwoRanges_Returns3WhenDateNoticeGivenLessThanStartDate()
+        public async Task GetNumDaysInIntersectionOfTwoRanges_Returns3WhenDateNoticeGivenLessThanStartDateButBeforeInsolvencyDate()
         {
             // Arrange
             var startDate1 = new DateTime(2018, 10, 1);
@@ -776,9 +777,48 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.ExtensionsTe
             var startDate2 = new DateTime(2018, 10, 5);
             var endDate2 = new DateTime(2018, 10, 10);
             var dateNoticeGiven = new DateTime(2018, 10, 4);
+            var insolvencyDate = new DateTime(2018, 10, 11);
 
             // Act
-            var result = await startDate1.GetNumDaysInIntersectionOfTwoRanges(endDate1, startDate2, endDate2, dateNoticeGiven);
+            var result = await startDate1.GetNumDaysInIntersectionOfTwoRangesWithLimit(endDate1, startDate2, endDate2, dateNoticeGiven, insolvencyDate);
+
+            // Assert
+            result.Should().Be(3);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task GetNumDaysInIntersectionOfTwoRanges_Returns2WhenDateNoticeGivenLessThanEndDateButAfterInsolvencyDate()
+        {
+            // Arrange
+            var startDate1 = new DateTime(2018, 10, 1);
+            var endDate1 = new DateTime(2018, 10, 7);
+            var startDate2 = new DateTime(2018, 10, 5);
+            var endDate2 = new DateTime(2018, 10, 10);
+            var dateNoticeGiven = new DateTime(2018, 10, 7);
+            var insolvencyDate = new DateTime(2018, 10, 6);
+
+            // Act
+            var result = await startDate1.GetNumDaysInIntersectionOfTwoRangesWithLimit(endDate1, startDate2, endDate2, dateNoticeGiven, insolvencyDate);
+
+            // Assert
+            result.Should().Be(2);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task GetNumDaysInIntersectionOfTwoRanges_Returns3WhenDateNoticeGivenLessThanStartDateButAfterInsolvencyDate()
+        {
+            // Arrange
+            var startDate1 = new DateTime(2018, 10, 1);
+            var endDate1 = new DateTime(2018, 10, 7);
+            var startDate2 = new DateTime(2018, 10, 5);
+            var endDate2 = new DateTime(2018, 10, 10);
+            var dateNoticeGiven = new DateTime(2018, 10, 5);
+            var insolvencyDate = new DateTime(2018, 10, 4);
+
+            // Act
+            var result = await startDate1.GetNumDaysInIntersectionOfTwoRangesWithLimit(endDate1, startDate2, endDate2, dateNoticeGiven, insolvencyDate);
 
             // Assert
             result.Should().Be(3);
