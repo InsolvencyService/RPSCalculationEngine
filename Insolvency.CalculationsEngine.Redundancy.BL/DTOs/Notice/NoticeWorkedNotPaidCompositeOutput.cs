@@ -11,6 +11,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Notice
             rp1Results = new NoticeWorkedNotPaidResponseDTO();
             rp14aResults = new NoticeWorkedNotPaidResponseDTO();
         }
+        public string TraceInfo { get; set; }
         public string SelectedInputSource { get; set; }
 
         //public NoticeWorkedNotPaidAggregateOutput nwnpResults;

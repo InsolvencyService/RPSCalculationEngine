@@ -7,7 +7,7 @@
         }
 
         public RefundOfNotionalTaxResponseDto(decimal taxableEarning, decimal taxAllowance, decimal maximumCNPEntitlement, decimal cnpPaid, decimal cnpTaxDeducted,
-            decimal? maximumRefundLimit, decimal? cnpPaidAfterRefund, decimal refundAmount)
+            decimal? maximumRefundLimit, decimal? cnpPaidAfterRefund, decimal refundAmount, string traceInfo = "")
         {
             TaxableEarning = taxableEarning;
             TaxAllowance = taxAllowance;
@@ -17,7 +17,9 @@
             MaximumRefundLimit = maximumRefundLimit;
             CNPPaidAfterRefund = cnpPaidAfterRefund;
             RefundAmount = refundAmount;
+            TraceInfo = traceInfo;                        
         }
+        public string TraceInfo { get; set; }
         public decimal? TaxableEarning { get; set; }
         public decimal? TaxAllowance { get; set; }
         public decimal? MaximumCNPEntitlement { get; set; }
