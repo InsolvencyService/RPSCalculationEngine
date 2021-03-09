@@ -8,7 +8,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.RedundancyPayment
         {
         }
 
-        public RedundancyPaymentResponseDto(DateTime adjStartDate,int noticeWeeks, DateTime relNoticeDate, int upto21, int from22to41, int over41,decimal redWeeks, decimal gross, decimal empPartPayment, decimal net, decimal statutoryMaximum, string traceInfo = "")
+        public RedundancyPaymentResponseDto(DateTime adjStartDate,int noticeWeeks, DateTime relNoticeDate, int upto21, int from22to41, int over41,decimal redWeeks, decimal gross, decimal empPartPayment, decimal net, decimal statutoryMaximum)
         {
             AdjEmploymentStartDate = adjStartDate;
             NoticeEntitlementWeeks = noticeWeeks;
@@ -21,10 +21,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.RedundancyPayment
             EmployerPartPayment = empPartPayment;
             NetEntitlement = net;
             StatutoryMax = statutoryMaximum;
-            TraceInfo = traceInfo;
         }
 
-        public string TraceInfo { get; set; }
+        public string TraceInfo { get; set; } = string.Empty;
         public DateTime AdjEmploymentStartDate { get; set; }
         public int NoticeEntitlementWeeks { get; set; }
         public DateTime NoticeDateForRedundancyPay { get; set; }

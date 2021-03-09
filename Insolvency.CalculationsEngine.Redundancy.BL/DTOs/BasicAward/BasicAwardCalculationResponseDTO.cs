@@ -2,7 +2,7 @@
 {
     public class BasicAwardCalculationResponseDTO
     {
-        public string TraceInfo { get; set; }
+        public string TraceInfo { get; set; } = string.Empty;
 
         public decimal GrossEntitlement { get; set; }
 

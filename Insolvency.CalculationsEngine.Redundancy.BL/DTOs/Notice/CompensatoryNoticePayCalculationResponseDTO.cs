@@ -10,7 +10,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Notice
         {
             WeeklyResults = new List<CompensatoryNoticePayResult>();
         }
-        public string TraceInfo { get; set; }
+        public string TraceInfo { get; set; } = string.Empty;
 
         public int NoticeWeeksDue { get; set; }
 
