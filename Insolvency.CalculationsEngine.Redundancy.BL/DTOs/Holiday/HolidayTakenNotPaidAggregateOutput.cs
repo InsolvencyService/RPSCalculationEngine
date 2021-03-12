@@ -9,6 +9,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Holiday
         {
         }
 
+        public string TraceInfo { get; set; } = string.Empty;
         public string SelectedInputSource { get; set; }
         public HolidayTakenNotPaidResponseDTO RP1ResultsList { get; set; }
         public HolidayTakenNotPaidResponseDTO RP14aResultsList { get; set; }

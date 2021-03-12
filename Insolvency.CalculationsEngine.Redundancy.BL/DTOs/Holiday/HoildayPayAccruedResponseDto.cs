@@ -9,6 +9,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Holiday
             WeeklyResults = new List<HolidayPayAccruedWeeklyResult>();
         }
 
+        public string TraceInfo { get; set; } = string.Empty;
         public decimal StatutoryMax { get; set; }
         public decimal HolidaysOwed { get; set; }
         public decimal BusinessDaysInClaim { get; set; }

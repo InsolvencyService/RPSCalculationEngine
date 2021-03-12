@@ -22,6 +22,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.RedundancyPayment
             NetEntitlement = net;
             StatutoryMax = statutoryMaximum;
         }
+
+        public string TraceInfo { get; set; } = string.Empty;
         public DateTime AdjEmploymentStartDate { get; set; }
         public int NoticeEntitlementWeeks { get; set; }
         public DateTime NoticeDateForRedundancyPay { get; set; }

@@ -15,6 +15,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.ProjectedNoticeDate
             ProjectedNoticeDate = projectedNoticeDate;
         }
 
+        public string TraceInfo { get; set; } = string.Empty;
+
         public DateTime ProjectedNoticeDate { get; set; }
 
         public DateTime NoticeStartDate { get; set; }

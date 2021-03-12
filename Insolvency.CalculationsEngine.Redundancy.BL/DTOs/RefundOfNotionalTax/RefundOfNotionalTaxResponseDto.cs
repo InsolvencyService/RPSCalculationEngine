@@ -18,6 +18,7 @@
             CNPPaidAfterRefund = cnpPaidAfterRefund;
             RefundAmount = refundAmount;
         }
+        public string TraceInfo { get; set; } = string.Empty;
         public decimal? TaxableEarning { get; set; }
         public decimal? TaxAllowance { get; set; }
         public decimal? MaximumCNPEntitlement { get; set; }

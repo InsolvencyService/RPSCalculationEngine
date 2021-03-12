@@ -2,6 +2,8 @@
 {
     public class BasicAwardCalculationResponseDTO
     {
+        public string TraceInfo { get; set; } = string.Empty;
+
         public decimal GrossEntitlement { get; set; }
 
         public bool IsTaxable { get; set; }
