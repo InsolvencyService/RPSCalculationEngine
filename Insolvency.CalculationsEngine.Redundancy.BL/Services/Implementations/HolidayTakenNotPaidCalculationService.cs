@@ -29,7 +29,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             DateTime? holidayYearStart,
             IOptions<ConfigLookupRoot> options)
         {
-            var statutoryMax = ConfigValueLookupHelper.GetStatutoryMax(options, data.First().InsolvencyDate);
+            var statutoryMax = ConfigValueLookupHelper.GetStatutoryMax(options, data.First().DismissalDate);
 
             var calculationResult = new HolidayTakenNotPaidResponseDTO();
             calculationResult.StatutoryMax = Math.Round(statutoryMax, 2);
