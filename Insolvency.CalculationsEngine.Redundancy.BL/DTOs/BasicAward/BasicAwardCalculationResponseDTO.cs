@@ -1,8 +1,10 @@
-﻿namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.BasicAward
+﻿using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
+
+namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.BasicAward
 {
     public class BasicAwardCalculationResponseDTO
     {
-        public string TraceInfo { get; set; } = string.Empty;
+        public string TraceInfo { get; set; } = TraceInfoSerializer.GetTraceDetails();
 
         public decimal GrossEntitlement { get; set; }
 

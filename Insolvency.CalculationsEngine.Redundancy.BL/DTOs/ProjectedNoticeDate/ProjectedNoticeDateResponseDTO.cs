@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,7 +16,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.ProjectedNoticeDate
             ProjectedNoticeDate = projectedNoticeDate;
         }
 
-        public string TraceInfo { get; set; } = string.Empty;
+        public string TraceInfo { get; set; } = TraceInfoSerializer.GetTraceDetails();
 
         public DateTime ProjectedNoticeDate { get; set; }
 
