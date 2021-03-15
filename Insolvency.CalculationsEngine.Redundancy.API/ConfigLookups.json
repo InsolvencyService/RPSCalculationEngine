@@ -102,8 +102,13 @@
     },
     {
       "StartDate": "2020-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2021-04-05",
       "StatMax": "538"
+    },
+    {
+      "StartDate": "2021-04-06",
+      "EndDate": "9999-12-31",
+      "StatMax": "544"
     }
   ],
   "NotionalBenefitsWeeklyRateUnder25": [
@@ -114,8 +119,13 @@
     },
     {
       "StartDate": "2020-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2021-04-05",
       "Amount": "58.90"
+    },
+    {
+      "StartDate": "2021-04-06",
+      "EndDate": "9999-12-31",
+      "Amount": "59.20"
     }
   ],
   "NotionalBenefitsWeeklyRate25AndOver": [
@@ -126,8 +136,13 @@
     },
     {
       "StartDate": "2020-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2021-04-05",
       "Amount": "74.35"
+    },
+    {
+      "StartDate": "2021-04-06",
+      "EndDate": "9999-12-31",
+      "Amount": "74.70"
     }
   ],
   "BenefitWaitingDaysLookup": [
@@ -152,15 +167,25 @@
     },
     {
       "StartDate": "2020-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2021-04-05",
       "NIThreshold": "183"
+    },
+    {
+      "StartDate": "2021-04-06",
+      "EndDate": "9999-12-31",
+      "NIThreshold": "184"
     }
   ],
   "NIUpperThresholdLookup": [
     {
       "StartDate": "1900-01-01",
-      "EndDate": "9999-12-31",
+      "EndDate": "2021-04-05",
       "NIThreshold": "962"
+    },
+    {
+      "StartDate": "2021-04-06",
+      "EndDate": "9999-12-31",
+      "NIThreshold": "967"
     }
   ],
   "NIRateLookup": [
