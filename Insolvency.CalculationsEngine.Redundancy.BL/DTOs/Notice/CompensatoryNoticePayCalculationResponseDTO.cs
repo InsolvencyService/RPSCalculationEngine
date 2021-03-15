@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Notice
         {
             WeeklyResults = new List<CompensatoryNoticePayResult>();
         }
-        public string TraceInfo { get; set; } = string.Empty;
+        public string TraceInfo { get; set; } = TraceInfoSerializer.GetTraceDetails();
 
         public int NoticeWeeksDue { get; set; }
 
