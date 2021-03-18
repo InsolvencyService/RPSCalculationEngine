@@ -77,20 +77,20 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             // Arrange
             var request = new ApportionmentCalculationRequestModel()
             {
-                GrossPaidInFourMonth = 689.04m,
-                GrossEntitlement = 689.04m,
-                TotalClaimedInFourMonth = 3445.20m,
+                GrossPaidInFourMonth = 668.84m,
+                GrossEntitlement = 668.84m,
+                TotalClaimedInFourMonth = 900.00m,
                 TupeStatus = false
             };
             // Act
             var result = await _service.PerformApportionmentCalculationAsync(request, _options);
 
             // Assert
-            Math.Round(result.PrefClaim, 2).Should().Be(160m);
+            Math.Round(result.PrefClaim, 2).Should().Be(497.05m);
             Math.Round(result.NonPrefClaim, 2).Should()
-                .Be(Math.Round(request.GrossPaidInFourMonth, 2) - Math.Round(result.PrefClaim, 2));
+                .Be(Math.Round(request.GrossEntitlement, 2) - Math.Round(result.PrefClaim, 2));
             result.TupeStatus.Should().Be(request.TupeStatus);
-            result.ApportionmentPercentage.Should().Be(20);
+            result.ApportionmentPercentage.Should().Be(74.3156m);
         }
 
         [Fact]
