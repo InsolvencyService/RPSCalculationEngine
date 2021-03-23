@@ -76,5 +76,5 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Calculations.APPA.Extensio
                 };
             }
         }
-    }
+        }
 }

@@ -1,4 +1,4 @@
-﻿using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
+﻿using Insolvency.CalculationsEngine.Redundancy.BL.Serializer.Extensions;
 using System;
 
 namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.RedundancyPayment
@@ -24,7 +24,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.RedundancyPayment
             StatutoryMax = statutoryMaximum;
         }
 
-        public string TraceInfo { get; set; } = TraceInfoSerializer.GetTraceDetails();
+        public string TraceInfo { get; set; } = TraceInfoSerializer.ConvertToJson();
         public DateTime AdjEmploymentStartDate { get; set; }
         public int NoticeEntitlementWeeks { get; set; }
         public DateTime NoticeDateForRedundancyPay { get; set; }
