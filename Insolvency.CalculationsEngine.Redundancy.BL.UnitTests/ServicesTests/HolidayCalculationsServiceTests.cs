@@ -97,8 +97,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             };
 
             _hpaService.Setup(x => x.PerformHolidayPayAccruedCalculationAsync(hpaRequest, _options)).ReturnsAsync(hpaResponse);
-            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp1, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options)).ReturnsAsync(htnpResponseRp1);
-            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp14a, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options)).ReturnsAsync(htnpResponseRp14a);
+            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp1, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options, null)).ReturnsAsync(htnpResponseRp1);
+            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp14a, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options, null)).ReturnsAsync(htnpResponseRp14a);
 
             var request = new HolidayCalculationRequestModel()
             {
@@ -123,14 +123,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 14.9732m,
                 16.9732m,
                 hpaRequest.HolidayYearStart,
-                It.IsAny<IOptions<ConfigLookupRoot>>()), Times.Once);
+                It.IsAny<IOptions<ConfigLookupRoot>>(), null), Times.Once);
             _htnpService.Verify(m => m.PerformCalculationAsync(
                 htnpRequest,
                 InputSource.Rp14a,
                 0m,
                 0m,
                 hpaRequest.HolidayYearStart,
-                It.IsAny<IOptions<ConfigLookupRoot>>()), Times.Once);
+                It.IsAny<IOptions<ConfigLookupRoot>>(), null), Times.Once);
             
         }
 
@@ -199,8 +199,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             };
 
             _hpaService.Setup(x => x.PerformHolidayPayAccruedCalculationAsync(hpaRequest, _options)).ReturnsAsync(hpaResponse);
-            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp1, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options)).ReturnsAsync(htnpResponseRp1);
-            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp14a, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options)).ReturnsAsync(htnpResponseRp14a);
+            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp1, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options, null)).ReturnsAsync(htnpResponseRp1);
+            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp14a, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options, null)).ReturnsAsync(htnpResponseRp14a);
 
             var request = new HolidayCalculationRequestModel()
             {
@@ -225,14 +225,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 0m,
                 0m,
                 hpaRequest.HolidayYearStart,
-                It.IsAny<IOptions<ConfigLookupRoot>>()), Times.Once);
+                It.IsAny<IOptions<ConfigLookupRoot>>(), null), Times.Once);
             _htnpService.Verify(m => m.PerformCalculationAsync(
                 It.IsAny<List<HolidayTakenNotPaidCalculationRequestModel>>(),
                 InputSource.Rp14a,
                 14.9732m,
                 16.9732m,
                 hpaRequest.HolidayYearStart,
-                It.IsAny<IOptions<ConfigLookupRoot>>()), Times.Once);
+                It.IsAny<IOptions<ConfigLookupRoot>>(), null), Times.Once);
         }
 
         [Fact]
@@ -269,8 +269,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 }
             };
 
-            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp1, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options)).ReturnsAsync(htnpResponseRp1);
-            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp14a, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options)).ReturnsAsync(htnpResponseRp14a);
+            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp1, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options, null)).ReturnsAsync(htnpResponseRp1);
+            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp14a, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options, null)).ReturnsAsync(htnpResponseRp14a);
 
             var request = new HolidayCalculationRequestModel()
             {
@@ -292,14 +292,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 0,
                 30m,
                 null,
-                It.IsAny<IOptions<ConfigLookupRoot>>()), Times.Once);
+                It.IsAny<IOptions<ConfigLookupRoot>>(), null), Times.Once);
             _htnpService.Verify(m => m.PerformCalculationAsync(
                 It.IsAny<List<HolidayTakenNotPaidCalculationRequestModel>>(),
                 InputSource.Rp14a,
                 0m,
                 0m,
                 null,
-                It.IsAny<IOptions<ConfigLookupRoot>>()), Times.Once);
+                It.IsAny<IOptions<ConfigLookupRoot>>(), null), Times.Once);
         }
 
         [Fact]
@@ -336,8 +336,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 }
             };
 
-            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp1, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options)).ReturnsAsync(htnpResponseRp1);
-            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp14a, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options)).ReturnsAsync(htnpResponseRp14a);
+            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp1, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options, null)).ReturnsAsync(htnpResponseRp1);
+            _htnpService.Setup(x => x.PerformCalculationAsync(htnpRequest, InputSource.Rp14a, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options, null)).ReturnsAsync(htnpResponseRp14a);
 
             var request = new HolidayCalculationRequestModel()
             {
@@ -359,14 +359,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 0m,
                 0m,
                 null,
-                It.IsAny<IOptions<ConfigLookupRoot>>()), Times.Once);
+                It.IsAny<IOptions<ConfigLookupRoot>>(), null), Times.Once);
             _htnpService.Verify(m => m.PerformCalculationAsync(
                 htnpRequest,
                 InputSource.Rp14a,
                 0m,
                 30m,
                 null,
-                It.IsAny<IOptions<ConfigLookupRoot>>()), Times.Once);
+                It.IsAny<IOptions<ConfigLookupRoot>>(), null), Times.Once);
         }
 
         [Fact]
@@ -396,7 +396,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 It.IsAny<decimal>(),
                 It.IsAny<decimal>(),
                 It.IsAny<DateTime?>(),
-                It.IsAny<IOptions<ConfigLookupRoot>>()), Times.Never);
+                It.IsAny<IOptions<ConfigLookupRoot>>(), null), Times.Never);
         }
 
         [Fact]
@@ -414,8 +414,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 htnpRequestRp14a
             };
 
-            _htnpService.Setup(m => m.PerformCalculationAsync(htnpRequest, InputSource.Rp1, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options)).ReturnsAsync(htnpResponseRp1);
-            _htnpService.Setup(m => m.PerformCalculationAsync(htnpRequest, InputSource.Rp14a, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options)).ReturnsAsync(htnpResponseRp14a);
+            _htnpService.Setup(m => m.PerformCalculationAsync(htnpRequest, InputSource.Rp1, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options, null)).ReturnsAsync(htnpResponseRp1);
+            _htnpService.Setup(m => m.PerformCalculationAsync(htnpRequest, InputSource.Rp14a, It.IsAny<decimal>(), It.IsAny<decimal>(), It.IsAny<DateTime?>(), _options, null)).ReturnsAsync(htnpResponseRp14a);
 
             var request = new HolidayCalculationRequestModel()
             {
@@ -437,14 +437,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                It.IsAny<decimal>(),
                It.IsAny<decimal>(),
                It.IsAny<DateTime?>(),
-               It.IsAny<IOptions<ConfigLookupRoot>>()), Times.Once);
+               It.IsAny<IOptions<ConfigLookupRoot>>(), null), Times.Once);
             _htnpService.Verify(m => m.PerformCalculationAsync(
                 It.IsAny<List<HolidayTakenNotPaidCalculationRequestModel>>(),
                 InputSource.Rp14a,
                 It.IsAny<decimal>(),
                 It.IsAny<decimal>(),
                 It.IsAny<DateTime?>(),
-                It.IsAny<IOptions<ConfigLookupRoot>>()), Times.Once);
+                It.IsAny<IOptions<ConfigLookupRoot>>(), null), Times.Once);
         }
 
         [Fact]
@@ -474,7 +474,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
               It.IsAny<decimal>(),
               It.IsAny<decimal>(),
               It.IsAny<DateTime?>(),
-              It.IsAny<IOptions<ConfigLookupRoot>>()), Times.Never);
+              It.IsAny<IOptions<ConfigLookupRoot>>(), null), Times.Never);
         }
 
         [Fact]
@@ -504,7 +504,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
               It.IsAny<decimal>(),
               It.IsAny<decimal>(),
               It.IsAny<DateTime?>(),
-              It.IsAny<IOptions<ConfigLookupRoot>>()), Times.Never);
+              It.IsAny<IOptions<ConfigLookupRoot>>(), null), Times.Never);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.APPA
             PayLines = new List<ProtectiveAwardPayLine>();
         }
 
-        public string TraceInfo { get; set; } = TraceInfoSerializer.GetTraceDetails();
+        public string TraceInfo { get; set; }
 
         public bool IsTaxable { get; set; }
 

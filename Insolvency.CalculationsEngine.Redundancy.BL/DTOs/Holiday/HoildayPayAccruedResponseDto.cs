@@ -1,4 +1,4 @@
-﻿using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
+﻿using Insolvency.CalculationsEngine.Redundancy.BL.Serializer.Extensions;
 using System.Collections.Generic;
 
 namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Holiday
@@ -10,7 +10,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Holiday
             WeeklyResults = new List<HolidayPayAccruedWeeklyResult>();
         }
 
-        public string TraceInfo { get; set; } = TraceInfoSerializer.GetTraceDetails();
+        public string TraceInfo { get; set; } = TraceInfoSerializer.ConvertToJson();
         public decimal StatutoryMax { get; set; }
         public decimal HolidaysOwed { get; set; }
         public decimal BusinessDaysInClaim { get; set; }

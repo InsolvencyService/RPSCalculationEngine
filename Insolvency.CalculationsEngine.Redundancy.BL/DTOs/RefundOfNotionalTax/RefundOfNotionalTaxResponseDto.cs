@@ -1,4 +1,5 @@
-﻿using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
+﻿using Insolvency.CalculationsEngine.Redundancy.BL.Serializer.Extensions;
+using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
 
 namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.RefundOfNotionalTax
 {
@@ -20,7 +21,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.RefundOfNotionalTax
             CNPPaidAfterRefund = cnpPaidAfterRefund;
             RefundAmount = refundAmount;
         }
-        public string TraceInfo { get; set; } = TraceInfoSerializer.GetTraceDetails();
+        public string TraceInfo { get; set; } = TraceInfoSerializer.ConvertToJson();
         public decimal? TaxableEarning { get; set; }
         public decimal? TaxAllowance { get; set; }
         public decimal? MaximumCNPEntitlement { get; set; }

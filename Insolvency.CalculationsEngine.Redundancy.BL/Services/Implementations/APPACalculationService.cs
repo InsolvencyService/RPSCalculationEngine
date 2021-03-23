@@ -1,5 +1,6 @@
 ﻿using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.APPA;
 using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Common;
+using Insolvency.CalculationsEngine.Redundancy.BL.Serializer.Extensions;
 using Insolvency.CalculationsEngine.Redundancy.BL.Services.Interfaces;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
 using Microsoft.Extensions.Options;
@@ -25,12 +26,13 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
         {
             var allWeeks = new List<IWeeklyResult>();
             var result = new APPACalculationResponseDTO();
-
+            var rp1TraceInfo = new TraceInfo();
+            var rp14TraceInfo = new TraceInfo();
             if (data.Ap != null && data.Ap.Any())
             {
                 result.Ap = new ArrearsOfPayAggregateOutput();
-                result.Ap.RP1ResultsList = await _apService.PerformCalculationAsync(data.Ap, InputSource.Rp1, options);
-                result.Ap.RP14aResultsList = await _apService.PerformCalculationAsync(data.Ap, InputSource.Rp14a, options);
+                result.Ap.RP1ResultsList = await _apService.PerformCalculationAsync(data.Ap, InputSource.Rp1, options, rp1TraceInfo);
+                result.Ap.RP14aResultsList = await _apService.PerformCalculationAsync(data.Ap, InputSource.Rp14a, options, rp14TraceInfo);
 
                 var rp1Any = result.Ap.RP1ResultsList != null && result.Ap.RP1ResultsList.WeeklyResult.Any();
                 var rp1Sum = rp1Any ? result.Ap.RP1ResultsList.WeeklyResult.Sum(x => x.NetEntitlement) : 0M;
@@ -42,11 +44,13 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 {
                     result.Ap.SelectedInputSource = InputSource.Rp1;
                     allWeeks.AddRange(result.Ap.RP1ResultsList.WeeklyResult);
+                    result.Ap.TraceInfo = await rp1TraceInfo.ConvertToJson();
                 }
                 else
                 {
                     result.Ap.SelectedInputSource = InputSource.Rp14a;
                     allWeeks.AddRange(result.Ap.RP14aResultsList.WeeklyResult);
+                    result.Ap.TraceInfo = await rp14TraceInfo.ConvertToJson();
                 }
             }
 
@@ -54,6 +58,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             {
                 result.Pa = await _paService.PerformProtectiveAwardCalculationAsync(data.Pa, options);
                 allWeeks.AddRange(result.Pa.PayLines);
+               
             }
 
             allWeeks.OrderByDescending(x => x.NetEntitlement)
