@@ -12,7 +12,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
             Dates = new List<TraceInfoDate>();
         }
 
-        [JsonProperty("dates ")]
+        [JsonProperty("dates")]
         public IList<TraceInfoDate> Dates { get; set; }
      
     }

@@ -140,8 +140,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 Pa = paRequest
             };
 
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, null)).ReturnsAsync(apResponseRP1);
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, null)).ReturnsAsync(apResponseRP14a);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP1);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP14a);
             _paService.Setup(m => m.PerformProtectiveAwardCalculationAsync(paRequest, _options)).ReturnsAsync(paResponse);
 
             // Act
@@ -265,8 +265,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 Pa = paRequest
             };
 
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, null)).ReturnsAsync(apResponseRP1);
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, null)).ReturnsAsync(apResponseRP14a);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP1);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP14a);
             _paService.Setup(m => m.PerformProtectiveAwardCalculationAsync(paRequest, _options)).ReturnsAsync(paResponse);
 
             // Act
@@ -393,8 +393,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 Pa = paRequest
             };
 
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, null)).ReturnsAsync(apResponseRP1);
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, null)).ReturnsAsync(apResponseRP14a);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP1);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP14a);
             _paService.Setup(m => m.PerformProtectiveAwardCalculationAsync(paRequest, _options)).ReturnsAsync(paResponse);
 
             // Act
@@ -485,8 +485,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 Pa = null
             };
 
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, null)).ReturnsAsync(apResponseRP1);
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, null)).ReturnsAsync(apResponseRP14a);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP1);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP14a);
 
             // Act
             var results = await _service.PerformCalculationAsync(request, _options);
@@ -686,8 +686,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 Pa = null
             };
 
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, null)).ReturnsAsync(apResponseRP1);
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, null)).ReturnsAsync(apResponseRP14a);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP1);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP14a);
 
             // Act
             var results = await _service.PerformCalculationAsync(request, _options);
@@ -774,8 +774,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 Pa = null
             };
 
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, null)).ReturnsAsync(apResponseRP1);
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, null)).ReturnsAsync(apResponseRP14a);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP1);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP14a);
 
             // Act
             var results = await _service.PerformCalculationAsync(request, _options);
@@ -843,8 +843,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 Pa = null
             };
 
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, null)).ReturnsAsync(apResponseRP1);
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, null)).ReturnsAsync(apResponseRP14a);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP1);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP14a);
 
             // Act
             var results = await _service.PerformCalculationAsync(request, _options);
@@ -914,8 +914,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 Pa = null
             };
 
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, null)).ReturnsAsync(apResponseRP1);
-            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, null)).ReturnsAsync(apResponseRP14a);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp1, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP1);
+            _apService.Setup(m => m.PerformCalculationAsync(apRequests, InputSource.Rp14a, _options, It.IsAny<TraceInfo>())).ReturnsAsync(apResponseRP14a);
 
             // Act
             var results = await _service.PerformCalculationAsync(request, _options);

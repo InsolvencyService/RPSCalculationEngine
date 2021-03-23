@@ -156,8 +156,12 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             calculationResult.InputSource = data.InputSource;
             calculationResult.StatutoryMax = statutoryMax;
             calculationResult.WeeklyResult = weeklyResult;
-            traceInfoDate.StartDate = data.UnpaidPeriodFrom;
-            traceInfoDate.EndDate = data.UnpaidPeriodTo;
+            if (traceInfoDate != null)
+            {
+                traceInfoDate.StartDate = data.UnpaidPeriodFrom;
+                traceInfoDate.EndDate = data.UnpaidPeriodTo;
+            }
+
             return await Task.FromResult(calculationResult);
         }
     }
