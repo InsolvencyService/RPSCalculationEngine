@@ -13,7 +13,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Serializer.Extensions
     {
         private static JsonSerializerSettings jsonSettings { get; set; } = new JsonSerializerSettings
         {
-            DateFormatString = "dd/MM/yyy hh:mm:ss",
+            DateFormatString = "dd/MM/yyyy hh:mm:ss",
             Formatting = Formatting.None
             
         };

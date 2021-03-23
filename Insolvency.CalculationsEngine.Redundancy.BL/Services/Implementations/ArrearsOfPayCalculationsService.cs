@@ -147,7 +147,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             calculationResult.DngApplied = (adjustedPeriodTo > data.DateNoticeGiven.Date);
             calculationResult.RunNWNP = (adjustedPeriodTo > data.DateNoticeGiven.Date);
             calculationResult.WeeklyResult = weeklyresult;
-            traceInfo.Dates.Add(new TraceInfoDate
+            traceInfo?.Dates.Add(new TraceInfoDate
             {
                 StartDate = data.UnpaidPeriodFrom,
                 EndDate = data.UnpaidPeriodTo
