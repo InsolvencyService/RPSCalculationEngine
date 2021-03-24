@@ -51,19 +51,19 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
                 foreach (var nwnp in data.Nwnp)
                 {
-                    var traceDdate = new TraceInfoDate();
-                    var res = await _nwnpService.PerformNwnpCalculationAsync(nwnp, options, traceDdate);
+                    var traceDate = new TraceInfoDate();
+                    var res = await _nwnpService.PerformNwnpCalculationAsync(nwnp, options, traceDate);
                     if (res.InputSource == InputSource.Rp1)
                     {
                         //nwnpOutput.nwnpResults.rP1ResultsList.Add(res);
                         nwnpOutput.rp1Results.WeeklyResult.AddRange(res.WeeklyResult);
-                        rp1TraceInfo.Dates.Add(traceDdate);
+                        rp1TraceInfo.Dates.Add(traceDate);
                     }
                     else if (res.InputSource == InputSource.Rp14a)
                     {
                         //nwnpOutput.nwnpResults.rP14aResultsList.Add(res);
                         nwnpOutput.rp14aResults.WeeklyResult.AddRange(res.WeeklyResult);
-                        rp14TraceInfo.Dates.Add(traceDdate);
+                        rp14TraceInfo.Dates.Add(traceDate);
                     }
                 }
 
