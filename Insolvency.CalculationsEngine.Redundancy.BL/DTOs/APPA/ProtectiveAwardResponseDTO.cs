@@ -1,4 +1,4 @@
-﻿using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
+﻿using Insolvency.CalculationsEngine.Redundancy.BL.Serializer.Extensions;
 using System.Collections.Generic;
 
 namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.APPA
@@ -10,7 +10,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.APPA
             PayLines = new List<ProtectiveAwardPayLine>();
         }
 
-        public string TraceInfo { get; set; }
+        public string TraceInfo { get; set; } = TraceInfoSerializer.ConvertToJson();
 
         public bool IsTaxable { get; set; }
 
