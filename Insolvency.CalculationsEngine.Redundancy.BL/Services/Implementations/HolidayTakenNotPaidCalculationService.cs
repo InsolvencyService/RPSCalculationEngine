@@ -1,5 +1,6 @@
 ﻿using Insolvency.CalculationsEngine.Redundancy.BL.Calculations.Holiday.Extensions;
 using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Holiday;
+using Insolvency.CalculationsEngine.Redundancy.BL.Serializer.Extensions;
 using Insolvency.CalculationsEngine.Redundancy.BL.Services.Interfaces;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
 using Insolvency.CalculationsEngine.Redundancy.Common.Extensions;
@@ -27,7 +28,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             decimal maxDaysInCurrentHolidayYear,
             decimal maxDaysInTotal,
             DateTime? holidayYearStart,
-            IOptions<ConfigLookupRoot> options)
+            IOptions<ConfigLookupRoot> options, TraceInfo traceInfo = null)
         {
             var statutoryMax = ConfigValueLookupHelper.GetStatutoryMax(options, data.First().InsolvencyDate);
 
@@ -106,6 +107,12 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                         GrossEntitlementIn4Months = Math.Round(Math.Min(maximumEntitlementInPrefPeriod, employerEntitlementInPrefPeriod), 2),
                     });
                 }
+             
+                traceInfo?.Dates.Add(new TraceInfoDate
+                {
+                    StartDate = firstRequest.UnpaidPeriodFrom,
+                    EndDate = firstRequest.UnpaidPeriodTo
+                }); ;
             }
             return await Task.FromResult(calculationResult);
         }

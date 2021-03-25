@@ -1,5 +1,6 @@
 ﻿using Insolvency.CalculationsEngine.Redundancy.BL.Calculations.Notice.Extensions;
 using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Notice;
+using Insolvency.CalculationsEngine.Redundancy.BL.Serializer.Extensions;
 using Insolvency.CalculationsEngine.Redundancy.BL.Services.Interfaces;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
 using Insolvency.CalculationsEngine.Redundancy.Common.Extensions;
@@ -14,7 +15,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 {
     public class NoticeWorkedNotPaidCalculationService : INoticeWorkedNotPaidCalculationService
     {
-        public async Task<NoticeWorkedNotPaidResponseDTO> PerformNwnpCalculationAsync(NoticeWorkedNotPaidCalculationRequestModel data, IOptions<ConfigLookupRoot> options)
+        public async Task<NoticeWorkedNotPaidResponseDTO> PerformNwnpCalculationAsync(NoticeWorkedNotPaidCalculationRequestModel data, IOptions<ConfigLookupRoot> options, TraceInfoDate traceInfoDate = null)
         {
             var calculationResult = new NoticeWorkedNotPaidResponseDTO();
             var weeklyResult = new List<NoticeWorkedNotPaidWeeklyResult>();
@@ -155,6 +156,12 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             calculationResult.InputSource = data.InputSource;
             calculationResult.StatutoryMax = statutoryMax;
             calculationResult.WeeklyResult = weeklyResult;
+            if (traceInfoDate != null)
+            {
+                traceInfoDate.StartDate = data.UnpaidPeriodFrom;
+                traceInfoDate.EndDate = data.UnpaidPeriodTo;
+            }
+
             return await Task.FromResult(calculationResult);
         }
     }

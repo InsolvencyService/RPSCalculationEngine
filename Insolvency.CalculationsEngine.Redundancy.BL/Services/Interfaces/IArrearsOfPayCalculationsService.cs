@@ -9,8 +9,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Interfaces
     public interface IArrearsOfPayCalculationsService
     {
         Task<ArrearsOfPayResponseDTO> PerformCalculationAsync(
-            List<ArrearsOfPayCalculationRequestModel> data, string inputSource, IOptions<ConfigLookupRoot> options);
+            List<ArrearsOfPayCalculationRequestModel> data, string inputSource, IOptions<ConfigLookupRoot> options, TraceInfo traceInfo= null);
 
-        Task<ArrearsOfPayResponseDTO> PerformCalculationAsync(ArrearsOfPayCalculationRequestModel data, IOptions<ConfigLookupRoot> _options);
+        Task<ArrearsOfPayResponseDTO> PerformCalculationAsync(ArrearsOfPayCalculationRequestModel data, IOptions<ConfigLookupRoot> _options, TraceInfo traceInfo = null);
+        
     }
 }

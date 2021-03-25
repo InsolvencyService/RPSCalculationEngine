@@ -1,6 +1,7 @@
 ﻿using Insolvency.CalculationsEngine.Redundancy.BL.Calculations.Holiday.Extensions;
 using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Common;
 using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Holiday;
+using Insolvency.CalculationsEngine.Redundancy.BL.Serializer.Extensions;
 using Insolvency.CalculationsEngine.Redundancy.BL.Services.Interfaces;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
 using Insolvency.CalculationsEngine.Redundancy.Common.Extensions;
@@ -16,7 +17,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
         private readonly IHolidayPayAccruedCalculationService _hpaService;
         private readonly IHolidayTakenNotPaidCalculationService _htnpService;
 
-        public HolidayCalculationService(IHolidayPayAccruedCalculationService hpaService, 
+        public HolidayCalculationService(IHolidayPayAccruedCalculationService hpaService,
             IHolidayTakenNotPaidCalculationService htnpService)
         {
             _hpaService = hpaService;
@@ -37,7 +38,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
         {
             string selectedInputString = null;
             var result = new HolidayCalculationResponseDTO();
-
+            var traceinfo = new TraceInfo();
             // select the input source with lowest count in the currrent holiday year
             if (data.Htnp != null && data.Htnp.Any())
             {
@@ -86,14 +87,18 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                     (selectedInputString == InputSource.Rp1) ? maximumHTNPDaysInHolidayYear : 0,
                     (selectedInputString == InputSource.Rp1) ? maximumHTNPDaysInTotal : 0,
                     holidayYearStart,
-                    options);
+                    options,
+                    (selectedInputString == InputSource.Rp1) ? traceinfo : null);
                 result.Htnp.RP14aResultsList = await _htnpService.PerformCalculationAsync(
                     data.Htnp,
                     InputSource.Rp14a,
                     (selectedInputString == InputSource.Rp14a) ? maximumHTNPDaysInHolidayYear : 0,
                     (selectedInputString == InputSource.Rp14a) ? maximumHTNPDaysInTotal : 0,
                     holidayYearStart,
-                    options);
+                    options,
+                    (selectedInputString == InputSource.Rp14a) ? traceinfo : null);
+                
+                result.Htnp.TraceInfo = await traceinfo?.ConvertToJson();
             }
             return result;
         }
@@ -102,6 +107,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
         {
             string selectedInputString = null;
             var result = new HolidayCalculationResponseDTO();
+            var traceinfo = new TraceInfo();
 
             var firstHtnp = data.Htnp.First();
             var htnpEndDate = firstHtnp.DismissalDate.Date < firstHtnp.InsolvencyDate.Date ? firstHtnp.DismissalDate.Date : firstHtnp.InsolvencyDate.Date;
@@ -126,14 +132,18 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 0,
                 (selectedInputString == InputSource.Rp1) ? maximumHolidayEntitlement : 0,
                 null,
-                options);
+                options,
+                (selectedInputString == InputSource.Rp1) ? traceinfo : null);
             result.Htnp.RP14aResultsList = await _htnpService.PerformCalculationAsync(
                 data.Htnp,
                 InputSource.Rp14a,
                 0,
                 (selectedInputString == InputSource.Rp14a) ? maximumHolidayEntitlement : 0,
                 null,
-                options);
+                options,
+                (selectedInputString == InputSource.Rp14a) ? traceinfo : null);
+
+            result.Htnp.TraceInfo = await traceinfo?.ConvertToJson(); 
 
             return result;
         }

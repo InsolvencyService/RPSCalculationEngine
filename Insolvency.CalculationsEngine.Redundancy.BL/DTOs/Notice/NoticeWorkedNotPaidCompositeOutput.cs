@@ -1,5 +1,4 @@
-﻿using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
-using System.Collections.Generic;
+﻿using Insolvency.CalculationsEngine.Redundancy.BL.Serializer.Extensions;
 
 namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Notice
 {
@@ -12,7 +11,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Notice
             rp1Results = new NoticeWorkedNotPaidResponseDTO();
             rp14aResults = new NoticeWorkedNotPaidResponseDTO();
         }
-        public string TraceInfo { get; set; } = TraceInfoSerializer.GetTraceDetails();
+        public string TraceInfo { get; set; } = TraceInfoSerializer.ConvertToJson();
         public string SelectedInputSource { get; set; }
 
         //public NoticeWorkedNotPaidAggregateOutput nwnpResults;

@@ -9,24 +9,25 @@ using Insolvency.CalculationsEngine.Redundancy.Common.Extensions;
 using Microsoft.Extensions.Options;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
 using Insolvency.CalculationsEngine.Redundancy.BL.Calculations.RedundancyPaymentCalculation.Extensions;
+using Insolvency.CalculationsEngine.Redundancy.BL.Serializer.Extensions;
 
 namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 {
     public class ArrearsOfPayCalculationsService : IArrearsOfPayCalculationsService
     {
         public async Task<ArrearsOfPayResponseDTO> PerformCalculationAsync(
-            List<ArrearsOfPayCalculationRequestModel> data, string inputSource, IOptions<ConfigLookupRoot> options)
+            List<ArrearsOfPayCalculationRequestModel> data, string inputSource, IOptions<ConfigLookupRoot> options, TraceInfo traceInfo = null)
         {
             var responses = new List<ArrearsOfPayResponseDTO>();
 
             foreach (var request in data.Where(x => x.InputSource == inputSource))
-                responses.Add(await PerformCalculationAsync(request, options));
+                responses.Add(await PerformCalculationAsync(request, options, traceInfo));
 
             return await responses.MergeWeeklyResults(inputSource, options);
         }
 
         public async Task<ArrearsOfPayResponseDTO> PerformCalculationAsync(
-            ArrearsOfPayCalculationRequestModel data, IOptions<ConfigLookupRoot> options)
+            ArrearsOfPayCalculationRequestModel data, IOptions<ConfigLookupRoot> options, TraceInfo traceInfo = null)
         {
             var calculationResult = new ArrearsOfPayResponseDTO();
             var weeklyresult = new List<ArrearsOfPayWeeklyResult>();
@@ -41,15 +42,15 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
             var adjustedPeriodFrom = await data.UnpaidPeriodFrom.Date.GetAdjustedPeriodFromAsync(data.InsolvencyDate.Date);
             var adjustedPeriodTo = await data.UnpaidPeriodTo.Date.GetAdjustedPeriodToAsync(data.InsolvencyDate.Date, data.DismissalDate.Date);
-           
+
             DateTime extendedAdjustedPeriodTo = adjustedPeriodTo;
             if (extendedAdjustedPeriodTo.DayOfWeek != (DayOfWeek)data.PayDay)
                 extendedAdjustedPeriodTo = adjustedPeriodTo.AddDays(7);
             var payDays = await adjustedPeriodFrom.Date.GetDaysInRange(extendedAdjustedPeriodTo.Date, (DayOfWeek)data.PayDay);
 
             decimal adjustedWeeklyWage = await data.WeeklyWage.GetAdjustedWeeklyWageAsync(data.ShiftPattern, data.UnpaidPeriodFrom, data.UnpaidPeriodTo, data.ApClaimAmount);
-            decimal WeeklyWageBetweenNoticeGivenAndNoticeEnd = decimal.Zero; 
-            
+            decimal WeeklyWageBetweenNoticeGivenAndNoticeEnd = decimal.Zero;
+
             DateTime prefPeriodStartDate = data.InsolvencyDate.Date.AddMonths(-4);
             prefPeriodStartDate = (prefPeriodStartDate <= data.EmploymentStartDate.Date) ? data.EmploymentStartDate.Date : prefPeriodStartDate.Date;
             DateTime prefPeriodEndDate = (data.DismissalDate < data.InsolvencyDate) ? data.DismissalDate.Date : data.InsolvencyDate.Date;
@@ -58,7 +59,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             foreach (var payWeekEnd in payDays)
             {
                 var employmentDays = 0;
-                var employmentDaysBetweenNoticeGivenAndNoticeEndDate = 0;               
+                var employmentDaysBetweenNoticeGivenAndNoticeEndDate = 0;
                 var maximumEntitlement = 0.0m;
                 var employmentDaysInPrefPeriod = 0;
                 var employmentDaysInPrefPeriodPostDNG = 0;
@@ -71,7 +72,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
                     //is this day a working day?
                     if (await date.IsEmploymentDay(data.ShiftPattern))
-                    {                        
+                    {
 
                         if (date >= adjustedPeriodFrom.Date && date <= adjustedPeriodTo.Date)
                         {
@@ -82,7 +83,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                                 if (date >= prefPeriodStartDate && date <= prefPeriodEndDate)
                                     employmentDaysInPrefPeriodPostDNG++;
                             }
-                           
+
                             else
                             {
                                 employmentDays++;
@@ -97,7 +98,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 var weekStartDate = payWeekEnd.AddDays(-6);
                 var maximumDays = await weekStartDate.GetNumDaysInIntersectionOfTwoRangesWithLimit(payWeekEnd, data.EmploymentStartDate.Date, data.DismissalDate.Date, data.DateNoticeGiven.Date, data.InsolvencyDate.Date);
                 var maximumDaysInPrefPeriod = await weekStartDate.GetNumDaysInIntersectionOfTwoRangesWithLimit(payWeekEnd, prefPeriodStartDate, prefPeriodEndDate, data.DateNoticeGiven.Date, data.InsolvencyDate.Date);
-                
+
                 //calculate Employer Liability for week
                 var employerEntitlement = adjustedWeeklyWage / data.ShiftPattern.Count * employmentDays +
                                             WeeklyWageBetweenNoticeGivenAndNoticeEnd / data.ShiftPattern.Count * employmentDaysBetweenNoticeGivenAndNoticeEndDate;
@@ -106,11 +107,11 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 employerEntitlementInPrefPeriod = Math.Round(employerEntitlementInPrefPeriod, 2);
 
                 //calculate Statutory Maximum liability for week
-                maximumEntitlementInPrefPeriod = Math.Round((statutoryMax / 7 * maximumDaysInPrefPeriod),2);
+                maximumEntitlementInPrefPeriod = Math.Round((statutoryMax / 7 * maximumDaysInPrefPeriod), 2);
                 maximumEntitlement = statutoryMax / 7 * maximumDays;
 
                 var grossEntitlement = Math.Min(maximumEntitlement, employerEntitlement);
-                
+
                 var taxRate = ConfigValueLookupHelper.GetTaxRate(options, DateTime.Now);
                 var taxDeducated = Math.Round(await grossEntitlement.GetTaxDeducted(taxRate, data.IsTaxable), 2);
 
@@ -146,6 +147,12 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             calculationResult.DngApplied = (adjustedPeriodTo > data.DateNoticeGiven.Date);
             calculationResult.RunNWNP = (adjustedPeriodTo > data.DateNoticeGiven.Date);
             calculationResult.WeeklyResult = weeklyresult;
+            traceInfo?.Dates.Add(new TraceInfoDate
+            {
+                StartDate = data.UnpaidPeriodFrom,
+                EndDate = data.UnpaidPeriodTo
+            });
+
             return await Task.FromResult(calculationResult);
         }
     }

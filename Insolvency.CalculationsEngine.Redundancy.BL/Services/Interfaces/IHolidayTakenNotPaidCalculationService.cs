@@ -15,6 +15,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Interfaces
             decimal maxDaysInCurrentHolidayYear,
             decimal maxDaysInTotal,
             DateTime? holidayYearStart,
-            IOptions<ConfigLookupRoot> options);
+            IOptions<ConfigLookupRoot> options,
+            TraceInfo traceInfo = null);
     }
 }

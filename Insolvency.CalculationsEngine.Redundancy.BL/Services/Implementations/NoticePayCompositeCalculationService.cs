@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Insolvency.CalculationsEngine.Redundancy.BL.Serializer.Extensions;
 
 namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 {
@@ -33,6 +34,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             var result = new NoticePayCompositeCalculationResponseDTO();
             var cnpOutput = new CompensatoryNoticePayCalculationResponseDTO();
             var nwnpOutput = new NoticeWorkedNotPaidCompositeOutput();
+            var rp1TraceInfo = new TraceInfo();
+            var rp14TraceInfo = new TraceInfo();
 
             //CNP calculation
             if (data.Cnp != null)
@@ -48,16 +51,19 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
                 foreach (var nwnp in data.Nwnp)
                 {
-                    var res = await _nwnpService.PerformNwnpCalculationAsync(nwnp, options);
+                    var traceDate = new TraceInfoDate();
+                    var res = await _nwnpService.PerformNwnpCalculationAsync(nwnp, options, traceDate);
                     if (res.InputSource == InputSource.Rp1)
                     {
                         //nwnpOutput.nwnpResults.rP1ResultsList.Add(res);
                         nwnpOutput.rp1Results.WeeklyResult.AddRange(res.WeeklyResult);
+                        rp1TraceInfo.Dates.Add(traceDate);
                     }
                     else if (res.InputSource == InputSource.Rp14a)
                     {
                         //nwnpOutput.nwnpResults.rP14aResultsList.Add(res);
                         nwnpOutput.rp14aResults.WeeklyResult.AddRange(res.WeeklyResult);
+                        rp14TraceInfo.Dates.Add(traceDate);
                     }
                 }
 
@@ -83,12 +89,15 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                     nwnpOutput.SelectedInputSource = InputSource.Rp1;
                     nwnpOutput.rp1Results.WeeklyResult.ForEach(x => x.IsSelected = true);
                     nwnpOutput.rp14aResults.WeeklyResult.ForEach(x => x.IsSelected = false);
+                    nwnpOutput.TraceInfo = await rp1TraceInfo.ConvertToJson();
                 }
                 else
                 {
                     nwnpOutput.SelectedInputSource = InputSource.Rp14a;
                     nwnpOutput.rp1Results.WeeklyResult.ForEach(x => x.IsSelected = false);
                     nwnpOutput.rp14aResults.WeeklyResult.ForEach(x => x.IsSelected = true);
+                    nwnpOutput.TraceInfo = await rp14TraceInfo.ConvertToJson();
+
                 }
             }
 
