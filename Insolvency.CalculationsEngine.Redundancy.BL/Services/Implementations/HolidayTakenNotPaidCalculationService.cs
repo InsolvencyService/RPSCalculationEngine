@@ -107,12 +107,12 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                         GrossEntitlementIn4Months = Math.Round(Math.Min(maximumEntitlementInPrefPeriod, employerEntitlementInPrefPeriod), 2),
                     });
                 }
-             
-                traceInfo?.Dates.Add(new TraceInfoDate
-                {
-                    StartDate = firstRequest.UnpaidPeriodFrom,
-                    EndDate = firstRequest.UnpaidPeriodTo
-                }); ;
+                foreach (var req in data.Where(x => x.InputSource == inputSource))
+                    traceInfo?.Dates.Add(new TraceInfoDate
+                    {
+                       StartDate = req.UnpaidPeriodFrom,
+                       EndDate = req.UnpaidPeriodTo
+                   });
             }
             return await Task.FromResult(calculationResult);
         }
