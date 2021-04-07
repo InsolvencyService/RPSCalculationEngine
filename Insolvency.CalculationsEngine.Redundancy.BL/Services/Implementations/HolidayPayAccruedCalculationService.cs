@@ -27,7 +27,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 adjHolYearStart = twelveMonthsPrior;
 
             var holYearEndDate = await data.GetHolidayYearEnd();
-            var statMaxWeeklyPay = ConfigValueLookupHelper.GetStatutoryMax(options, data.DismissalDate);
+            var statMaxWeeklyPay = ConfigValueLookupHelper.GetStatutoryMax(options, data.InsolvencyDate);
 
             // Calculate totals for holiday pay accrued
             int totalBusinessDaysInClaim = await data.HolidayYearStart.GetNumBusinessDaysInRange(holYearEndDate, shiftPattern);

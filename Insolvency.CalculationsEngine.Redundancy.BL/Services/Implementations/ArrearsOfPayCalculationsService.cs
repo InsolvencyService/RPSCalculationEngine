@@ -33,7 +33,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             var weeklyresult = new List<ArrearsOfPayWeeklyResult>();
             int weekNumber = 1;
 
-            var statutoryMax = ConfigValueLookupHelper.GetStatutoryMax(options, data.DismissalDate);
+            var statutoryMax = ConfigValueLookupHelper.GetStatutoryMax(options, data.InsolvencyDate);
 
             var relevantNoticeDate = await data.DateNoticeGiven.GetRelevantNoticeDate(data.DismissalDate);
             var noticeEntitlementWeeks = await data.EmploymentStartDate.GetNoticeEntitlementWeeks(relevantNoticeDate);    //not adjusted start date      
