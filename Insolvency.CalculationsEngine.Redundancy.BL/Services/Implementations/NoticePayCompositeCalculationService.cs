@@ -58,12 +58,18 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                         //nwnpOutput.nwnpResults.rP1ResultsList.Add(res);
                         nwnpOutput.rp1Results.WeeklyResult.AddRange(res.WeeklyResult);
                         rp1TraceInfo.Dates.Add(traceDate);
+                        rp1TraceInfo.NumberOfDays = 0.00m;
+                        foreach (var week in res.WeeklyResult)
+                            rp1TraceInfo.NumberOfDays += week.EmploymentDays;
                     }
                     else if (res.InputSource == InputSource.Rp14a)
                     {
                         //nwnpOutput.nwnpResults.rP14aResultsList.Add(res);
                         nwnpOutput.rp14aResults.WeeklyResult.AddRange(res.WeeklyResult);
                         rp14TraceInfo.Dates.Add(traceDate);
+                        rp14TraceInfo.NumberOfDays = 0.00m;
+                        foreach (var week in res.WeeklyResult)
+                            rp14TraceInfo.NumberOfDays += week.EmploymentDays;
                     }
                 }
 

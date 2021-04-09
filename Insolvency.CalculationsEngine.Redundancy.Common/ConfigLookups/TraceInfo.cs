@@ -14,6 +14,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
 
         [JsonProperty("dates")]
         public IList<TraceInfoDate> Dates { get; set; }
-     
+
+        [JsonProperty("NumberOfDays")]
+        public Decimal NumberOfDays { get; set; }
+
     }
 }
