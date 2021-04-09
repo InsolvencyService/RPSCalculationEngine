@@ -93,6 +93,11 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 ArrearsOfPayTestsDataGenerator.GetRequestWithInvalidPayDay(),
                 "'Pay day' is not valid correct values are [0 = Sunday, 1 = Mon, 2 = Tues, 3 = Wed, 4 = Thurs, 5 = Fri, 6 = Sat]"
             };
+
+            yield return new object[] {
+                ArrearsOfPayTestsDataGenerator.GetRequestWithNoWorkingDaysInClaim(),
+                "No Working Days in Claim"
+            };
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

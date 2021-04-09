@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
 using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.APPA;
+using Insolvency.CalculationsEngine.Redundancy.Common.Extensions;
+using System;
 
 namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares.Validators
 {
@@ -58,6 +60,32 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
             RuleFor(req => req.PayDay).Must(CommonValidation.BeValidPayDay)
                 .WithMessage(
                     $"'Pay day' is not valid correct values are [0 = Sunday, 1 = Mon, 2 = Tues, 3 = Wed, 4 = Thurs, 5 = Fri, 6 = Sat]");
+
+            RuleFor(req => req)
+            .Must(WorkingDaysInClaimPresent)
+            .WithMessage($"No Working Days in Claim");
+        }
+
+        private bool WorkingDaysInClaimPresent(ArrearsOfPayCalculationRequestModel appa)
+        {
+            int numDays = 0;
+            DateTime start = appa.UnpaidPeriodFrom;
+            DateTime end = appa.UnpaidPeriodTo;
+
+            if (end >= start)
+            {
+                if (appa.ShiftPattern != null)
+                {
+                    string weekDayNames = appa.ShiftPattern.GetShiftDayNames().Result;
+
+                    for (var date = start; date <= end; date = date.AddDays(1))
+                    {
+                        if (weekDayNames.Contains(date.DayOfWeek.ToString()))
+                            numDays++;
+                    }
+                }
+            }
+            return numDays != 0;
         }
     }
 }
