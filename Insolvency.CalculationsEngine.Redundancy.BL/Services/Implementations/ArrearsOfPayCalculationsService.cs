@@ -32,6 +32,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             var calculationResult = new ArrearsOfPayResponseDTO();
             var weeklyresult = new List<ArrearsOfPayWeeklyResult>();
             int weekNumber = 1;
+            var totalDays = 0.00m;
 
             var statutoryMax = ConfigValueLookupHelper.GetStatutoryMax(options, data.DismissalDate);
 
@@ -140,6 +141,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                     EmployerEntitlementIn4MonthPeriod = employerEntitlementInPrefPeriod,
                     GrossEntitlementIn4Months = Math.Min(maximumEntitlementInPrefPeriod, employerEntitlementInPrefPeriod)
                 });
+                totalDays += employmentDays + employmentDaysInPrefPeriodPostDNG;
             } //outter loop for paydays collection
 
             calculationResult.InputSource = data.InputSource;
@@ -152,6 +154,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 StartDate = data.UnpaidPeriodFrom,
                 EndDate = data.UnpaidPeriodTo
             });
+            if (traceInfo != null)
+                traceInfo.NumberOfDays = totalDays;
 
             return await Task.FromResult(calculationResult);
         }

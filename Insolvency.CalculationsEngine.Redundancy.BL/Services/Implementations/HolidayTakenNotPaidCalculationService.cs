@@ -65,6 +65,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
                 // generate the output weeks
                 int weekNum = 1;
+                decimal total_days = 0.00m;
 
                 foreach (var week in weeks.OrderBy(x => x.PayDate).ThenBy(x => x.IsSelected))
                 {
@@ -88,6 +89,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                     grossEntitlement = Math.Round(grossEntitlement, 2);
                     var netLiability = await grossEntitlement.GetNetLiability(taxDeducated, niDeducted);
 
+                    total_days += week.EmploymentDays;
                     calculationResult.WeeklyResult.Add(new HolidayTakenNotPaidWeeklyResult()
                     {
                         WeekNumber = weekNum++,
@@ -111,8 +113,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                     traceInfo?.Dates.Add(new TraceInfoDate
                     {
                        StartDate = req.UnpaidPeriodFrom,
-                       EndDate = req.UnpaidPeriodTo
-                   });
+                       EndDate = req.UnpaidPeriodTo,
+                    });
+                if (traceInfo != null)
+                    traceInfo.NumberOfDays = total_days;
             }
             return await Task.FromResult(calculationResult);
         }
