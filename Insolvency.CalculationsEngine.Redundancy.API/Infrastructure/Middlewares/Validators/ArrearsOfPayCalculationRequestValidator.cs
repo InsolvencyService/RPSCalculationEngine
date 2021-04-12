@@ -68,7 +68,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
 
         private bool WorkingDaysInClaimPresent(ArrearsOfPayCalculationRequestModel appa)
         {
-            int numDays = 0;
             DateTime start = appa.UnpaidPeriodFrom;
             DateTime end = appa.UnpaidPeriodTo;
 
@@ -81,11 +80,11 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                     for (var date = start; date <= end; date = date.AddDays(1))
                     {
                         if (weekDayNames.Contains(date.DayOfWeek.ToString()))
-                            numDays++;
+                            return true;
                     }
                 }
             }
-            return numDays != 0;
+            return false;
         }
     }
 }
