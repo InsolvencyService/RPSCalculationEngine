@@ -51,8 +51,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
             yield return new object[] {
                 new HolidayCalculationRequestModel
                 {
-                    Rp14aNotRequired = true,
-                    Rp1NotRequired = false,
                     Hpa = new HolidayPayAccruedCalculationRequestModel
                     {
                         InsolvencyDate = new DateTime(2017, 03, 22),
@@ -89,7 +87,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 new HolidayCalculationRequestModel
                 {
                     Rp14aNotRequired = false,
-                    Rp1NotRequired = true,
                     Hpa = new HolidayPayAccruedCalculationRequestModel
                     {
                         InsolvencyDate = new DateTime(2017, 03, 22),
