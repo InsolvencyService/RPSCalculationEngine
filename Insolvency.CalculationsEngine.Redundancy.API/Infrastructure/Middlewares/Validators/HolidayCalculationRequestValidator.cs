@@ -69,12 +69,16 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
 
         private bool RP1DataPresent(HolidayCalculationRequestModel data)
         {
-            return data.Rp14aNotRequired ? data.Htnp.Count(x => x.InputSource == InputSource.Rp1) > 0 : true;
+            return data.Htnp.Count(x => x.InputSource == InputSource.Rp14a) == 0 ||
+                   data.Htnp.Count(x => x.InputSource == InputSource.Rp1) > 0 ||
+                   data.Rp1NotRequired;
         }
 
         private bool RP14aDataPresent(HolidayCalculationRequestModel data)
         {
-            return data.Rp1NotRequired ? data.Htnp.Count(x => x.InputSource == InputSource.Rp14a) > 0 : true;
+            return data.Htnp.Count(x => x.InputSource == InputSource.Rp1) == 0 ||
+                   data.Htnp.Count(x => x.InputSource == InputSource.Rp14a) > 0 ||
+                   data.Rp14aNotRequired;
         }
     }
 }
