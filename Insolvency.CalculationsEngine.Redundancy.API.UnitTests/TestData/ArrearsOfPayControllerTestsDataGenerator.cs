@@ -289,5 +289,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
             request.PayDay = 9;
             return request;
         }
+
+        public static ArrearsOfPayCalculationRequestModel GetRequestWithNoWorkingDaysInClaim()
+        {
+            var request = GetValidRequestData();
+            request.UnpaidPeriodFrom = new DateTime(2021, 04, 19);
+            request.UnpaidPeriodTo = new DateTime(2021, 04, 19);
+            request.ShiftPattern = new List<string> { "0", "3", "4", "5" };
+            return request;
+        }
     }
 }
