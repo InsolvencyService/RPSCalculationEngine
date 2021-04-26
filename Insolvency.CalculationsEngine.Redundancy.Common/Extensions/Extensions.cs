@@ -175,7 +175,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.Extensions
             var intersectStart = (startDate1.Date > startDate2.Date) ? startDate1.Date : startDate2.Date;
             var intersectEnd = (endDate1.Date < endDate2.Date) ? endDate1.Date : endDate2.Date;
 
-            var endLimit = new[] {dateNoticeGiven, insolvencyDate}.OrderBy(x => x).First();
+            var templimit = new[] { endDate2, insolvencyDate }.OrderBy(x => x).Last();
+            var endLimit = new[] {dateNoticeGiven, templimit }.OrderBy(x => x).First();
             if (endLimit.Date > intersectStart.Date && endLimit < intersectEnd.Date)
                 intersectEnd = endLimit.Date;
 
