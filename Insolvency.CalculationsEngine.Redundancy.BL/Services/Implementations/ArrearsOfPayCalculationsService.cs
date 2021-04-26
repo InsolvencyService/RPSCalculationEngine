@@ -54,7 +54,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
             DateTime prefPeriodStartDate = data.InsolvencyDate.Date.AddMonths(-4);
             prefPeriodStartDate = (prefPeriodStartDate <= data.EmploymentStartDate.Date) ? data.EmploymentStartDate.Date : prefPeriodStartDate.Date;
-            DateTime prefPeriodEndDate = (data.DismissalDate < data.InsolvencyDate) ? data.DismissalDate.Date : data.InsolvencyDate.Date;
+            DateTime prefPeriodEndDate = (data.DismissalDate > data.InsolvencyDate) ? data.DismissalDate.Date : data.InsolvencyDate.Date;
 
             //step through paydaysCollection
             foreach (var payWeekEnd in payDays)
