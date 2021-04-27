@@ -506,7 +506,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                     new ArrearsOfPayWeeklyResult(2, new DateTime(2019, 3, 9), 330.09M, 508M, 330.09M, 330.09M,true, 66.02M, 17.65M, 246.42M, 7, 5, 508M, 330.09M, 330.09M),
                     new ArrearsOfPayWeeklyResult(3, new DateTime(2019, 3, 16), 330.09M, 217.71M, 198.05M, 198.05M,true, 39.61M, 1.81M, 156.63M, 3, 5, 217.71M, 198.05M, 198.05M),
                     new ArrearsOfPayWeeklyResult(4, new DateTime(2019, 3, 23), 330.09M, 508M, 132.03M, 132.03M,true, 26.41M, 0M, 105.62M, 7, 5, 508M, 132.03M, 132.03M),
-                    new ArrearsOfPayWeeklyResult(5, new DateTime(2019, 3, 30), 330.09M, 362.86M, 264.07M, 264.07M,true, 52.81M, 9.73M, 201.53M, 5, 4, 362.86M, 264.07M, 264.07M),
+                    new ArrearsOfPayWeeklyResult(5, new DateTime(2019, 3, 30), 330.09M, 362.86M, 264.07M, 264.07M,true, 52.81M, 9.73M, 201.53M, 5, 4, 508.00M, 264.07M, 264.07M),
                 });
 
             var actualResult = await _arrearsOfPayCalculationsService.PerformCalculationAsync(aopRequest, _options);
@@ -653,7 +653,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                     new ArrearsOfPayWeeklyResult(4, new DateTime(2017, 2, 11), 781.25M, 479M, 781.25M, 479M, true, 95.80M, 35.52M, 347.68M, 7, 5, 479M, 781.25M, 479M),
                     new ArrearsOfPayWeeklyResult(5, new DateTime(2017, 2, 18), 781.25M, 479M, 781.25M, 479M, true, 95.80M, 35.52M, 347.68M, 7, 5, 479M, 781.25M, 479M),
                     new ArrearsOfPayWeeklyResult(6, new DateTime(2017, 2, 25), 781.25M, 479M, 781.25M, 479M, true, 95.80M, 35.52M, 347.68M, 7, 5, 479M, 781.25M, 479M),
-                    new ArrearsOfPayWeeklyResult(7, new DateTime(2017, 3, 4), 781.25M, 205.29M, 312.50M, 205.29M, true, 41.06M, 2.67M, 161.56M, 3, 2, 205.29M, 312.50M, 205.29M),
+                    new ArrearsOfPayWeeklyResult(7, new DateTime(2017, 3, 4), 781.25M, 205.29M, 312.50M, 205.29M, true, 41.06M, 2.67M, 161.56M, 3, 2, 273.71M, 312.50M, 273.71M),
                 });
 
             var actualResult = await _arrearsOfPayCalculationsService.PerformCalculationAsync(aopRequest, _options);

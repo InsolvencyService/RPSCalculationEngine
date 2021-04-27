@@ -802,7 +802,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.ExtensionsTe
             var result = await startDate1.GetNumDaysInIntersectionOfTwoRangesWithLimit(endDate1, startDate2, endDate2, dateNoticeGiven, insolvencyDate);
 
             // Assert
-            result.Should().Be(2);
+            result.Should().Be(3);
         }
 
         [Fact]
