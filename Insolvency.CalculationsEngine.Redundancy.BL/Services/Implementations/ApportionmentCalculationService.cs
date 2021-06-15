@@ -24,8 +24,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 apportionmentPercentage = (data.TotalClaimedInFourMonth <= preferentialLimit) ? 1m :
                     data.GrossPaidInFourMonth / data.TotalClaimedInFourMonth;
 
-                preferentialClaim = (data.TotalClaimedInFourMonth > preferentialLimit
-                    ? Math.Min(data.GrossPaidInFourMonth, preferentialLimit) * apportionmentPercentage
+                preferentialClaim = (data.TotalClaimedInFourMonth > preferentialLimit 
+                    ? preferentialLimit * apportionmentPercentage 
                     : data.GrossPaidInFourMonth * apportionmentPercentage);
             }
             apportionmentPercentage = Math.Round(apportionmentPercentage * 100, 4);
