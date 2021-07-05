@@ -7,13 +7,13 @@ using Insolvency.CalculationsEngine.Redundancy.BL.Services.Interfaces;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Internal;
 using Microsoft.Extensions.Options;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
+//using Microsoft.Extensions.Logging.Internal;
 
 namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTests
 {
@@ -28,7 +28,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             _mockLogger = new Mock<ILogger<HolidayController>>();
             _mockLogger.Setup(x => x.Log(It.IsAny<LogLevel>(),
                 It.IsAny<EventId>(),
-                It.IsAny<FormattedLogValues>(),
+                It.IsAny<String>(),
                 It.IsAny<Exception>(),
                 It.IsAny<Func<object, Exception, string>>()));
             var testConfigLookupDataHelper = new TestConfigLookupDataHelper();

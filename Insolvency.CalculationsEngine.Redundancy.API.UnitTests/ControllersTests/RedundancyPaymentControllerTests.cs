@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Insolvency.CalculationsEngine.Redundancy.API.Controllers;
@@ -7,13 +6,12 @@ using Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData;
 using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.RedundancyPayment;
 using Insolvency.CalculationsEngine.Redundancy.BL.Services.Interfaces;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
-using Insolvency.CalculationsEngine.Redundancy.Common.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Internal;
 using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
+//using Microsoft.Extensions.Logging.Internal;
 
 namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTests
 {
@@ -29,7 +27,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             _mockLogger = new Mock<ILogger<RedundancyPaymentController>>();
             _mockLogger.Setup(x => x.Log(It.IsAny<LogLevel>(),
                 It.IsAny<EventId>(),
-                It.IsAny<FormattedLogValues>(),
+                It.IsAny<String>(),
                 It.IsAny<Exception>(),
                 It.IsAny<Func<object, Exception, string>>()));
             _redundancyPaymentControllerTestDataGenerator = new RedundancyPaymentTestsDataGenerator();
