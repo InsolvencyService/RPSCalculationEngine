@@ -77,14 +77,25 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var responseDto = okObjectResult.Value.Should()
                 .BeOfType<RedundancyPaymentResponseDto>().Subject;
 
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Information,
-                It.IsAny<EventId>(),
-                It.Is<object>(v =>
-                    v.ToString().Contains("Calculation performed successfully for the request data provided")),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+            //_mockLogger.Verify(x => x.Log(
+            //    LogLevel.Information,
+            //    It.IsAny<EventId>(),
+            //    It.Is<object>(v =>
+            //        v.ToString().Contains("Calculation performed successfully for the request data provided")),
+            //    null,
+            //    It.IsAny<Func<object, Exception, string>>()
+            //));
+
+            _mockLogger.Verify(
+                m => m.Log<It.IsAnyType>(
+                    LogLevel.Information,
+                    It.IsAny<EventId>(),
+                    (It.IsAnyType)It.Is<object>(v =>
+                            v.ToString().Contains("Calculation performed successfully for the request data provided")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>())
+                    );
+
         }
 
         [Fact]
@@ -111,13 +122,23 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var result = await redundancyPayController.PostAsync(requestData);
             var badRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
             var statusCode = badRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Error,
-                It.IsAny<EventId>(),
-                It.Is<object>(v => v.ToString().Contains("Years of service cannot be less than 2 years")),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+            //_mockLogger.Verify(x => x.Log(
+            //    LogLevel.Error,
+            //    It.IsAny<EventId>(),
+            //    It.Is<object>(v => v.ToString().Contains("Years of service cannot be less than 2 years")),
+            //    null,
+            //    It.IsAny<Func<object, Exception, string>>()
+            //));
+
+            _mockLogger.Verify(
+                m => m.Log<It.IsAnyType>(
+                    LogLevel.Error,
+                    It.IsAny<EventId>(),
+                    (It.IsAnyType)It.Is<object>(v =>
+                            v.ToString().Contains("Years of service cannot be less than 2 years")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>())
+                    );
         }
 
         [Fact]
@@ -134,13 +155,23 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var result = await redundancyPayController.PostAsync(requestData);
             var badRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
             var statusCode = badRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Error,
-                It.IsAny<EventId>(),
-                It.Is<object>(v => v.ToString().Contains("Request model not valid")),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+            //_mockLogger.Verify(x => x.Log(
+            //    LogLevel.Error,
+            //    It.IsAny<EventId>(),
+            //    It.Is<object>(v => v.ToString().Contains("Request model not valid")),
+            //    null,
+            //    It.IsAny<Func<object, Exception, string>>()
+            //));
+
+            _mockLogger.Verify(
+                m => m.Log<It.IsAnyType>(
+                    LogLevel.Error,
+                    It.IsAny<EventId>(),
+                    (It.IsAnyType)It.Is<object>(v =>
+                            v.ToString().Contains("Request model not valid")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>()),
+                Times.Once);
         }
 
         [Fact]
@@ -157,13 +188,24 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var result = await redundancyPayController.PostAsync(requestData);
             var badRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
             var statusCode = badRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Error,
-                It.IsAny<EventId>(),
-                It.Is<object>(v => v.ToString().Contains("Weekly wage is invalid; value must be greater than zero")),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+            //_mockLogger.Verify(x => x.Log(
+            //    LogLevel.Error,
+            //    It.IsAny<EventId>(),
+            //    It.Is<object>(v => v.ToString().Contains("Weekly wage is invalid; value must be greater than zero")),
+            //    null,
+            //    It.IsAny<Func<object, Exception, string>>()
+            //));
+
+            _mockLogger.Verify(
+                m => m.Log<It.IsAnyType>(
+                    LogLevel.Error,
+                    It.IsAny<EventId>(),
+                    (It.IsAnyType)It.Is<object>(v =>
+                            v.ToString().Contains("Weekly wage is invalid; value must be greater than zero")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>())
+                );
+
         }
 
         [Fact]
@@ -180,13 +222,23 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var result = await redundancyPayController.PostAsync(requestData);
             var badRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
             var statusCode = badRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Error,
-                It.IsAny<EventId>(),
-                It.Is<object>(v => v.ToString().Contains("Request Data is null and could not be parsed")),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+            //_mockLogger.Verify(x => x.Log(
+            //    LogLevel.Error,
+            //    It.IsAny<EventId>(),
+            //    It.Is<object>(v => v.ToString().Contains("Request Data is null and could not be parsed")),
+            //    null,
+            //    It.IsAny<Func<object, Exception, string>>()
+            //));
+
+            _mockLogger.Verify(
+                m => m.Log<It.IsAnyType>(
+                    LogLevel.Error,
+                    It.IsAny<EventId>(),
+                    (It.IsAnyType)It.Is<object>(v =>
+                            v.ToString().Contains("Request Data is null and could not be parsed")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>())
+                );
         }
 
         [Fact]
@@ -213,13 +265,24 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var result = await redundancyPayController.PostAsync(requestData);
             var badRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
             var statusCode = badRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Error,
-                It.IsAny<EventId>(),
-                It.Is<object>(v => v.ToString().Contains("Claim Receipt Date is not provided or it is an invalid date")),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+            //_mockLogger.Verify(x => x.Log(
+            //    LogLevel.Error,
+            //    It.IsAny<EventId>(),
+            //    It.Is<object>(v => v.ToString().Contains("Claim Receipt Date is not provided or it is an invalid date")),
+            //    null,
+            //    It.IsAny<Func<object, Exception, string>>()
+            //));
+
+            _mockLogger.Verify(
+                m => m.Log<It.IsAnyType>(
+                    LogLevel.Error,
+                    It.IsAny<EventId>(),
+                    (It.IsAnyType)It.Is<object>(v =>
+                            v.ToString().Contains("Claim Receipt Date is not provided or it is an invalid date")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>())
+                    );
+
         }
 
         [Fact]
@@ -247,13 +310,24 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var result = await redundancyPayController.PostAsync(requestData);
             var badRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
             var statusCode = badRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Error,
-                It.IsAny<EventId>(),
-                It.Is<object>(v => v.ToString().Contains("Claim Receipt Date must be within 6 months of the dismissal date")),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+            //_mockLogger.Verify(x => x.Log(
+            //    LogLevel.Error,
+            //    It.IsAny<EventId>(),
+            //    It.Is<object>(v => v.ToString().Contains("Claim Receipt Date must be within 6 months of the dismissal date")),
+            //    null,
+            //    It.IsAny<Func<object, Exception, string>>()
+            //));
+
+            _mockLogger.Verify(
+                m => m.Log<It.IsAnyType>(
+                    LogLevel.Error,
+                    It.IsAny<EventId>(),
+                    (It.IsAnyType)It.Is<object>(v =>
+                            v.ToString().Contains("Claim Receipt Date must be within 6 months of the dismissal date")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>())
+                     );
         }
+
     }
 }

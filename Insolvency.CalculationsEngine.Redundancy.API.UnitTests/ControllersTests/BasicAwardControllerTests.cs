@@ -86,13 +86,22 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var badRequestObjectRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
             badRequestObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
 
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Error,
-                It.IsAny<EventId>(),
-                It.Is<object>(v => v.ToString().Contains(expectedErrorMessage)), 
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+            //_mockLogger.Verify(x => x.Log(
+            //    LogLevel.Error,
+            //    It.IsAny<EventId>(),
+            //    It.Is<object>(v => v.ToString().Contains(expectedErrorMessage)), 
+            //    null,
+            //    It.IsAny<Func<object, Exception, string>>()
+            //));
+
+            _mockLogger.Verify(
+               m => m.Log<It.IsAnyType>(
+                   LogLevel.Error,
+                   It.IsAny<EventId>(),
+                   (It.IsAnyType)It.Is<object>(v =>
+                           v.ToString().Contains(expectedErrorMessage)),
+                   null,
+                   It.IsAny<Func<It.IsAnyType, Exception, string>>()));
         }
     }
 }

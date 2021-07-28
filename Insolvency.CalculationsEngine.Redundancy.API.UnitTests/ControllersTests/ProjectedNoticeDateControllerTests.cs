@@ -71,14 +71,24 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var responseDto = okObjectResult.Value.Should().BeOfType<ProjectedNoticeDateResponseDTO>().Subject;
             responseDto.ProjectedNoticeDate.Should().Be(new DateTime(2018, 01, 08));
 
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Information,
-                It.IsAny<EventId>(),
-                It.Is<object>(v =>
-                    v.ToString().Contains("Calculation performed successfully for the request data provided")),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+            //_mockLogger.Verify(x => x.Log(
+            //    LogLevel.Information,
+            //    It.IsAny<EventId>(),
+            //    It.Is<object>(v =>
+            //        v.ToString().Contains("Calculation performed successfully for the request data provided")),
+            //    null,
+            //    It.IsAny<Func<object, Exception, string>>()
+            //));
+
+            _mockLogger.Verify(
+                m => m.Log<It.IsAnyType>(
+                    LogLevel.Information,
+                    It.IsAny<EventId>(),
+                    (It.IsAnyType)It.Is<object>(v =>
+                            v.ToString().Contains("Calculation performed successfully for the request data provided")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>())
+                    );
         }
 
         [Fact]
@@ -94,14 +104,24 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             //Assert
             var badRequestObjectRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
             badRequestObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Error,
-                It.IsAny<EventId>(),
-                It.Is<object>(v =>
-                    v.ToString().Contains("Bad payload")),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+            //_mockLogger.Verify(x => x.Log(
+            //    LogLevel.Error,
+            //    It.IsAny<EventId>(),
+            //    It.Is<object>(v =>
+            //        v.ToString().Contains("Bad payload")),
+            //    null,
+            //    It.IsAny<Func<object, Exception, string>>()
+            //));
+
+            _mockLogger.Verify(
+                m => m.Log<It.IsAnyType>(
+                    LogLevel.Error,
+                    It.IsAny<EventId>(),
+                    (It.IsAnyType)It.Is<object>(v =>
+                            v.ToString().Contains("Bad payload")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>()),
+                Times.Once);
         }
 
         [Fact]
@@ -118,13 +138,23 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             //Assert
             var badRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
             var statusCode = badRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Error,
-                It.IsAny<EventId>(),
-                It.Is<object>(v => v.ToString().Contains("'Employment Start Date' is not provided or it is an invalid date")),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+            //_mockLogger.Verify(x => x.Log(
+            //    LogLevel.Error,
+            //    It.IsAny<EventId>(),
+            //    It.Is<object>(v => v.ToString().Contains("'Employment Start Date' is not provided or it is an invalid date")),
+            //    null,
+            //    It.IsAny<Func<object, Exception, string>>()
+            //));
+
+            _mockLogger.Verify(
+                m => m.Log<It.IsAnyType>(
+                    LogLevel.Error,
+                    It.IsAny<EventId>(),
+                    (It.IsAnyType)It.Is<object>(v =>
+                            v.ToString().Contains("'Employment Start Date' is not provided or it is an invalid date")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>())
+                    );
         }
 
         [Fact]
@@ -141,13 +171,24 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             //Assert
             var badRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
             var statusCode = badRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Error,
-                It.IsAny<EventId>(),
-                It.Is<object>(v => v.ToString().Contains("'Dismissal Date' can not be before the Employment Start Date")),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+            //_mockLogger.Verify(x => x.Log(
+            //    LogLevel.Error,
+            //    It.IsAny<EventId>(),
+            //    It.Is<object>(v => v.ToString().Contains("'Dismissal Date' can not be before the Employment Start Date")),
+            //    null,
+            //    It.IsAny<Func<object, Exception, string>>()
+            //));
+
+            _mockLogger.Verify(
+                m => m.Log<It.IsAnyType>(
+                    LogLevel.Error,
+                    It.IsAny<EventId>(),
+                    (It.IsAnyType)It.Is<object>(v =>
+                            v.ToString().Contains("'Dismissal Date' can not be before the Employment Start Date")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>()),
+                Times.Once);
+
         }
     }
 }
