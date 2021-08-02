@@ -7,13 +7,13 @@ using Insolvency.CalculationsEngine.Redundancy.BL.Services.Interfaces;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Internal;
 using Microsoft.Extensions.Options;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
+//using Microsoft.Extensions.Logging.Internal;
 
 namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTests
 {
@@ -29,7 +29,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
 
             _mockLogger = new Mock<ILogger<NoticeController>>();
             _mockLogger.Setup(x => x.Log(It.IsAny<LogLevel>(), It.IsAny<EventId>(),
-                It.IsAny<FormattedLogValues>(),
+                It.IsAny<String>(),
                 It.IsAny<Exception>(),
                 It.IsAny<Func<object, Exception, string>>()));
             var testConfigLookupDataHelper = new TestConfigLookupDataHelper();
@@ -89,13 +89,13 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var badRequestObjectRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
             badRequestObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
 
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Error,
-                It.IsAny<EventId>(),
-                It.Is<object>(v => v.ToString().Contains(expectedErrorMessage)),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+            _mockLogger.Verify(
+                 m => m.Log<It.IsAnyType>(
+                 LogLevel.Error,
+                 It.IsAny<EventId>(),
+                 (It.IsAnyType)It.Is<object>(v => v.ToString().Contains(expectedErrorMessage)),
+                  null,
+                  It.IsAny<Func<It.IsAnyType, Exception, string>>()));
         }
 
         [Theory]
@@ -118,14 +118,13 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var badRequestObjectRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
             badRequestObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
 
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Error,
-                It.IsAny<EventId>(),
-                It.Is<object>(v =>
-                    v.ToString().Contains(expectedErrorMessage)),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+            _mockLogger.Verify(
+                 m => m.Log<It.IsAnyType>(
+                 LogLevel.Error,
+                 It.IsAny<EventId>(),
+                 (It.IsAnyType)It.Is<object>(v => v.ToString().Contains(expectedErrorMessage)),
+                  null,
+                  It.IsAny<Func<It.IsAnyType, Exception, string>>()));
         }
 
         [Theory]
@@ -148,15 +147,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             //Assert
             var badRequestObjectRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
             badRequestObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Error,
-                It.IsAny<EventId>(),
-                It.Is<object>(v =>
-                    v.ToString().Contains(expectedErrorMessage)),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
-            
+
+            _mockLogger.Verify(
+                 m => m.Log<It.IsAnyType>(
+                 LogLevel.Error,
+                 It.IsAny<EventId>(),
+                 (It.IsAnyType)It.Is<object>(v => v.ToString().Contains(expectedErrorMessage)),
+                  null,
+                  It.IsAny<Func<It.IsAnyType, Exception, string>>()));
         }
 
         [Fact]
@@ -176,14 +174,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
 
             //Assert
             var okRequestObjectRequest = result.Should().BeOfType<OkObjectResult>().Subject;
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Information,
-                It.IsAny<EventId>(),
-                It.Is<object>(v =>
-                    v.ToString().Contains("Calculation performed successfully for the request data provided")),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+
+            _mockLogger.Verify(
+                 m => m.Log<It.IsAnyType>(
+                 LogLevel.Information,
+                 It.IsAny<EventId>(),
+                 (It.IsAnyType)It.Is<object>(v => v.ToString().Contains("Calculation performed successfully for the request data provided")),
+                  null,
+                  It.IsAny<Func<It.IsAnyType, Exception, string>>()));
             okRequestObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.OK);
         }
 
@@ -211,14 +209,17 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
 
             //Assert
             var okRequestObjectRequest = result.Should().BeOfType<OkObjectResult>().Subject;
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Information,
-                It.IsAny<EventId>(),
-                It.Is<object>(v =>
-                    v.ToString().Contains("Calculation performed successfully for the request data provided")),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+
+            _mockLogger.Verify(
+                m => m.Log<It.IsAnyType>(
+                    LogLevel.Information,
+                    It.IsAny<EventId>(),
+                    (It.IsAnyType)It.Is<object>(v =>
+                            v.ToString().Contains("Calculation performed successfully for the request data provided")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>())
+                    );
+
             okRequestObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.OK);
         }
 

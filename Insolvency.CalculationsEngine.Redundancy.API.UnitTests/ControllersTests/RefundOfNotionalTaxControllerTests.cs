@@ -1,19 +1,17 @@
 ﻿using FluentAssertions;
 using Insolvency.CalculationsEngine.Redundancy.API.Controllers;
 using Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData;
-using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.RefundOfNotionalTax;
-using Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations;
 using Insolvency.CalculationsEngine.Redundancy.BL.Services.Interfaces;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Internal;
 using Microsoft.Extensions.Options;
 using Moq;
 using System;
 using System.Net;
 using System.Threading.Tasks;
 using Xunit;
+//using Microsoft.Extensions.Logging.Internal;
 
 namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTests
 {
@@ -29,7 +27,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             _mockLogger = new Mock<ILogger<RefundOfNotionalTaxController>>();
             _mockLogger.Setup(x => x.Log(It.IsAny<LogLevel>(),
                 It.IsAny<EventId>(),
-                It.IsAny<FormattedLogValues>(),
+                It.IsAny<String>(),
                 It.IsAny<Exception>(),
                 It.IsAny<Func<object, Exception, string>>()));
             _refundOfNotionalTaxControllerTestDataGenerator = new RefundOfNotionalTaxTestsDataGenerator();
@@ -75,14 +73,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var okObjectResult = result.Should().BeOfType<OkObjectResult>().Subject;
             var statusCode = okObjectResult.StatusCode.Should().Be((int)HttpStatusCode.OK);
 
-            _mockLogger.Verify(x => x.Log(
+            _mockLogger.Verify(
+            m => m.Log<It.IsAnyType>(
                 LogLevel.Information,
                 It.IsAny<EventId>(),
-                It.Is<object>(v =>
-                    v.ToString().Contains("Calculation performed successfully for the request data provided")),
+                (It.IsAnyType)It.Is<object>(v =>
+                        v.ToString().Contains("Calculation performed successfully for the request data provided")),
                 null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+                It.IsAny<Func<It.IsAnyType, Exception, string>>()));
         }
 
         [Fact]
@@ -102,14 +100,17 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
                 await refundOfNotionalTaxController.PostAsync(requestData);
             var badRequestObjectRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
             badRequestObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
-            _mockLogger.Verify(x => x.Log(
-                LogLevel.Error,
-                It.IsAny<EventId>(),
-                It.Is<object>(v =>
-                    v.ToString().Contains("Bad payload")),
-                null,
-                It.IsAny<Func<object, Exception, string>>()
-            ));
+
+            _mockLogger.Verify(
+                m => m.Log<It.IsAnyType>(
+                    LogLevel.Error,
+                    It.IsAny<EventId>(),
+                    (It.IsAnyType)It.Is<object>(v =>
+                            v.ToString().Contains("Bad payload")),
+                    null,
+                    It.IsAny<Func<It.IsAnyType, Exception, string>>())
+                );
+
         }
     }
 }
