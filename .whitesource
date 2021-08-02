@@ -1,23 +1,8 @@
-
 {
-
- 
-"checkRunSettings": {
-
- 
-"vulnerableCheckRunConclusionLevel": "failure"
-
- 
-},
-
- 
-"issueSettings": {
-
- 
-"minSeverityLevel": "LOW"
-
- 
-}
-
- 
+  "checkRunSettings": {
+    "vulnerableCheckRunConclusionLevel": "failure"
+  },
+  "issueSettings": {
+    "minSeverityLevel": "LOW"
+  }
 }
