@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/dotnet/runtime:5.0-aspnetcore-runtime AS base
+FROM mcr.microsoft.com/dotnet/runtime:5.0 AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-sdk AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY Insolvency.CalculationsEngine.Redundancy.API/Insolvency.CalculationsEngine.Redundancy.API.csproj Insolvency.CalculationsEngine.Redundancy.API/
 COPY Insolvency.CalculationsEngine.Redundancy.BL/Insolvency.CalculationsEngine.Redundancy.BL.csproj Insolvency.CalculationsEngine.Redundancy.BL/
