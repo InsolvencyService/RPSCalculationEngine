@@ -200,6 +200,13 @@
       "NIRate": "0.1325"
     }
   ],
+  "NIUpperRateLookup": [
+    {
+      "StartDate": "1900-01-01",
+      "EndDate": "9999-12-31",
+      "NIRate": "0.02"
+    }
+  ],
   "PrefentialLimitLookup": [
     {
       "StartDate": "1900-01-01",
