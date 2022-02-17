@@ -51,8 +51,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
                 new NIRateLookup
                 {
                     StartDate = new DateTime(1900, 01, 01),
-                    EndDate = new DateTime(9999, 12, 31),
+                    EndDate = new DateTime(2022, 04, 05),
                     NIRate = 0.12m
+                },
+                new NIRateLookup
+                {
+                    StartDate = new DateTime(2022, 04, 06),
+                    EndDate = new DateTime(9999, 12, 31),
+                    NIRate = 0.1325m
                 }
             };
         }
