@@ -60,6 +60,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.TestData
                 yield return new object[] { new DateTime(2015, 10, 23), 0.12m };
                 yield return new object[] { new DateTime(2016, 04, 12), 0.12m };
                 yield return new object[] { new DateTime(2000, 06, 19), 0.12m };
+                yield return new object[] { new DateTime(2021, 04, 06), 0.12m };
+                yield return new object[] { new DateTime(2022, 04, 06), 0.1325m };
             }
 
             IEnumerator IEnumerable.GetEnumerator()
