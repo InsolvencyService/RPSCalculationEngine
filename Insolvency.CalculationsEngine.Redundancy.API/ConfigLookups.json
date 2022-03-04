@@ -107,8 +107,13 @@
     },
     {
       "StartDate": "2021-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2022-04-05",
       "StatMax": "544"
+    },
+    {
+      "StartDate": "2022-04-06",
+      "EndDate": "9999-12-31",
+      "StatMax": "571"
     }
   ],
   "NotionalBenefitsWeeklyRateUnder25": [
@@ -172,8 +177,13 @@
     },
     {
       "StartDate": "2021-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2022-04-05",
       "NIThreshold": "184"
+    },
+    {
+      "StartDate": "2022-04-06",
+      "EndDate": "9999-12-31",
+      "NIThreshold": "190"
     }
   ],
   "NIUpperThresholdLookup": [
