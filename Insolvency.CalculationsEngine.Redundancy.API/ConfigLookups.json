@@ -172,8 +172,13 @@
     },
     {
       "StartDate": "2021-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2022-04-05",
       "NIThreshold": "184"
+    },
+    {
+      "StartDate": "2022-04-06",
+      "EndDate": "9999-12-31",
+      "NIThreshold": "190"
     }
   ],
   "NIUpperThresholdLookup": [
