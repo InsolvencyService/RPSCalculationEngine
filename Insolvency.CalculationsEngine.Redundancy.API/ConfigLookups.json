@@ -107,11 +107,11 @@
     },
     {
       "StartDate": "2021-04-06",
-      "EndDate": "2022-04-05",
+      "EndDate": "2022-03-08",
       "StatMax": "544"
     },
     {
-      "StartDate": "2022-04-06",
+      "StartDate": "2022-03-09",
       "EndDate": "9999-12-31",
       "StatMax": "571"
     }
@@ -176,12 +176,12 @@
       "NIThreshold": "183"
     },
     {
-      "StartDate": "2021-04-06",
-      "EndDate": "2022-04-05",
+      "StartDate": "2021-04-05",
+      "EndDate": "2022-03-08",
       "NIThreshold": "184"
     },
     {
-      "StartDate": "2022-04-06",
+      "StartDate": "2022-03-09",
       "EndDate": "9999-12-31",
       "NIThreshold": "190"
     }
@@ -201,11 +201,11 @@
   "NIRateLookup": [
     {
       "StartDate": "1900-01-01",
-      "EndDate": "2022-04-05",
+      "EndDate": "2022-03-08",
       "NIRate": "0.12"
     },
     {
-      "StartDate": "2022-04-06",
+      "StartDate": "2022-03-09",
       "EndDate": "9999-12-31",
       "NIRate": "0.1325"
     }
