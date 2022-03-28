@@ -129,8 +129,13 @@
     },
     {
       "StartDate": "2021-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2022-03-08",
       "Amount": "59.20"
+    },
+    {
+      "StartDate": "2022-03-09",
+      "EndDate": "9999-12-31",
+      "Amount": "61.05"
     }
   ],
   "NotionalBenefitsWeeklyRate25AndOver": [
@@ -146,8 +151,13 @@
     },
     {
       "StartDate": "2021-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2022-03-08",
       "Amount": "74.70"
+    },
+    {
+      "StartDate": "2022-03-09",
+      "EndDate": "9999-12-31",
+      "Amount": "77.00"
     }
   ],
   "BenefitWaitingDaysLookup": [
