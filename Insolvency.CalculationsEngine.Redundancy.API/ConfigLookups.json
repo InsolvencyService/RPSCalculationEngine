@@ -107,11 +107,11 @@
     },
     {
       "StartDate": "2021-04-06",
-      "EndDate": "2022-03-08",
+      "EndDate": "2022-04-05",
       "StatMax": "544"
     },
     {
-      "StartDate": "2022-03-09",
+      "StartDate": "2022-04-06",
       "EndDate": "9999-12-31",
       "StatMax": "571"
     }
@@ -129,8 +129,13 @@
     },
     {
       "StartDate": "2021-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2022-04-05",
       "Amount": "59.20"
+    },
+    {
+      "StartDate": "2022-04-06",
+      "EndDate": "9999-12-31",
+      "Amount": "61.05"
     }
   ],
   "NotionalBenefitsWeeklyRate25AndOver": [
@@ -146,8 +151,13 @@
     },
     {
       "StartDate": "2021-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2022-04-05",
       "Amount": "74.70"
+    },
+    {
+      "StartDate": "2022-04-06",
+      "EndDate": "9999-12-31",
+      "Amount": "77.00"
     }
   ],
   "BenefitWaitingDaysLookup": [
@@ -177,11 +187,11 @@
     },
     {
       "StartDate": "2021-04-06",
-      "EndDate": "2022-03-08",
+      "EndDate": "2022-04-05",
       "NIThreshold": "184"
     },
     {
-      "StartDate": "2022-03-09",
+      "StartDate": "2022-04-06",
       "EndDate": "9999-12-31",
       "NIThreshold": "190"
     }
@@ -201,11 +211,11 @@
   "NIRateLookup": [
     {
       "StartDate": "1900-01-01",
-      "EndDate": "2022-03-08",
+      "EndDate": "2022-04-05",
       "NIRate": "0.12"
     },
     {
-      "StartDate": "2022-03-09",
+      "StartDate": "2022-04-06",
       "EndDate": "9999-12-31",
       "NIRate": "0.1325"
     }
@@ -213,11 +223,11 @@
   "NIUpperRateLookup": [
     {
       "StartDate": "1900-01-01",
-      "EndDate": "2022-03-08",
+      "EndDate": "2022-04-05",
       "NIRate": "0.02"
     },
     {
-      "StartDate": "2022-03-09",
+      "StartDate": "2022-04-06",
       "EndDate": "9999-12-31",
       "NIRate": "0.0325"
     }
