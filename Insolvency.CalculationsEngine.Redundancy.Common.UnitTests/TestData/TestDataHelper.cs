@@ -15,6 +15,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.TestData
                 yield return new object[] {new DateTime(2014, 06, 19), 464};
                 yield return new object[] {new DateTime(2020, 04, 05), 525};
                 yield return new object[] {new DateTime(2020, 04, 06), 538};
+                yield return new object[] {new DateTime(2021, 04, 06), 544};
+                yield return new object[] {new DateTime(2022, 04, 06), 571};
             }
 
             IEnumerator IEnumerable.GetEnumerator()
@@ -77,6 +79,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.TestData
                 yield return new object[] { new DateTime(2015, 10, 23), 0.02m };
                 yield return new object[] { new DateTime(2016, 04, 12), 0.02m };
                 yield return new object[] { new DateTime(2000, 06, 19), 0.02m };
+                yield return new object[] { new DateTime(2022, 06, 19), 0.0325m };
             }
 
             IEnumerator IEnumerable.GetEnumerator()
@@ -94,6 +97,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.TestData
                 yield return new object[] { new DateTime(2000, 06, 19), 166m };
                 yield return new object[] { new DateTime(2020, 04, 05), 166m };
                 yield return new object[] { new DateTime(2020, 04, 06), 183m };
+                yield return new object[] { new DateTime(2021, 04, 06), 184m };
+                yield return new object[] { new DateTime(2022, 04, 06), 190m };
             }
 
             IEnumerator IEnumerable.GetEnumerator()
@@ -109,6 +114,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.UnitTests.TestData
                 yield return new object[] { new DateTime(2015, 10, 23), 962m };
                 yield return new object[] { new DateTime(2016, 04, 12), 962m };
                 yield return new object[] { new DateTime(2000, 06, 19), 962m };
+                yield return new object[] { new DateTime(2021, 06, 19), 967m };
             }
 
             IEnumerator IEnumerable.GetEnumerator()
