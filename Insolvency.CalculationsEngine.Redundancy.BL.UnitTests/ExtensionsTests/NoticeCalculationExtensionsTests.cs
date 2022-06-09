@@ -129,8 +129,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ExtensionsTests
                                         GrossEntitlement = 330.25m,
                                         IsTaxable = true,
                                         TaxDeducted = 66.05m,
-                                        NiDeducted = 20.19m,
-                                        NetEntitlement = 244.01m,
+                                        NiDeducted = 18.58m,
+                                        NetEntitlement = 245.62m,
                                         MaximumDays = 7,
                                         EmploymentDays = 5,
                                         MaximumEntitlementIn4MonthPeriod = 0m,
@@ -151,8 +151,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ExtensionsTests
                                         GrossEntitlement = 272.12m,//recalculated -min of MaximumEntitlement & EmployerEntitlement
                                         IsTaxable = true,
                                         TaxDeducted = 54.42m,//recalculated based on new GrossEntitlement
-                                        NiDeducted = 10.69m,//recalculated based on new GrossEntitlement
-                                        NetEntitlement = 207.01m,//recalculated based on new GrossEntitlement, ni & tax
+                                        NiDeducted = 10.88m,//recalculated based on new GrossEntitlement
+                                        NetEntitlement = 206.82m,//recalculated based on new GrossEntitlement, ni & tax
                                         MaximumDays = 6, //max of week 0 & 1 from the input data
                                         EmploymentDays = 4,//sum of week 0 & 1 from the input data
                                         MaximumEntitlementIn4MonthPeriod = 0m,//max of week 0 & 1 from the input data
@@ -170,8 +170,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ExtensionsTests
                                         GrossEntitlement = 330.25m,
                                         IsTaxable = true,
                                         TaxDeducted = 66.05m,
-                                        NiDeducted = 20.19m,
-                                        NetEntitlement = 244.01m,
+                                        NiDeducted = 18.58m,
+                                        NetEntitlement = 245.62m,
                                         MaximumDays = 7,
                                         EmploymentDays = 5,
                                         MaximumEntitlementIn4MonthPeriod = 0m,

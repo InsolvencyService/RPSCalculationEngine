@@ -70,9 +70,15 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
                 new NIRateLookup
                 {
                     StartDate = new DateTime(1900, 01, 01),
-                    EndDate = new DateTime(9999, 12, 31),
+                    EndDate = new DateTime(2022, 04, 05),
                     NIRate = 0.02m
-                }
+                },
+                new NIRateLookup
+                {
+                    StartDate = new DateTime(2022, 04, 06),
+                    EndDate = new DateTime(9999, 12, 31),
+                    NIRate = 0.0325m
+                 }
             };
         }
 
@@ -89,9 +95,21 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
                 new NIThresholdLookup
                 {
                     StartDate = new DateTime(2020, 04, 06),
-                    EndDate = new DateTime(9999, 12, 31),
+                    EndDate = new DateTime(2021, 04, 05),
                     NIThreshold = 183m
-                }
+                },
+                new NIThresholdLookup
+                {
+                    StartDate = new DateTime(2021, 04, 06),
+                    EndDate = new DateTime(2022, 04, 05),
+                    NIThreshold = 184m
+                },
+                new NIThresholdLookup
+                {
+                    StartDate = new DateTime(2022, 04, 06),
+                    EndDate = new DateTime(9999, 12, 31),
+                    NIThreshold = 190m
+                },
             };
         }
 
@@ -102,8 +120,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
                 new NIThresholdLookup
                 {
                     StartDate = new DateTime(1900, 01, 01),
-                    EndDate = new DateTime(9999, 12, 31),
+                    EndDate = new DateTime(2021, 04, 05),
                     NIThreshold = 962m
+                },
+                new NIThresholdLookup
+                {
+                  StartDate = new DateTime(2021, 04, 06),
+                  EndDate = new DateTime(9999, 12, 31),
+                  NIThreshold = 967m
                 }
             };
         }
@@ -134,8 +158,20 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
                     new NotionalBenefitLookup()
                     {
                         StartDate =  new DateTime(2020, 4, 6),
-                        EndDate = new DateTime(9999, 12, 31),
+                        EndDate = new DateTime(2021, 4, 5),
                         Amount = 58.90m
+                    },
+                    new NotionalBenefitLookup()
+                    {
+                        StartDate =  new DateTime(2021, 4, 6),
+                        EndDate = new DateTime(2022, 4, 5),
+                        Amount = 59.20m
+                    },
+                    new NotionalBenefitLookup()
+                    {
+                        StartDate =  new DateTime(2022, 4, 6),
+                        EndDate = new DateTime(9999, 12, 31),
+                        Amount = 61.05m
                     }
                 };
             configLookupRoot.NotionalBenefitsWeeklyRate25AndOver =
@@ -150,8 +186,20 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
                     new NotionalBenefitLookup()
                     {
                         StartDate =  new DateTime(2020, 4, 6),
-                        EndDate = new DateTime(9999, 12, 31),
+                        EndDate = new DateTime(2021, 4, 5),
                         Amount = 74.35m
+                    },
+                    new NotionalBenefitLookup()
+                    {
+                        StartDate =  new DateTime(2021, 4, 6),
+                        EndDate = new DateTime(2022, 4, 5),
+                        Amount = 74.70m
+                    },
+                    new NotionalBenefitLookup()
+                    {
+                        StartDate =  new DateTime(2022, 4, 6),
+                        EndDate = new DateTime(9999, 12, 31),
+                        Amount = 77.00m
                     }
                 };
         }
@@ -223,8 +271,20 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
             statMaxList.Add(new StatMaxLookup
             {
                 StartDate = new DateTime(2020, 04, 06),
-                EndDate = new DateTime(9999, 12, 31),
+                EndDate = new DateTime(2021, 04, 05),
                 StatMax = 538
+            });
+            statMaxList.Add(new StatMaxLookup
+            {
+                StartDate = new DateTime(2021, 04, 06),
+                EndDate = new DateTime(2022, 04, 05),
+                StatMax = 544
+            });
+            statMaxList.Add(new StatMaxLookup
+            {
+                StartDate = new DateTime(2022, 04, 06),
+                EndDate = new DateTime(9999, 12, 31),
+                StatMax = 571
             });
         }
     }

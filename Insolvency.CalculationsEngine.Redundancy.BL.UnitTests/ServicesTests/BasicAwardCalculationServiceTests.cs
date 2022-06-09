@@ -79,8 +79,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             response.GrossEntitlement.Should().Be(request.BasicAwardAmount);
             response.IsTaxable.Should().Be(request.IsTaxable);
             response.TaxDeducted.Should().Be(100m);
-            response.NIDeducted.Should().Be(38.04m);
-            response.NetEntitlement.Should().Be(361.96m);
+            response.NIDeducted.Should().Be(41.08m);
+            response.NetEntitlement.Should().Be(358.92m);
             response.PreferentialClaim.Should().Be(0m);
             response.NonPreferentialClaim.Should().Be(response.GrossEntitlement);
         }
@@ -100,8 +100,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             response.GrossEntitlement.Should().Be(request.BasicAwardAmount);
             response.IsTaxable.Should().Be(request.IsTaxable);
             response.TaxDeducted.Should().Be(200m);
-            response.NIDeducted.Should().Be(94.24m);
-            response.NetEntitlement.Should().Be(705.76m);
+            response.NIDeducted.Should().Be(104.02m);
+            response.NetEntitlement.Should().Be(695.98m);
             response.PreferentialClaim.Should().Be(0m);
             response.NonPreferentialClaim.Should().Be(response.GrossEntitlement);
         }
