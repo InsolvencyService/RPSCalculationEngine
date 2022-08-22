@@ -65,12 +65,11 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Controllers
 
                 var validator = new RedundancyPaymentCalculationRequestValidator();
                 var validatorCheck = await validator.ValidateAsync(data);
-                var validatorErrors = validatorCheck.Errors.GetErrorsAsString();
                 if (!ModelState.IsValid || !validatorCheck.IsValid)
                 {
                     _logger.LogError(400, $"Request model not valid " +
                                           $"{ModelState}\n Request Data {JsonConvert.SerializeObject(data)} \n Errors : " +
-                                          $"{validatorErrors} ");
+                                          $"{validatorCheck.Errors.GetErrorsAsString()} ");
                     return BadRequest(ModelState);
                 }
 
