@@ -80,9 +80,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
             var relevantDismissalDate = await data.DismissalDate.GetRelevantDismissalDate(projectedNoticeDate);
 
             var totalYearsOfService = await adjStartDate.GetServiceYearsAsync(relevantDismissalDate);
-            YearsOfService = Math.Max(YearsOfService, totalYearsOfService);
+            var totalMaxYearsOfService = Math.Max(YearsOfService, totalYearsOfService);
 
-            return await Task.FromResult(totalYearsOfService >= 2);
+            return await Task.FromResult(totalMaxYearsOfService >= 2);
         }
 
         private bool ClaimReceitDateLessThatDismissalDatePlus6Months(RedundancyPaymentCalculationRequestModel data)
