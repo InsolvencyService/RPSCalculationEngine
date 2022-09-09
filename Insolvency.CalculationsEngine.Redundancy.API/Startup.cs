@@ -10,6 +10,9 @@ using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.OpenApi.Models;
+using FluentValidation;
+using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares.Validators;
+
 namespace Insolvency.CalculationsEngine.Redundancy.API
 {
     public class Startup
@@ -24,7 +27,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
             {
@@ -34,6 +36,23 @@ namespace Insolvency.CalculationsEngine.Redundancy.API
             services.AddControllers(options => options.EnableEndpointRouting = false);
             services.AddOptions();
             services.Configure<ConfigLookupRoot>(Configuration);
+
+            services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
+            services.AddValidatorsFromAssemblyContaining<APPACalculationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<ApportionmentCalculationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<ArrearsOfPayCalculationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<BasicAwardCalculationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<CompensatoryNoticePayCalculationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<HolidayCalculationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<HolidayPayAccruedCalculationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<HolidayTakenNotPaidCalculationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<NoticePayCompositeCalculationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<NoticeWorkedNotPaidCalculationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<ProjectedNoticeDateCalculationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<ProtectiveAwardCalculationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<RedundancyPaymentCalculationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<RefundOfNotionalTaxCalculationRequestValidator>();
+
             //Configure BL services
             ServicesInstaller.ConfigureServices(services);
         }
