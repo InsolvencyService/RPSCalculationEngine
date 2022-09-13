@@ -1,0 +1,78 @@
+trigger:
+- release/*
+  
+pool:
+  vmImage: windows-latest
+
+variables:
+- name: buildConfiguration
+  value: 'Release'
+
+resources:
+  repositories:
+  - repository: inss-devops-common-lib
+    type: github
+    endpoint: InsolvencyService
+    name: InsolvencyService/inss-devops-common-lib
+    ref: develop
+    
+stages:
+- stage: BuildTest
+  displayName: 'Build and Test'
+  jobs:  
+    - job: 
+      steps:
+      - task: UseDotNet@2
+        inputs:
+          version: '6.0.x'
+
+      - task: DotNetCoreCLI@2
+        displayName: NuGet Restore
+        inputs:
+          command: 'restore'
+          projects: '**/Insolvency.CalculationsEngine.sln'
+  
+      - task: DotNetCoreCLI@2
+        displayName: 'Build Solution'
+        inputs:
+          command: 'build'
+          arguments: '--configuration $(buildConfiguration)'        
+
+      - task: DotNetCoreCLI@2
+        displayName: 'Run Tests'
+        inputs:
+          command: test
+          projects: '**/*Tests/*.csproj'
+          arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+
+      - task: DotNetCoreCLI@2
+        displayName: 'Publish Project'
+        inputs:
+          command: 'publish'
+          publishWebProjects: false
+          projects: '**/*.csproj'
+          arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish Artifact'
+        inputs:
+          targetPath: '$(Build.ArtifactStagingDirectory)' 
+          artifactName: 'Insolvency.CalculationsEngine'
+        condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+
+## - stage: DeployDev
+##   pool:
+##     name: RPS
+##     demands:
+##     - Agent.Labels -contains CALCENGINE-Dev
+##   displayName: 'Deploy to Dev'
+##   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+##   dependsOn: BuildTest
+##   variables:
+##     - group: CALCENGINE-Dev
+##   jobs:
+##     - template: deploy-jobs-template.yml
+##       parameters:
+##         environment: 'Dev'
+##         appInsightsConnectionString: $(AppInsightsConnectionString)
+## 
