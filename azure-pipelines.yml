@@ -4,6 +4,14 @@ trigger:
 pool:
   vmImage: windows-latest
 
+parameters:
+- name: skipCI
+  type: boolean
+  default: false
+- name: forceDeploy
+  type: boolean
+  default: false
+
 variables:
 - name: buildConfiguration
   value: 'Release'
@@ -18,6 +26,7 @@ resources:
     
 stages:
 - stage: BuildTest
+  condition: ${{ ne(parameters.skipCI, true) }}
   displayName: 'Build and Test'
   jobs:  
     - job: 
@@ -36,7 +45,8 @@ stages:
         displayName: 'Build Solution'
         inputs:
           command: 'build'
-          arguments: '--configuration $(buildConfiguration)'        
+          projects: '**/Insolvency.CalculationsEngine.sln'
+          arguments: '--configuration $(buildConfiguration)'
 
       - task: DotNetCoreCLI@2
         displayName: 'Run Tests'
@@ -56,23 +66,23 @@ stages:
       - task: PublishPipelineArtifact@1
         displayName: 'Publish Artifact'
         inputs:
-          targetPath: '$(Build.ArtifactStagingDirectory)' 
+          targetPath: '$(Build.ArtifactStagingDirectory)'
           artifactName: 'Insolvency.CalculationsEngine'
         condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
-## - stage: DeployDev
-##   pool:
-##     name: RPS
-##     demands:
-##     - Agent.Labels -contains CALCENGINE-Dev
-##   displayName: 'Deploy to Dev'
-##   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-##   dependsOn: BuildTest
-##   variables:
-##     - group: CALCENGINE-Dev
-##   jobs:
-##     - template: deploy-jobs-template.yml
-##       parameters:
-##         environment: 'Dev'
-##         appInsightsConnectionString: $(AppInsightsConnectionString)
-## 
+- stage: DeployDev
+  condition: or(and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')), eq(${{ parameters.forceDeploy }}, true))
+  dependsOn: BuildTest
+  pool:
+    name: RPS
+    demands:
+    - Agent.Label -equals CALCENGINE-Dev
+  displayName: 'Deploy to Dev'
+  variables:
+    - group: CALCENGINE-Dev
+  jobs:
+    - template: deploy-jobs-template.yml
+      parameters:
+        environment: 'Dev'
+        appInsightsConnectionString: $(AppInsightsConnectionString)
+
