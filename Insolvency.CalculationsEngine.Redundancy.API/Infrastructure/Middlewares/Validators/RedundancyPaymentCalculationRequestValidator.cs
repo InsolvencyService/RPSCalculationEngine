@@ -58,7 +58,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                  .WithMessage("Number of days on employment break is invalid; value must be greater than or equal to zero");
 
             RuleFor(Req => Req)
-                .MustAsync(TotalYearsOfServiceGreaterThan2)
+                .Must(TotalYearsOfServiceGreaterThan2)
                 .WithName("EmploymentStartDate")
                 .WithMessage("Years of service cannot be less than 2 years")
                 .When(x => x.EmploymentStartDate != DateTime.MinValue &&
@@ -66,8 +66,12 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
                             x.DateNoticeGiven != DateTime.MinValue);
         }
 
+        private bool TotalYearsOfServiceGreaterThan2(RedundancyPaymentCalculationRequestModel data)
+        {
+            return TotalYearsOfServiceGreaterThan2Async(data, new CancellationToken()).Result;
+        }
 
-        private async Task<bool> TotalYearsOfServiceGreaterThan2(RedundancyPaymentCalculationRequestModel data, CancellationToken token)
+        private async Task<bool> TotalYearsOfServiceGreaterThan2Async(RedundancyPaymentCalculationRequestModel data, CancellationToken token)
         {
             var adjStartDate = await data.EmploymentStartDate.GetAdjustedEmploymentStartDate(data.EmploymentBreaks);
             var relevantNoticeDate = await data.DateNoticeGiven.GetRelevantNoticeDate(data.DismissalDate);
@@ -80,13 +84,13 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
             var relevantDismissalDate = await data.DismissalDate.GetRelevantDismissalDate(projectedNoticeDate);
 
             var totalYearsOfService = await adjStartDate.GetServiceYearsAsync(relevantDismissalDate);
-            YearsOfService = Math.Max(YearsOfService, totalYearsOfService);
+            var totalMaxYearsOfService = Math.Max(YearsOfService, totalYearsOfService);
 
-            return await Task.FromResult(totalYearsOfService >= 2);
+            return await Task.FromResult(totalMaxYearsOfService >= 2);
         }
 
         private bool ClaimReceitDateLessThatDismissalDatePlus6Months(RedundancyPaymentCalculationRequestModel data)
-       {
+        {
             return data.ClaimReceiptDate.Date <= data.DismissalDate.Date.AddMonths(6);
         }
     }
