@@ -60,18 +60,24 @@ jobs:
 
           - checkout: inss-devops-common-lib
 
-          - task: PowerShell@2
-            displayName: 'Performing Health Check - Staging'    
-            inputs:
-              failOnStderr: true
-              targetType: 'filePath'
-              filePath: $(System.DefaultWorkingDirectory)/powershell/InvokeRequestWithRetry.ps1
-              arguments: > # Use this to avoid newline characters in multi-line string
-                -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine-staging.azurewebsites.net"
-                -Method "${{ parameters.method }}"
-                -Retries ${{ parameters.retries }}
-                -SecondsDelay ${{ parameters.secondsDelay }}
-                -TimeoutSec ${{ parameters.timeoutSec }} 
+          - script: |
+              bash $(System.DefaultWorkingDirectory)/bash/curl_url_with_retry.sh \
+                "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine.azurewebsites.net" \
+                "${{ parameters.method }}" ${{ parameters.retries }} ${{ parameters.secondsDelay }} ${{ parameters.timeoutSec }}
+            displayName: 'Performing Health Check - Staging'
+
+##           - task: PowerShell@2
+##             displayName: 'Performing Health Check - Staging'
+##             inputs:
+##               failOnStderr: true
+##               targetType: 'filePath'
+##               filePath: $(System.DefaultWorkingDirectory)/powershell/InvokeRequestWithRetry.ps1
+##               arguments: > # Use this to avoid newline characters in multi-line string
+##                 -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine-staging.azurewebsites.net"
+##                 -Method "${{ parameters.method }}"
+##                 -Retries ${{ parameters.retries }}
+##                 -SecondsDelay ${{ parameters.secondsDelay }}
+##                 -TimeoutSec ${{ parameters.timeoutSec }}
             
           - task: AzureAppServiceManage@0
             displayName: Swap Staging Slot into Production
@@ -84,7 +90,7 @@ jobs:
               SwapWithProduction: true
 
           - task: PowerShell@2
-            displayName: 'Performing Health Check - Production'    
+            displayName: 'Performing Health Check - Production'
             inputs:
               failOnStderr: true
               targetType: 'filePath'
@@ -94,7 +100,7 @@ jobs:
                 -Method "${{ parameters.method }}"
                 -Retries ${{ parameters.retries }}
                 -SecondsDelay ${{ parameters.secondsDelay }}
-                -TimeoutSec ${{ parameters.timeoutSec }} 
+                -TimeoutSec ${{ parameters.timeoutSec }}
 
           - task: AzureAppServiceManage@0
             displayName: Stop Staging Slot
