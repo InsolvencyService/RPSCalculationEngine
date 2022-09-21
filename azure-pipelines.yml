@@ -68,7 +68,7 @@ stages:
         inputs:
           targetPath: '$(Build.ArtifactStagingDirectory)'
           artifactName: 'Insolvency.CalculationsEngine'
-        condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+#        condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
 - stage: DeployDev
   condition: or(and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')), eq(${{ parameters.forceDeploy }}, true))
