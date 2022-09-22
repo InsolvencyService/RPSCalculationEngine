@@ -26,8 +26,6 @@ parameters:
   - name: appInsightsConnectionString
     type: string
 
-###              deployToSlotOrASE: true
-###              slotName: 'staging'
 jobs:
   - deployment: 
     environment: ${{ parameters.environment }}
@@ -44,19 +42,21 @@ jobs:
               WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine'
               resourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-calcengine'
               package: '$(Pipeline.Workspace)/**/${{ parameters.calcengineApiZipFile }}'
+              deployToSlotOrASE: true
+              slotName: 'staging'
               appSettings: >
                 -Environment "${{ parameters.environment }}"
                 -APPLICATIONINSIGHTS_CONNECTION_STRING ${{ parameters.appInsightsConnectionString }}
 
-###          - task: AzureAppServiceManage@0
-###            displayName: Start Staging Slot
-###            inputs:
-###              azureSubscription: ${{ parameters.azureSubscription }}
-###              Action: 'Start Azure App Service'
-###              WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine'
-###              resourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-calcengine'
-###              SpecifySlotOrASE: true
-###              Slot: 'staging'
+          - task: AzureAppServiceManage@0
+            displayName: Start Staging Slot
+            inputs:
+              azureSubscription: ${{ parameters.azureSubscription }}
+              Action: 'Start Azure App Service'
+              WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine'
+              resourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-calcengine'
+              SpecifySlotOrASE: true
+              Slot: 'staging'
 
 ###          - checkout: inss-devops-common-lib
 ###
