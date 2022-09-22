@@ -58,13 +58,13 @@ jobs:
               SpecifySlotOrASE: true
               Slot: 'staging'
 
-###          - checkout: inss-devops-common-lib
-###
-###          - script: |
-###              bash $(System.DefaultWorkingDirectory)/bash/curl_url_with_retry.sh \
-###                "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine.azurewebsites.net" \
-###                "${{ parameters.method }}" ${{ parameters.retries }} ${{ parameters.secondsDelay }} ${{ parameters.timeoutSec }}
-###            displayName: 'Performing Health Check - Staging'
+          - checkout: inss-devops-common-lib
+
+          - script: |
+              bash $(System.DefaultWorkingDirectory)/bash/curl_url_with_retry.sh \
+                "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine.azurewebsites.net/swagger" \
+                "${{ parameters.method }}" ${{ parameters.retries }} ${{ parameters.secondsDelay }} ${{ parameters.timeoutSec }}
+            displayName: 'Performing Health Check - Staging'
 
 ##           - task: PowerShell@2
 ##             displayName: 'Performing Health Check - Staging'
