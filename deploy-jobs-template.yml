@@ -62,7 +62,7 @@ jobs:
 
           - script: |
               bash $(System.DefaultWorkingDirectory)/bash/curl_url_with_retry.sh \
-                "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine-staging.azurewebsites.net/swagger" \
+                "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine-staging.azurewebsites.net/pinggetba" \
                 "${{ parameters.method }}" ${{ parameters.retries }} ${{ parameters.secondsDelay }} ${{ parameters.timeoutSec }}
             displayName: 'Performing Health Check - Staging'
 
@@ -79,36 +79,36 @@ jobs:
 ##                 -SecondsDelay ${{ parameters.secondsDelay }}
 ##                 -TimeoutSec ${{ parameters.timeoutSec }}
             
-###          - task: AzureAppServiceManage@0
-###            displayName: Swap Staging Slot into Production
-###            inputs:
-###              azureSubscription: ${{ parameters.azureSubscription }}
-###              Action: 'Swap Slots'
-###              WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine'
-###              resourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-calcengine'
-###              SourceSlot: 'staging'
-###              SwapWithProduction: true
-###
-###          - task: PowerShell@2
-###            displayName: 'Performing Health Check - Production'
-###            inputs:
-###              failOnStderr: true
-###              targetType: 'filePath'
-###              filePath: $(System.DefaultWorkingDirectory)/powershell/InvokeRequestWithRetry.ps1
-###              arguments: > # Use this to avoid newline characters in multi-line string
-###                -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine.azurewebsites.net"
-###                -Method "${{ parameters.method }}"
-###                -Retries ${{ parameters.retries }}
-###                -SecondsDelay ${{ parameters.secondsDelay }}
-###                -TimeoutSec ${{ parameters.timeoutSec }}
-###
-###          - task: AzureAppServiceManage@0
-###            displayName: Stop Staging Slot
-###            inputs:
-###              azureSubscription: ${{ parameters.azureSubscription }}
-###              Action: 'Stop Azure App Service'
-###              WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine'
-###              resourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-calcengine'
-###              SpecifySlotOrASE: true
-###              Slot: 'staging'
-###
+          - task: AzureAppServiceManage@0
+            displayName: Swap Staging Slot into Production
+            inputs:
+              azureSubscription: ${{ parameters.azureSubscription }}
+              Action: 'Swap Slots'
+              WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine'
+              resourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-calcengine'
+              SourceSlot: 'staging'
+              SwapWithProduction: true
+
+          - task: PowerShell@2
+            displayName: 'Performing Health Check - Production'
+            inputs:
+              failOnStderr: true
+              targetType: 'filePath'
+              filePath: $(System.DefaultWorkingDirectory)/powershell/InvokeRequestWithRetry.ps1
+              arguments: > # Use this to avoid newline characters in multi-line string
+                -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine.azurewebsites.net/pinggetba"
+                -Method "${{ parameters.method }}"
+                -Retries ${{ parameters.retries }}
+                -SecondsDelay ${{ parameters.secondsDelay }}
+                -TimeoutSec ${{ parameters.timeoutSec }}
+
+          - task: AzureAppServiceManage@0
+            displayName: Stop Staging Slot
+            inputs:
+              azureSubscription: ${{ parameters.azureSubscription }}
+              Action: 'Stop Azure App Service'
+              WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine'
+              resourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-calcengine'
+              SpecifySlotOrASE: true
+              Slot: 'staging'
+
