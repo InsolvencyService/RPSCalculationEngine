@@ -73,10 +73,10 @@ stages:
 - stage: DeployDev
   condition: or(and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')), eq(${{ parameters.forceDeploy }}, true))
   dependsOn: BuildTest
-  pool:
-    name: RPS
-    demands:
-    - Agent.Label -equals CALCENGINE-Dev
+#  pool:
+#    name: RPS
+#    demands:
+#    - Agent.Label -equals CALCENGINE-Dev
   displayName: 'Deploy to Dev'
   variables:
     - group: CALCENGINE-Dev
