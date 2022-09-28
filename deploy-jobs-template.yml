@@ -49,7 +49,7 @@ jobs:
             displayName: Apply App Service Settings
             inputs:
               azureSubscription: ${{ parameters.azureSubscription }}
-              WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine'
+              appName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine'
               slotName: 'staging'
               appSettings: |
                 [
