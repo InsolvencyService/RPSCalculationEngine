@@ -73,7 +73,7 @@ jobs:
               targetType: 'filePath'
               filePath: $(System.DefaultWorkingDirectory)/powershell/InvokeRequestWithRetry.ps1
               arguments: > # Use this to avoid newline characters in multi-line string
-                -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine-staging.azurewebsites.net"
+                -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine-staging.azurewebsites.net/api/v1/HealthCheck"
                 -Method "${{ parameters.method }}"
                 -Retries ${{ parameters.retries }}
                 -SecondsDelay ${{ parameters.secondsDelay }}
@@ -96,7 +96,7 @@ jobs:
               targetType: 'filePath'
               filePath: $(System.DefaultWorkingDirectory)/powershell/InvokeRequestWithRetry.ps1
               arguments: > # Use this to avoid newline characters in multi-line string
-                -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine.azurewebsites.net/pinggetba"
+                -URI "https://app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine.azurewebsites.net/api/v1/HealthCheck"
                 -Method "${{ parameters.method }}"
                 -Retries ${{ parameters.retries }}
                 -SecondsDelay ${{ parameters.secondsDelay }}
