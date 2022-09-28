@@ -44,9 +44,26 @@ jobs:
               package: '$(Pipeline.Workspace)/**/${{ parameters.calcengineApiZipFile }}'
               deployToSlotOrASE: true
               slotName: 'staging'
-              appSettings: >
-                -Environment "${{ parameters.environment }}"
-                -APPLICATIONINSIGHTS_CONNECTION_STRING ${{ parameters.appInsightsConnectionString }}
+
+          - task: AzureAppServiceSettings@1
+            displayName: Apply App Service Settings
+            inputs:
+              azureSubscription: ${{ parameters.azureSubscription }}
+              WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine'
+              slotName: 'staging'
+              appSettings: |
+                [
+                  {
+                    "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+                    "value": "@Microsoft.KeyVault(VaultName=kv-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce;SecretName=AppInsightsConnectionString)",
+                    "slotSetting": false
+                  },
+                  {
+                      "name": "Environment",
+                      "value": "${{ parameters.environment }}",
+                      "slotSetting": false
+                  }
+                ]
 
           - task: AzureAppServiceManage@0
             displayName: Start Staging Slot
