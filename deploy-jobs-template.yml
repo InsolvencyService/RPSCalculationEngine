@@ -44,6 +44,8 @@ jobs:
               package: '$(Pipeline.Workspace)/**/${{ parameters.calcengineApiZipFile }}'
               deployToSlotOrASE: true
               slotName: 'staging'
+              appSettings: >
+                -APPLICATIONINSIGHTS_CONNECTION_STRING '@Microsoft.KeyVault(VaultName=kv-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce;SecretName=AppInsightsConnectionString)'
 
           - task: AzureAppServiceSettings@1
             displayName: Apply App Service Settings
@@ -53,11 +55,6 @@ jobs:
               slotName: 'staging'
               appSettings: |
                 [
-                  {
-                    "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
-                    "value": "@Microsoft.KeyVault(VaultName=kv-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce;SecretName=AppInsightsConnectionString)",
-                    "slotSetting": false
-                  },
                   {
                       "name": "Environment",
                       "value": "${{ parameters.environment }}",
