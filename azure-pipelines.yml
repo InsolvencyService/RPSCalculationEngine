@@ -89,10 +89,10 @@ stages:
 - stage: DeploySIT
   condition: or(and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')), eq(${{ parameters.forceDeploy }}, true))
   dependsOn: BuildTest
-  pool:
-    name: RPS
-    demands:
-    - Agent.Label -equals CALCENGINE-SIT
+  # pool:
+  #   name: RPS
+  #   demands:
+  #   - Agent.Label -equals CALCENGINE-SIT
   displayName: 'Deploy to SIT'
   variables:
     - group: CALCENGINE-SIT
