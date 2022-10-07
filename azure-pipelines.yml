@@ -10,7 +10,7 @@ parameters:
   default: false
 - name: forceDeploy
   type: boolean
-  default: false
+  default: true
 
 variables:
 - name: buildConfiguration
@@ -68,10 +68,10 @@ stages:
         inputs:
           targetPath: '$(Build.ArtifactStagingDirectory)'
           artifactName: 'Insolvency.CalculationsEngine'
-#        condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+        condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
 - stage: DeployDev
-  condition: or(and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')), eq(${{ parameters.forceDeploy }}, true))
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
   dependsOn: BuildTest
 #  pool:
 #    name: RPS
@@ -87,12 +87,8 @@ stages:
         appInsightsConnectionString: $(AppInsightsConnectionString)
 
 - stage: DeploySIT
-  condition: or(and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')), eq(${{ parameters.forceDeploy }}, true))
-  dependsOn: BuildTest
-  # pool:
-  #   name: RPS
-  #   demands:
-  #   - Agent.Label -equals CALCENGINE-SIT
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  dependsOn: DeployDev
   displayName: 'Deploy to SIT'
   variables:
     - group: CALCENGINE-SIT
@@ -102,3 +98,26 @@ stages:
         environment: 'SIT'
         appInsightsConnectionString: $(AppInsightsConnectionString)
 
+- stage: DeployPreProd
+  condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
+  dependsOn: DeploySIT
+  displayName: 'Deploy to PreProd'
+  variables:
+    - group: CALCENGINE-PreProd
+  jobs:
+    - template: deploy-jobs-template.yml
+      parameters:
+        environment: 'PreProd'
+        appInsightsConnectionString: $(AppInsightsConnectionString)
+
+# - stage: DeployProd
+#   condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
+#   dependsOn: DeployPreProd
+#   displayName: 'Deploy to Prod'
+#   variables:
+#     - group: CALCENGINE-Prod
+#   jobs:
+#     - template: deploy-jobs-template.yml
+#       parameters:
+#         environment: 'Prod'
+#         appInsightsConnectionString: $(AppInsightsConnectionString)
