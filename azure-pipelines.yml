@@ -4,14 +4,6 @@ trigger:
 pool:
   vmImage: windows-latest
 
-parameters:
-- name: skipCI
-  type: boolean
-  default: false
-- name: forceDeploy
-  type: boolean
-  default: true
-
 variables:
 - name: buildConfiguration
   value: 'Release'
@@ -26,7 +18,6 @@ resources:
     
 stages:
 - stage: BuildTest
-  condition: ${{ ne(parameters.skipCI, true) }}
   displayName: 'Build and Test'
   jobs:  
     - job: 
