@@ -37,6 +37,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.API
             services.AddOptions();
             services.Configure<ConfigLookupRoot>(Configuration);
 
+            services.AddHealthChecks();
+
             services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
             services.AddValidatorsFromAssemblyContaining<APPACalculationRequestValidator>();
             services.AddValidatorsFromAssemblyContaining<ApportionmentCalculationRequestValidator>();
