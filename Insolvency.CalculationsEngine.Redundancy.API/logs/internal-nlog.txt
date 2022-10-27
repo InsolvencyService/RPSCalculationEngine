@@ -369,3 +369,120 @@
 2022-05-19 14:49:05.8039 Info Found 40 configuration items
 2022-05-19 14:49:05.8245 Info Configuration initialized.
 2022-05-19 14:49:05.8245 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2022-09-08 15:35:28.0114 Info Message Template Auto Format enabled
+2022-09-08 15:35:28.0312 Info Loading assembly: NLog.Web.AspNetCore
+2022-09-08 15:35:28.0959 Info Adding target File Target[allfile]
+2022-09-08 15:35:28.0959 Info Adding target Console Target[console]
+2022-09-08 15:35:28.1102 Info Configured from an XML element in C:\Code\rpscalculationengine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net5.0\NLog.config...
+2022-09-08 15:35:28.1284 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2022-09-08 15:35:28.1399 Info Found 40 configuration items
+2022-09-08 15:35:28.1637 Info Configuration initialized.
+2022-09-08 15:35:28.1637 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2022-09-09 08:29:10.0240 Info Message Template Auto Format enabled
+2022-09-09 08:29:10.0417 Info Loading assembly: NLog.Web.AspNetCore
+2022-09-09 08:29:10.1151 Info Adding target File Target[allfile]
+2022-09-09 08:29:10.1151 Info Adding target Console Target[console]
+2022-09-09 08:29:10.1236 Info Configured from an XML element in C:\Code\rpscalculationengine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net5.0\NLog.config...
+2022-09-09 08:29:10.1236 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2022-09-09 08:29:10.1236 Info Found 40 configuration items
+2022-09-09 08:29:10.1489 Info Configuration initialized.
+2022-09-09 08:29:10.1489 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2022-09-09 08:32:41.3522 Info Message Template Auto Format enabled
+2022-09-09 08:32:41.3666 Info Loading assembly: NLog.Web.AspNetCore
+2022-09-09 08:32:41.4120 Info Adding target File Target[allfile]
+2022-09-09 08:32:41.4120 Info Adding target Console Target[console]
+2022-09-09 08:32:41.4185 Info Configured from an XML element in C:\Code\rpscalculationengine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net5.0\NLog.config...
+2022-09-09 08:32:41.4185 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2022-09-09 08:32:41.4185 Info Found 40 configuration items
+2022-09-09 08:32:41.4527 Info Configuration initialized.
+2022-09-09 08:32:41.4527 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2022-09-09 08:36:00.4988 Info Message Template Auto Format enabled
+2022-09-09 08:36:00.5146 Info Loading assembly: NLog.Web.AspNetCore
+2022-09-09 08:36:00.5592 Info Adding target File Target[allfile]
+2022-09-09 08:36:00.5606 Info Adding target Console Target[console]
+2022-09-09 08:36:00.5606 Info Configured from an XML element in C:\Code\rpscalculationengine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net5.0\NLog.config...
+2022-09-09 08:36:00.5606 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2022-09-09 08:36:00.5801 Info Found 40 configuration items
+2022-09-09 08:36:00.5904 Info Configuration initialized.
+2022-09-09 08:36:00.5904 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2022-09-09 08:40:35.0952 Info Message Template Auto Format enabled
+2022-09-09 08:40:35.1088 Info Loading assembly: NLog.Web.AspNetCore
+2022-09-09 08:40:35.1571 Info Adding target File Target[allfile]
+2022-09-09 08:40:35.1571 Info Adding target Console Target[console]
+2022-09-09 08:40:35.1571 Info Configured from an XML element in C:\Code\rpscalculationengine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net5.0\NLog.config...
+2022-09-09 08:40:35.1743 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2022-09-09 08:40:35.1743 Info Found 40 configuration items
+2022-09-09 08:40:35.1906 Info Configuration initialized.
+2022-09-09 08:40:35.1906 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2022-09-09 09:02:45.9450 Info Message Template Auto Format enabled
+2022-09-09 09:02:45.9600 Info Loading assembly: NLog.Web.AspNetCore
+2022-09-09 09:02:46.0248 Info Adding target File Target[allfile]
+2022-09-09 09:02:46.0248 Info Adding target Console Target[console]
+2022-09-09 09:02:46.0327 Info Configured from an XML element in C:\Code\rpscalculationengine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net5.0\NLog.config...
+2022-09-09 09:02:46.0327 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2022-09-09 09:02:46.0469 Info Found 40 configuration items
+2022-09-09 09:02:46.0597 Info Configuration initialized.
+2022-09-09 09:02:46.0597 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2022-09-09 09:06:03.2847 Info Message Template Auto Format enabled
+2022-09-09 09:06:03.3020 Info Loading assembly: NLog.Web.AspNetCore
+2022-09-09 09:06:03.3534 Info Adding target File Target[allfile]
+2022-09-09 09:06:03.3534 Info Adding target Console Target[console]
+2022-09-09 09:06:03.3599 Info Configured from an XML element in C:\Code\rpscalculationengine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net5.0\NLog.config...
+2022-09-09 09:06:03.3599 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2022-09-09 09:06:03.3789 Info Found 40 configuration items
+2022-09-09 09:06:03.3988 Info Configuration initialized.
+2022-09-09 09:06:03.3988 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2022-09-09 09:27:25.1278 Info Message Template Auto Format enabled
+2022-09-09 09:27:25.1417 Info Loading assembly: NLog.Web.AspNetCore
+2022-09-09 09:27:25.1936 Info Adding target File Target[allfile]
+2022-09-09 09:27:25.1936 Info Adding target Console Target[console]
+2022-09-09 09:27:25.2011 Info Configured from an XML element in C:\Code\rpscalculationengine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net5.0\NLog.config...
+2022-09-09 09:27:25.2011 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2022-09-09 09:27:25.2011 Info Found 40 configuration items
+2022-09-09 09:27:25.2249 Info Configuration initialized.
+2022-09-09 09:27:25.2249 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2022-09-09 09:59:51.9876 Info Message Template Auto Format enabled
+2022-09-09 09:59:52.0184 Info Loading assembly: NLog.Web.AspNetCore
+2022-09-09 09:59:52.0697 Info Adding target File Target[allfile]
+2022-09-09 09:59:52.0697 Info Adding target Console Target[console]
+2022-09-09 09:59:52.0810 Info Configured from an XML element in C:\Code\rpscalculationengine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net5.0\NLog.config...
+2022-09-09 09:59:52.0810 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2022-09-09 09:59:52.0957 Info Found 40 configuration items
+2022-09-09 09:59:52.1107 Info Configuration initialized.
+2022-09-09 09:59:52.1107 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2022-09-09 11:20:18.6849 Info Message Template Auto Format enabled
+2022-09-09 11:20:18.7006 Info Loading assembly: NLog.Web.AspNetCore
+2022-09-09 11:20:18.7571 Info Adding target File Target[allfile]
+2022-09-09 11:20:18.7571 Info Adding target Console Target[console]
+2022-09-09 11:20:18.7681 Info Configured from an XML element in C:\Code\rpscalculationengine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net5.0\NLog.config...
+2022-09-09 11:20:18.7788 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2022-09-09 11:20:18.7788 Info Found 40 configuration items
+2022-09-09 11:20:18.8040 Info Configuration initialized.
+2022-09-09 11:20:18.8040 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2022-09-09 11:27:54.8938 Info Message Template Auto Format enabled
+2022-09-09 11:27:54.9148 Info Loading assembly: NLog.Web.AspNetCore
+2022-09-09 11:27:54.9760 Info Adding target File Target[allfile]
+2022-09-09 11:27:54.9760 Info Adding target Console Target[console]
+2022-09-09 11:27:54.9843 Info Configured from an XML element in C:\Code\rpscalculationengine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net5.0\NLog.config...
+2022-09-09 11:27:54.9843 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2022-09-09 11:27:55.0017 Info Found 40 configuration items
+2022-09-09 11:27:55.0140 Info Configuration initialized.
+2022-09-09 11:27:55.0140 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2022-09-09 11:36:00.6476 Info Message Template Auto Format enabled
+2022-09-09 11:36:00.6652 Info Loading assembly: NLog.Web.AspNetCore
+2022-09-09 11:36:00.7303 Info Adding target File Target[allfile]
+2022-09-09 11:36:00.7337 Info Adding target Console Target[console]
+2022-09-09 11:36:00.7493 Info Configured from an XML element in C:\Code\rpscalculationengine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net5.0\NLog.config...
+2022-09-09 11:36:00.7645 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2022-09-09 11:36:00.7645 Info Found 40 configuration items
+2022-09-09 11:36:00.7929 Info Configuration initialized.
+2022-09-09 11:36:00.7929 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2022-09-09 11:51:02.8385 Info Message Template Auto Format enabled
+2022-09-09 11:51:02.8545 Info Loading assembly: NLog.Web.AspNetCore
+2022-09-09 11:51:02.8978 Info Adding target File Target[allfile]
+2022-09-09 11:51:02.8978 Info Adding target Console Target[console]
+2022-09-09 11:51:02.9067 Info Configured from an XML element in C:\Code\rpscalculationengine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net5.0\NLog.config...
+2022-09-09 11:51:02.9067 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2022-09-09 11:51:02.9194 Info Found 40 configuration items
+2022-09-09 11:51:02.9194 Info Configuration initialized.
+2022-09-09 11:51:02.9194 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
