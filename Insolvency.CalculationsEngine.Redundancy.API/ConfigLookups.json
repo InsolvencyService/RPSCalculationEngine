@@ -112,8 +112,13 @@
     },
     {
       "StartDate": "2022-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2023-04-05",
       "StatMax": "571"
+    },
+    {
+      "StartDate": "2023-04-06",
+      "EndDate": "9999-12-31",
+      "StatMax": "643"
     }
   ],
   "NotionalBenefitsWeeklyRateUnder25": [
