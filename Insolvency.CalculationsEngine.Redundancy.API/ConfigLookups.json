@@ -111,9 +111,14 @@
       "StatMax": "544"
     },
     {
-      "StartDate": "2022-04-06",
-      "EndDate": "9999-12-31",
+      "StartDate": "2022-04-06",      
+      "EndDate": "2023-04-05",
       "StatMax": "571"
+    },
+    {
+      "StartDate": "2023-04-06",
+      "EndDate": "9999-12-31",
+      "StatMax": "643"
     }
   ],
   "NotionalBenefitsWeeklyRateUnder25": [
@@ -133,9 +138,14 @@
       "Amount": "59.20"
     },
     {
-      "StartDate": "2022-04-06",
-      "EndDate": "9999-12-31",      
+      "StartDate": "2022-04-06",      
+      "EndDate": "2023-04-05",
       "Amount": "61.05"
+    },
+    {
+      "StartDate": "2023-04-06",
+      "EndDate": "9999-12-31",
+      "Amount": "67.20"
     }
   ],
   "NotionalBenefitsWeeklyRate25AndOver": [
@@ -156,8 +166,13 @@
     },
     {
       "StartDate": "2022-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2023-04-05",
       "Amount": "77.00"
+    },
+    {
+      "StartDate": "2023-04-06",
+      "EndDate": "9999-12-31",
+      "Amount": "84.80"
     }
   ],
   "BenefitWaitingDaysLookup": [
