@@ -71,6 +71,16 @@ jobs:
               resourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-calcengine'
               SpecifySlotOrASE: true
               Slot: 'staging'
+              
+          - task: AzureAppServiceManage@0
+            displayName: Start Production Slot
+            inputs:
+              azureSubscription: ${{ parameters.azureSubscription }}
+              Action: 'Start Azure App Service'
+              WebAppName: 'app-${{ parameters.location }}-${{ lower(parameters.environment) }}-ce-calcengine'
+              resourceGroupName: 'rg-${{ parameters.location }}-${{ lower(parameters.environment) }}-calcengine'
+              SpecifySlotOrASE: true
+              Slot: 'Production'
 
           - checkout: inss-devops-common-lib
 
