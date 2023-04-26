@@ -90,7 +90,7 @@ stages:
         appInsightsConnectionString: $(AppInsightsConnectionString)
 
 - stage: DeployPreProd
-  condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
   dependsOn: DeploySIT
   displayName: 'Deploy to PreProd'
   variables:
