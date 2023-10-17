@@ -101,14 +101,14 @@ stages:
         environment: 'PreProd'
         appInsightsConnectionString: $(AppInsightsConnectionString)
 
-# - stage: DeployProd
-#   condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
-#   dependsOn: DeployPreProd
-#   displayName: 'Deploy to Prod'
-#   variables:
-#     - group: CALCENGINE-Prod
-#   jobs:
-#     - template: deploy-jobs-template.yml
-#       parameters:
-#         environment: 'Prod'
-#         appInsightsConnectionString: $(AppInsightsConnectionString)
+- stage: DeployProd
+  condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
+  dependsOn: DeployPreProd
+  displayName: 'Deploy to Prod'
+  variables:
+    - group: CALCENGINE-Prod
+  jobs:
+    - template: deploy-jobs-template.yml
+      parameters:
+        environment: 'Prod'
+        appInsightsConnectionString: $(AppInsightsConnectionString)
