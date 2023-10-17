@@ -111,5 +111,5 @@ stages:
     - template: deploy-jobs-template.yml
       parameters:
         environment: 'Prod'
-        azureSubscription: 'App Services DevOps Prod'
+        azureSubscription: 'AppServicesDevOps-Prod'
         appInsightsConnectionString: $(AppInsightsConnectionString)
