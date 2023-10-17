@@ -36,7 +36,8 @@ stages:
         displayName: 'Build Solution'
         inputs:
           command: 'build'
-          arguments: '--configuration $(buildConfiguration)'        
+          projects: '**/Insolvency.CalculationsEngine.sln'
+          arguments: '--configuration $(buildConfiguration)'
 
       - task: DotNetCoreCLI@2
         displayName: 'Run Tests'
@@ -56,23 +57,58 @@ stages:
       - task: PublishPipelineArtifact@1
         displayName: 'Publish Artifact'
         inputs:
-          targetPath: '$(Build.ArtifactStagingDirectory)' 
+          targetPath: '$(Build.ArtifactStagingDirectory)'
           artifactName: 'Insolvency.CalculationsEngine'
         condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
-## - stage: DeployDev
-##   pool:
-##     name: RPS
-##     demands:
-##     - Agent.Labels -contains CALCENGINE-Dev
-##   displayName: 'Deploy to Dev'
-##   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-##   dependsOn: BuildTest
-##   variables:
-##     - group: CALCENGINE-Dev
-##   jobs:
-##     - template: deploy-jobs-template.yml
-##       parameters:
-##         environment: 'Dev'
-##         appInsightsConnectionString: $(AppInsightsConnectionString)
-## 
+- stage: DeployDev
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  dependsOn: BuildTest
+#  pool:
+#    name: RPS
+#    demands:
+#    - Agent.Label -equals CALCENGINE-Dev
+  displayName: 'Deploy to Dev'
+  variables:
+    - group: CALCENGINE-Dev
+  jobs:
+    - template: deploy-jobs-template.yml
+      parameters:
+        environment: 'Dev'
+        appInsightsConnectionString: $(AppInsightsConnectionString)
+
+- stage: DeploySIT
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  dependsOn: DeployDev
+  displayName: 'Deploy to SIT'
+  variables:
+    - group: CALCENGINE-SIT
+  jobs:
+    - template: deploy-jobs-template.yml
+      parameters:
+        environment: 'SIT'
+        appInsightsConnectionString: $(AppInsightsConnectionString)
+
+- stage: DeployPreProd
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  dependsOn: DeploySIT
+  displayName: 'Deploy to PreProd'
+  variables:
+    - group: CALCENGINE-PreProd
+  jobs:
+    - template: deploy-jobs-template.yml
+      parameters:
+        environment: 'PreProd'
+        appInsightsConnectionString: $(AppInsightsConnectionString)
+
+- stage: DeployProd
+  condition: and(succeeded(), contains(variables['build.sourceBranch'], 'refs/heads/release/'))
+  dependsOn: DeployPreProd
+  displayName: 'Deploy to Prod'
+  variables:
+    - group: CALCENGINE-Prod
+  jobs:
+    - template: deploy-jobs-template.yml
+      parameters:
+        environment: 'Prod'
+        appInsightsConnectionString: $(AppInsightsConnectionString)

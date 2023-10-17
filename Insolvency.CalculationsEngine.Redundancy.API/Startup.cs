@@ -1,17 +1,17 @@
-﻿using FluentValidation.AspNetCore;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
 using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure;
 using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares;
+using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares.Validators;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using NLog.Extensions.Logging;
-using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.OpenApi.Models;
-using FluentValidation;
-using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares.Validators;
+using NLog.Extensions.Logging;
 
 namespace Insolvency.CalculationsEngine.Redundancy.API
 {
@@ -37,6 +37,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.API
             services.AddOptions();
             services.Configure<ConfigLookupRoot>(Configuration);
 
+            services.AddHealthChecks();
+
             services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
             services.AddValidatorsFromAssemblyContaining<APPACalculationRequestValidator>();
             services.AddValidatorsFromAssemblyContaining<ApportionmentCalculationRequestValidator>();
@@ -58,7 +60,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddNLog();
 
