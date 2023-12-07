@@ -241,8 +241,13 @@
     },
     {
       "StartDate": "2022-11-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2023-12-06",
       "NIRate": "0.12"
+    },
+    {
+      "StartDate": "2023-12-07",
+      "EndDate": "9999-12-31",
+      "NIRate": "0.10"
     }
   ],
   "NIUpperRateLookup": [
