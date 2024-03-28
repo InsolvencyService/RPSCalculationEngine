@@ -433,6 +433,79 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
             outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
         }
+
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformHolidayPayAccruedForIrregularHoursWorkersCalculationAsync_Return_CalculatedHolidayPayAccruedResponse()
+        {
+            // Arrange
+            var inputData = await Task.FromResult(HolidayPayAccruedTestsDataGenerator.GetValidRequestForIrregularHourWorkerData());
+
+            // Act
+            var outputData = await Task.FromResult(_holidayPayAccruedCalculationService.PerformHolidayPayAccruedForIrregularHoursWorkersCalculationAsync(inputData, _options));
+
+            // Assert
+            outputData.Result.StatutoryMax.Should().Be(571.00m);
+            outputData.Result.HolidaysOwed.Should().Be(28);
+            outputData.Result.BusinessDaysInClaim.Should().Be(261.00m);
+            outputData.Result.WorkingDaysInClaim.Should().Be(65.00m);
+            outputData.Result.ProRataAccruedDays.Should().Be(4.9732m);
+
+            outputData.Result.WeeklyResults.Count.Should().Be(1);
+            outputData.Result.WeeklyResults[0].WeekNumber.Should().Be(1);
+            outputData.Result.WeeklyResults[0].MaximumEntitlement.Should().Be(487.24m);
+            outputData.Result.WeeklyResults[0].EmployerEntitlement.Should().Be(241.95m);
+            outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(241.95m);
+            outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
+            outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(48.39m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(6.23m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(187.33m);
+            outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
+            outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
+
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformHolidayPayAccruedForIrregularHoursWorkersCalculationWithSource_OverrideAsync_Return_CalculatedHolidayPayAccruedResponse()
+        {
+            // Arrange
+            var inputData = await Task.FromResult(HolidayPayAccruedTestsDataGenerator.GetValidRequestForIrregularHourWorkerDataWithSource_Override());
+
+            // Act
+            var outputData = await Task.FromResult(_holidayPayAccruedCalculationService.PerformHolidayPayAccruedForIrregularHoursWorkersCalculationAsync(inputData, _options));
+
+            // Assert
+            outputData.Result.StatutoryMax.Should().Be(571.00m);
+            outputData.Result.HolidaysOwed.Should().Be(28);
+            outputData.Result.BusinessDaysInClaim.Should().Be(261.00m);
+            outputData.Result.WorkingDaysInClaim.Should().Be(65.00m);
+            outputData.Result.ProRataAccruedDays.Should().Be(10.9732m);
+
+            outputData.Result.WeeklyResults.Count.Should().Be(3);
+            outputData.Result.WeeklyResults[0].WeekNumber.Should().Be(1);
+            outputData.Result.WeeklyResults[0].MaximumEntitlement.Should().Be(571m);
+            outputData.Result.WeeklyResults[0].EmployerEntitlement.Should().Be(243.25m);
+            outputData.Result.WeeklyResults[0].GrossEntitlement.Should().Be(243.25m);
+            outputData.Result.WeeklyResults[0].IsTaxable.Should().Be(true);
+            outputData.Result.WeeklyResults[0].TaxDeducted.Should().Be(48.65m);
+            outputData.Result.WeeklyResults[0].NiDeducted.Should().Be(6.39m);
+            outputData.Result.WeeklyResults[0].NetEntitlement.Should().Be(188.21m);
+            outputData.Result.WeeklyResults[0].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
+            outputData.Result.WeeklyResults[0].NonPreferentialClaim.Should().Be(0m);
+
+            outputData.Result.WeeklyResults[1].WeekNumber.Should().Be(2);
+            outputData.Result.WeeklyResults[1].MaximumEntitlement.Should().Be(571m);
+            outputData.Result.WeeklyResults[1].EmployerEntitlement.Should().Be(243.25m);
+            outputData.Result.WeeklyResults[1].GrossEntitlement.Should().Be(243.25m);
+            outputData.Result.WeeklyResults[1].IsTaxable.Should().Be(true);
+            outputData.Result.WeeklyResults[1].TaxDeducted.Should().Be(48.65m);
+            outputData.Result.WeeklyResults[1].NiDeducted.Should().Be(6.39m);
+            outputData.Result.WeeklyResults[1].NetEntitlement.Should().Be(188.21m);
+            outputData.Result.WeeklyResults[1].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
+            outputData.Result.WeeklyResults[1].NonPreferentialClaim.Should().Be(0m);
+        }
     }
 }
 

@@ -513,3 +513,93 @@
 2022-09-20 11:01:37.7577 Info Found 40 configuration items
 2022-09-20 11:01:37.7861 Info Configuration initialized.
 2022-09-20 11:01:37.7861 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2024-03-11 11:21:14.2207 Info Message Template Auto Format enabled
+2024-03-11 11:21:14.2611 Info Loading assembly: NLog.Web.AspNetCore
+2024-03-11 11:21:14.4296 Info Adding target File Target[allfile]
+2024-03-11 11:21:14.4526 Info Adding target Console Target[console]
+2024-03-11 11:21:14.4824 Info Configured from an XML element in C:\Users\EDINESSMA\OneDrive - NTT DATA EMEAL\Escritorio\Suprita-RPSCalculationEngine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net6.0\NLog.config...
+2024-03-11 11:21:14.5066 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2024-03-11 11:21:14.5308 Info Found 40 configuration items
+2024-03-11 11:21:14.5752 Info Configuration initialized.
+2024-03-11 11:21:14.5752 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2024-03-12 13:25:30.6073 Info Message Template Auto Format enabled
+2024-03-12 13:25:30.6331 Info Loading assembly: NLog.Web.AspNetCore
+2024-03-12 13:25:30.7889 Info Adding target File Target[allfile]
+2024-03-12 13:25:30.8154 Info Adding target Console Target[console]
+2024-03-12 13:25:30.8534 Info Configured from an XML element in C:\Users\EDINESSMA\OneDrive - NTT DATA EMEAL\Escritorio\Suprita-RPSCalculationEngine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net6.0\NLog.config...
+2024-03-12 13:25:30.9177 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2024-03-12 13:25:30.9574 Info Found 40 configuration items
+2024-03-12 13:25:31.0105 Info Configuration initialized.
+2024-03-12 13:25:31.0105 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2024-03-14 10:28:03.2712 Info Message Template Auto Format enabled
+2024-03-14 10:28:03.3000 Info Loading assembly: NLog.Web.AspNetCore
+2024-03-14 10:28:03.3670 Info Adding target File Target[allfile]
+2024-03-14 10:28:03.3670 Info Adding target Console Target[console]
+2024-03-14 10:28:03.3855 Info Configured from an XML element in C:\Users\EDINESSMA\OneDrive - NTT DATA EMEAL\Escritorio\Suprita-RPSCalculationEngine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net6.0\NLog.config...
+2024-03-14 10:28:03.3945 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2024-03-14 10:28:03.3945 Info Found 40 configuration items
+2024-03-14 10:28:03.4161 Info Configuration initialized.
+2024-03-14 10:28:03.4161 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2024-03-14 12:58:46.6395 Info Message Template Auto Format enabled
+2024-03-14 12:58:46.6567 Info Loading assembly: NLog.Web.AspNetCore
+2024-03-14 12:58:46.7020 Info Adding target File Target[allfile]
+2024-03-14 12:58:46.7020 Info Adding target Console Target[console]
+2024-03-14 12:58:46.7102 Info Configured from an XML element in C:\Users\EDINESSMA\OneDrive - NTT DATA EMEAL\Escritorio\Suprita-RPSCalculationEngine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net6.0\NLog.config...
+2024-03-14 12:58:46.7102 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2024-03-14 12:58:46.7256 Info Found 40 configuration items
+2024-03-14 12:58:46.7405 Info Configuration initialized.
+2024-03-14 12:58:46.7405 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2024-03-14 14:44:50.4493 Info Message Template Auto Format enabled
+2024-03-14 14:44:50.4941 Info Loading assembly: NLog.Web.AspNetCore
+2024-03-14 14:44:50.6008 Info Adding target File Target[allfile]
+2024-03-14 14:44:50.6008 Info Adding target Console Target[console]
+2024-03-14 14:44:50.6209 Info Configured from an XML element in C:\Users\EDINESSMA\OneDrive - NTT DATA EMEAL\Escritorio\Suprita-RPSCalculationEngine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net6.0\NLog.config...
+2024-03-14 14:44:50.6380 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2024-03-14 14:44:50.6602 Info Found 40 configuration items
+2024-03-14 14:44:50.7013 Info Configuration initialized.
+2024-03-14 14:44:50.7066 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2024-03-19 13:44:16.5827 Info Message Template Auto Format enabled
+2024-03-19 13:44:16.6309 Info Loading assembly: NLog.Web.AspNetCore
+2024-03-19 13:44:16.7617 Info Adding target File Target[allfile]
+2024-03-19 13:44:16.7617 Info Adding target Console Target[console]
+2024-03-19 13:44:16.7868 Info Configured from an XML element in C:\Users\EDINESSMA\OneDrive - NTT DATA EMEAL\Escritorio\Suprita-RPSCalculationEngine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net6.0\NLog.config...
+2024-03-19 13:44:16.8118 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2024-03-19 13:44:16.8332 Info Found 40 configuration items
+2024-03-19 13:44:16.8822 Info Configuration initialized.
+2024-03-19 13:44:16.8822 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2024-03-20 10:44:10.2068 Info Message Template Auto Format enabled
+2024-03-20 10:44:10.2276 Info Loading assembly: NLog.Web.AspNetCore
+2024-03-20 10:44:10.2769 Info Adding target File Target[allfile]
+2024-03-20 10:44:10.2769 Info Adding target Console Target[console]
+2024-03-20 10:44:10.2885 Info Configured from an XML element in C:\Users\EDINESSMA\OneDrive - NTT DATA EMEAL\Escritorio\Suprita-RPSCalculationEngine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net6.0\NLog.config...
+2024-03-20 10:44:10.2885 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2024-03-20 10:44:10.3027 Info Found 40 configuration items
+2024-03-20 10:44:10.3163 Info Configuration initialized.
+2024-03-20 10:44:10.3163 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2024-03-26 09:19:02.8951 Info Message Template Auto Format enabled
+2024-03-26 09:19:02.9176 Info Loading assembly: NLog.Web.AspNetCore
+2024-03-26 09:19:02.9926 Info Adding target File Target[allfile]
+2024-03-26 09:19:02.9992 Info Adding target Console Target[console]
+2024-03-26 09:19:02.9992 Info Configured from an XML element in C:\Users\EDINESSMA\OneDrive - NTT DATA EMEAL\Escritorio\Suprita-RPSCalculationEngine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net6.0\NLog.config...
+2024-03-26 09:19:03.0325 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2024-03-26 09:19:03.0325 Info Found 40 configuration items
+2024-03-26 09:19:03.0639 Info Configuration initialized.
+2024-03-26 09:19:03.0639 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2024-03-28 09:59:48.8363 Info Message Template Auto Format enabled
+2024-03-28 09:59:48.8481 Info Loading assembly: NLog.Web.AspNetCore
+2024-03-28 09:59:48.8799 Info Adding target File Target[allfile]
+2024-03-28 09:59:48.8799 Info Adding target Console Target[console]
+2024-03-28 09:59:48.8862 Info Configured from an XML element in C:\Users\EDINESSMA\OneDrive - NTT DATA EMEAL\Escritorio\Suprita-RPSCalculationEngine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net6.0\NLog.config...
+2024-03-28 09:59:48.8862 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2024-03-28 09:59:48.8862 Info Found 40 configuration items
+2024-03-28 09:59:48.9094 Info Configuration initialized.
+2024-03-28 09:59:48.9094 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.
+2024-03-28 10:07:13.1619 Info Message Template Auto Format enabled
+2024-03-28 10:07:13.1716 Info Loading assembly: NLog.Web.AspNetCore
+2024-03-28 10:07:13.2035 Info Adding target File Target[allfile]
+2024-03-28 10:07:13.2035 Info Adding target Console Target[console]
+2024-03-28 10:07:13.2035 Info Configured from an XML element in C:\Users\EDINESSMA\OneDrive - NTT DATA EMEAL\Escritorio\Suprita-RPSCalculationEngine\Insolvency.CalculationsEngine.Redundancy.API\bin\Debug\net6.0\NLog.config...
+2024-03-28 10:07:13.2176 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: allfile
+2024-03-28 10:07:13.2176 Info Found 40 configuration items
+2024-03-28 10:07:13.2441 Info Configuration initialized.
+2024-03-28 10:07:13.2441 Info NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 4.5.11.8645. Product version: 4.5.11.

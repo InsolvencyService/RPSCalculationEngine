@@ -24,7 +24,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                     WeeklyWage = 243.25m,
                     DaysCFwd = 5.5m,
                     DaysTaken = 3.5m,
-                    IpConfirmedDays = 25
+                    IpConfirmedDays = 25                  
                 },
                 Htnp = new List<HolidayTakenNotPaidCalculationRequestModel>()
                 {

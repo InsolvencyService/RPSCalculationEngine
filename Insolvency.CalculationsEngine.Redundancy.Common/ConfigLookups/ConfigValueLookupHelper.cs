@@ -115,5 +115,16 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
 
             return notionalBenefitWeeklyRate;
         }
+
+
+        public static decimal Get_Irregular_Hour_Worker_ContractedHolEntitlement(IOptions<ConfigLookupRoot> options)
+        {
+            var contractedHolEntitlement = options.Value.Irregular_Hour_Worker_ContractedHolEntitlement;
+
+            if (contractedHolEntitlement == 0)
+                throw new MissingConfigurationException("unable to determine the Irregular_Hour_Worker_ContractedHolEntitlement.");
+
+            return contractedHolEntitlement;
+        }
     }
 }

@@ -273,5 +273,6 @@
       "EndDate": "9999-12-31",
       "PreferentialLimit": "800"
     }
-  ]
+  ],
+  "Irregular_Hour_Worker_ContractedHolEntitlement": 28
 }
