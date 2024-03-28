@@ -57,8 +57,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
                 new NIRateLookup
                 {
                     StartDate = new DateTime(2022, 04, 06),
-                    EndDate = new DateTime(9999, 12, 31),
+                    EndDate = new DateTime(2022, 11, 05),
                     NIRate = 0.1325m
+                },
+                new NIRateLookup
+                {
+                    StartDate = new DateTime(2022, 11, 06),
+                    EndDate = new DateTime(9999, 12, 31),
+                    NIRate = 0.12m
                 }
             };
         }
@@ -76,9 +82,15 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
                 new NIRateLookup
                 {
                     StartDate = new DateTime(2022, 04, 06),
-                    EndDate = new DateTime(9999, 12, 31),
+                    EndDate = new DateTime(2022, 11, 05),
                     NIRate = 0.0325m
-                 }
+                 },
+                new NIRateLookup
+                {
+                    StartDate = new DateTime(2022, 11, 06),
+                    EndDate = new DateTime(9999, 12, 31),
+                    NIRate = 0.02m
+                }
             };
         }
 
