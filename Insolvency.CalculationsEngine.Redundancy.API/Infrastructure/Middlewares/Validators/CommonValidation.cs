@@ -61,5 +61,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
 
             return true;
         }
+
+        internal static bool BeIrregularWorkerValidHolidayYearStartDate(DateTime date)
+        {
+            return !(date < new DateTime(2024, 04, 01).Date);
+        }
     }
 }
