@@ -117,8 +117,13 @@
     },
     {
       "StartDate": "2023-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2024-04-05",
       "StatMax": "643"
+    },
+    {
+      "StartDate": "2024-04-06",
+      "EndDate": "9999-12-31",
+      "StatMax": "700"
     }
   ],
   "NotionalBenefitsWeeklyRateUnder25": [
@@ -144,8 +149,13 @@
     },
     {
       "StartDate": "2023-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2024-04-07",
       "Amount": "67.20"
+    },
+    {
+      "StartDate": "2024-04-08",
+      "EndDate": "9999-12-31",
+      "Amount": "71.70"
     }
   ],
   "NotionalBenefitsWeeklyRate25AndOver": [
@@ -171,8 +181,13 @@
     },
     {
       "StartDate": "2023-04-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2024-04-07",
       "Amount": "84.80"
+    },
+    {
+      "StartDate": "2024-04-08",
+      "EndDate": "9999-12-31",
+      "Amount": "90.50"
     }
   ],
   "BenefitWaitingDaysLookup": [
@@ -246,8 +261,13 @@
     },
     {
       "StartDate": "2024-01-06",
-      "EndDate": "9999-12-31",
+      "EndDate": "2024-04-05",
       "NIRate": "0.10"
+    },
+    {
+      "StartDate": "2024-04-06",
+      "EndDate": "9999-12-31",
+      "NIRate": "0.08"
     }
   ],
   "NIUpperRateLookup": [

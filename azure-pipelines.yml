@@ -113,3 +113,4 @@ stages:
       parameters:
         environment: 'Prod'
         appInsightsConnectionString: $(AppInsightsConnectionString)
+        azureSubscription: App Services DevOps Prod
