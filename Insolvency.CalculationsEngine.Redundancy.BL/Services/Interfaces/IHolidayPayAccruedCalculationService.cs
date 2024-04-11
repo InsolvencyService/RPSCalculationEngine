@@ -8,5 +8,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Interfaces
     public interface IHolidayPayAccruedCalculationService
     {
         Task<HolidayPayAccruedResponseDTO> PerformHolidayPayAccruedCalculationAsync(HolidayPayAccruedCalculationRequestModel data, IOptions<ConfigLookupRoot> options);
+        Task<HolidayPayAccruedResponseDTO> PerformHolidayPayAccruedForIrregularHoursWorkersCalculationAsync(IrregularHolidayPayAccruedCalculationRequestModel data, IOptions<ConfigLookupRoot> options);
     }
 }

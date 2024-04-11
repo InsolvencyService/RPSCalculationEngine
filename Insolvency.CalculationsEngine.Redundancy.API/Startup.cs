@@ -3,6 +3,8 @@ using FluentValidation.AspNetCore;
 using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure;
 using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares;
 using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares.Validators;
+using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares.Validators.IrregaulrWorkerHourHPA;
+using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares.Validators.IrregularHourWorkerHPA;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -54,6 +56,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.API
             services.AddValidatorsFromAssemblyContaining<ProtectiveAwardCalculationRequestValidator>();
             services.AddValidatorsFromAssemblyContaining<RedundancyPaymentCalculationRequestValidator>();
             services.AddValidatorsFromAssemblyContaining<RefundOfNotionalTaxCalculationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<IrregularHolidayCalculationRequestValidator>();
+            services.AddValidatorsFromAssemblyContaining<IrregularHolidayPayAccruedCalculationRequestValidator>();
 
             //Configure BL services
             ServicesInstaller.ConfigureServices(services);

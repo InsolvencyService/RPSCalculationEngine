@@ -8,5 +8,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Interfaces
     public interface IHolidayCalculationService
     {
         Task<HolidayCalculationResponseDTO> PerformHolidayCalculationAsync(HolidayCalculationRequestModel data, IOptions<ConfigLookupRoot> options);
+
+        Task<HolidayCalculationResponseDTO> PerformIrregularHolidayCalculationAsync(IrregularHolidayCalculationRequestModel data, IOptions<ConfigLookupRoot> options);
     }
 }

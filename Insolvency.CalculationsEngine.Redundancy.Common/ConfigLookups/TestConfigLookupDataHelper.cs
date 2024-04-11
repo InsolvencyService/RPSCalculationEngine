@@ -17,6 +17,8 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
             PopulateNIThresholdLookup(configLookupRoot);
             PopulateNIUpperThresholdLookup(configLookupRoot);
             PopulatePreferentialLimitLookup(configLookupRoot);
+            configLookupRoot.Irregular_Hour_Worker_ContractedHolEntitlement = 28;
+
             return configLookupRoot;
         }
 

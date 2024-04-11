@@ -14,5 +14,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups
         public List<NIThresholdLookup> NIThresholdLookup { get; set; }
         public List<NIThresholdLookup> NIUpperThresholdLookup { get; set; }
         public List<PreferentialLimitLookup> PrefentialLimitLookup { get; set; }
+        public int Irregular_Hour_Worker_ContractedHolEntitlement { get; set; }
     }
 }
