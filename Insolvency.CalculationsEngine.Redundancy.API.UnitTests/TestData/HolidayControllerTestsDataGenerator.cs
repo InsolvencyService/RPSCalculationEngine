@@ -64,5 +64,56 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 Htnp = new HolidayTakenNotPaidAggregateOutput()
             };
         }
+
+        public static IrregularHolidayCalculationRequestModel GetIrregularHolidayValidRequestData()
+        {
+            return new IrregularHolidayCalculationRequestModel()
+            {
+                Hpa = new IrregularHolidayPayAccruedCalculationRequestModel
+                {
+                    InsolvencyDate = new DateTime(2024, 06, 22),
+                    EmpStartDate = new DateTime(2016, 12, 19),
+                    DismissalDate = new DateTime(2024, 06, 22),
+                    ContractedHolEntitlement = 25,
+                    HolidayYearStart = new DateTime(2024, 04, 01),
+                    IsTaxable = true,
+                    PayDay = (int)DayOfWeek.Saturday,
+                    ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                    WeeklyWage = 243.25m,
+                    DaysCFwd = 5.5m,
+                    DaysTaken = 3.5m,
+                    HolidayAccruedDaysCore = 25,
+                    HolidaysCarriedOverCoreSource ="rp1",
+                    IrregularHoursWorker = true
+                },
+                Htnp = new List<HolidayTakenNotPaidCalculationRequestModel>()
+                {
+                    new HolidayTakenNotPaidCalculationRequestModel()
+                    {
+                        InputSource = InputSource.Rp1,
+                        InsolvencyDate = new DateTime(2018, 01, 10),
+                        DismissalDate = new DateTime(2018, 01, 03),
+                        UnpaidPeriodFrom = new DateTime(2017, 12, 12),
+                        UnpaidPeriodTo = new DateTime(2017, 12, 29),
+                        WeeklyWage = 306.85m,
+                        ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                        PayDay = 6,
+                        IsTaxable = true
+                    },
+                    new HolidayTakenNotPaidCalculationRequestModel()
+                    {
+                        InputSource = InputSource.Rp14a,
+                        InsolvencyDate = new DateTime(2018, 01, 10),
+                        DismissalDate = new DateTime(2018, 01, 03),
+                        UnpaidPeriodFrom = new DateTime(2017, 12, 12),
+                        UnpaidPeriodTo = new DateTime(2017, 12, 29),
+                        WeeklyWage = 306.85m,
+                        ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                        PayDay = 6,
+                        IsTaxable = true
+                    }
+                }
+            };
+        }
     }
 }

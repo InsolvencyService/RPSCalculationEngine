@@ -6,7 +6,7 @@ using Insolvency.CalculationsEngine.Redundancy.Common.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares.Validators.IrregaulrWorkerHourHPA
+namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares.Validators.IrregularHourWorkerHPA
 {
     public class IrregularHolidayCalculationRequestValidator : AbstractValidator<IrregularHolidayCalculationRequestModel>
     {

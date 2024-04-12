@@ -3,7 +3,6 @@ using FluentValidation.AspNetCore;
 using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure;
 using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares;
 using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares.Validators;
-using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares.Validators.IrregaulrWorkerHourHPA;
 using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares.Validators.IrregularHourWorkerHPA;
 using Insolvency.CalculationsEngine.Redundancy.Common.ConfigLookups;
 using Microsoft.AspNetCore.Builder;
