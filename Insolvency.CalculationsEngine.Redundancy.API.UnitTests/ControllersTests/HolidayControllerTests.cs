@@ -23,6 +23,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
         private readonly IOptions<ConfigLookupRoot> _confOptions;
         private readonly Mock<IHolidayCalculationService> _service;
 
+       
         public HolidayControllerTests()
         {
             _mockLogger = new Mock<ILogger<HolidayController>>();
@@ -317,6 +318,286 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.ControllersTest
             var response = new HolidayCalculationResponseDTO();
 
             _service.Setup(m => m.PerformHolidayCalculationAsync(request, _confOptions)).ReturnsAsync(response);
+            var controller = new HolidayController(_service.Object, _mockLogger.Object, _confOptions);
+
+            //Act
+            var result = await controller.PostAsync(request);
+
+            //Assert
+            var okObjectRequest = result.Should().BeOfType<OkObjectResult>().Subject;
+            okObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.OK);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task IrregularPostAsync_Succeeds()
+        {
+            //Arrange
+            var request = HolidayControllerTestsDataGenerator.GetIrregularHolidayValidRequestData();
+            var response = HolidayControllerTestsDataGenerator.GetValidResponseData();
+
+            _service.Setup(m => m.PerformIrregularHolidayCalculationAsync(request, _confOptions)).ReturnsAsync(response);
+            var controller = new HolidayController(_service.Object, _mockLogger.Object, _confOptions);
+
+            //Act
+            var result = await controller.PostAsync(request);
+            
+            //Assert
+            var okObjectRequest = result.Should().BeOfType<OkObjectResult>().Subject;
+            okObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.OK);
+        }
+
+
+        [Theory]
+        [Trait("Category", "UnitTest")]
+        [ClassData(typeof(IrregularHolidayValidationTestDataHelper))]
+        public async Task IrregularPostAsync_FailsWithBadRequest_WhenThereIsAValidationError(IrregularHolidayCalculationRequestModel request, string expectedErrorMessage)
+        {
+            //Arrange
+            var controller = new HolidayController(_service.Object, _mockLogger.Object, _confOptions);
+
+            //Act
+            var result = await controller.PostAsync(request);
+
+            //Assert
+            var badRequestObjectRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
+            badRequestObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
+
+            _mockLogger.Verify(
+                 m => m.Log<It.IsAnyType>(
+                 LogLevel.Error,
+                 It.IsAny<EventId>(),
+                 (It.IsAnyType)It.Is<object>(v => v.ToString().Contains(expectedErrorMessage)),
+                  null,
+                  It.IsAny<Func<It.IsAnyType, Exception, string>>()));
+        }
+
+        [Theory]
+        [Trait("Category", "UnitTest")]
+        [ClassData(typeof(IrregularHolidayPayAccruedValidationTestDataHelper))]
+        public async Task IrregularPostAsync_FailsWithBadRequest_WhenThereIsAHpaValidationError(IrregularHolidayPayAccruedCalculationRequestModel hpaRequest, string expectedErrorMessage)
+        {
+            //Arrange
+            var request = new IrregularHolidayCalculationRequestModel()
+            {
+                Hpa = hpaRequest
+            };
+
+            var controller = new HolidayController(_service.Object, _mockLogger.Object, _confOptions);
+
+            //Act
+            var result = await controller.PostAsync(request);
+
+            //Assert
+            var badRequestObjectRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
+            badRequestObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
+
+            _mockLogger.Verify(
+                  m => m.Log<It.IsAnyType>(
+                  LogLevel.Error,
+                  It.IsAny<EventId>(),
+                  (It.IsAnyType)It.Is<object>(v => v.ToString().Contains(expectedErrorMessage)),
+                   null,
+                   It.IsAny<Func<It.IsAnyType, Exception, string>>()));
+        }
+
+        [Theory]
+        [Trait("Category", "UnitTest")]
+        [ClassData(typeof(HolidayTakenNotPaidValidationTestDataHelper))]
+        public async Task IrregularPostAsync_FailsWithBadRequest_WhenThereIsAHtnpValidationError(HolidayTakenNotPaidCalculationRequestModel htnpRequest, string expectedErrorMessage)
+        {
+            //Arrange
+            var request = new HolidayCalculationRequestModel()
+            {
+                Htnp = new List<HolidayTakenNotPaidCalculationRequestModel>()
+                {
+                    htnpRequest
+                }
+            };
+
+            var controller = new HolidayController(_service.Object, _mockLogger.Object, _confOptions);
+
+            //Act
+            var result = await controller.PostAsync(request);
+
+            //Assert
+            var badRequestObjectRequest = result.Should().BeOfType<BadRequestObjectResult>().Subject;
+            badRequestObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.BadRequest);
+
+            _mockLogger.Verify(
+                 m => m.Log<It.IsAnyType>(
+                 LogLevel.Error,
+                 It.IsAny<EventId>(),
+                 (It.IsAnyType)It.Is<object>(v => v.ToString().Contains(expectedErrorMessage)),
+                  null,
+                  It.IsAny<Func<It.IsAnyType, Exception, string>>()));
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task IrreularPostAsync_SucceedsWithOverlappingPeriodsInDifferentInputSources()
+        {
+            //Arrange
+            var request = new IrregularHolidayCalculationRequestModel()
+            {
+                Hpa = null,
+                Htnp = new List<HolidayTakenNotPaidCalculationRequestModel>()
+                    {
+                        new HolidayTakenNotPaidCalculationRequestModel(InputSource.Rp14a, new DateTime(2018, 10, 6), new DateTime(2018, 10, 6), new DateTime(2018, 9, 10), new DateTime(2018, 9, 18), 320m,  new List<string> { "1", "2", "3", "4", "5" }, 6, true),
+                        new HolidayTakenNotPaidCalculationRequestModel(InputSource.Rp1, new DateTime(2018, 10, 6), new DateTime(2018, 10, 6), new DateTime(2018, 9, 18), new DateTime(2018, 9, 20), 320m,  new List<string> { "1", "2", "3", "4", "5" }, 6, true),
+                    }
+            };
+            var response = HolidayControllerTestsDataGenerator.GetValidResponseData();
+
+            _service.Setup(m => m.PerformIrregularHolidayCalculationAsync(request, _confOptions)).ReturnsAsync(response);
+            var controller = new HolidayController(_service.Object, _mockLogger.Object, _confOptions);
+
+            //Act
+            var result = await controller.PostAsync(request);
+
+            //Assert
+            var okObjectRequest = result.Should().BeOfType<OkObjectResult>().Subject;
+            okObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.OK);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task IrregularPostAsync_Succeeds_WithNoHTNPData()
+        {
+            //Arrange
+            var request = new IrregularHolidayCalculationRequestModel
+            {
+                Hpa = new IrregularHolidayPayAccruedCalculationRequestModel
+                {
+                    InsolvencyDate = new DateTime(2024, 06, 20),
+                    EmpStartDate = new DateTime(2016, 12, 19),
+                    DismissalDate = new DateTime(2024, 06, 20),
+                    ContractedHolEntitlement = 25,
+                    HolidayYearStart = new DateTime(2024, 04, 01),
+                    IsTaxable = true,
+                    PayDay = (int)DayOfWeek.Saturday,
+                    ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                    WeeklyWage = 243.25m,
+                    DaysCFwd = 5.5m,
+                    DaysTaken = 3.5m,
+                    HolidayAccruedDaysCore = 25,
+                    HolidaysCarriedOverCoreSource = "rp1",
+                    IrregularHoursWorker = true
+                },
+                Htnp = new List<HolidayTakenNotPaidCalculationRequestModel>()
+            };
+            var response = new HolidayCalculationResponseDTO();
+
+            _service.Setup(m => m.PerformIrregularHolidayCalculationAsync(request, _confOptions)).ReturnsAsync(response);
+            var controller = new HolidayController(_service.Object, _mockLogger.Object, _confOptions);
+
+            //Act
+            var result = await controller.PostAsync(request);
+
+            //Assert
+            var okObjectRequest = result.Should().BeOfType<OkObjectResult>().Subject;
+            okObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.OK);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task IrregularPostAsync_Succeeds_WithNoRP14aDataAndOverride()
+        {
+            //Arrange
+            var request = new IrregularHolidayCalculationRequestModel
+            {
+                Rp14aNotRequired = true,
+                Hpa = new IrregularHolidayPayAccruedCalculationRequestModel
+                {
+                    InsolvencyDate = new DateTime(2024, 06, 20),
+                    EmpStartDate = new DateTime(2016, 12, 19),
+                    DismissalDate = new DateTime(2024, 06, 20),
+                    ContractedHolEntitlement = 25,
+                    HolidayYearStart = new DateTime(2024, 04, 01),
+                    IsTaxable = true,
+                    PayDay = (int)DayOfWeek.Saturday,
+                    ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                    WeeklyWage = 243.25m,
+                    DaysCFwd = 5.5m,
+                    DaysTaken = 3.5m,
+                    HolidayAccruedDaysCore = 25,
+                    HolidaysCarriedOverCoreSource = "rp1",
+                    IrregularHoursWorker = true
+                },
+                Htnp = new List<HolidayTakenNotPaidCalculationRequestModel>()
+                {
+                    new HolidayTakenNotPaidCalculationRequestModel()
+                    {
+                        InputSource = InputSource.Rp1,
+                        InsolvencyDate = new DateTime(2018, 01, 10),
+                        DismissalDate = new DateTime(2018, 01, 03),
+                        UnpaidPeriodFrom = new DateTime(2017, 12, 12),
+                        UnpaidPeriodTo = new DateTime(2017, 12, 29),
+                        WeeklyWage = 306.85m,
+                        ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                        PayDay = 6,
+                        IsTaxable = true
+                    },
+                }
+            };
+            var response = new HolidayCalculationResponseDTO();
+
+            _service.Setup(m => m.PerformIrregularHolidayCalculationAsync(request, _confOptions)).ReturnsAsync(response);
+            var controller = new HolidayController(_service.Object, _mockLogger.Object, _confOptions);
+
+            //Act
+            var result = await controller.PostAsync(request);
+
+            //Assert
+            var okObjectRequest = result.Should().BeOfType<OkObjectResult>().Subject;
+            okObjectRequest.StatusCode.Should().Be((int)System.Net.HttpStatusCode.OK);
+        }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task IrregularPostAsync_Succeeds_WithRP14aDataAndRP1NotRequiredOverride()
+        {
+            //Arrange
+            var request = new IrregularHolidayCalculationRequestModel
+            {
+                Rp1NotRequired = true,
+                Rp14aNotRequired = true,
+                Hpa = new IrregularHolidayPayAccruedCalculationRequestModel
+                {
+                    InsolvencyDate = new DateTime(2024, 06, 20),
+                    EmpStartDate = new DateTime(2016, 12, 19),
+                    DismissalDate = new DateTime(2024, 06, 20),
+                    ContractedHolEntitlement = 25,
+                    HolidayYearStart = new DateTime(2024, 04, 01),
+                    IsTaxable = true,
+                    PayDay = (int)DayOfWeek.Saturday,
+                    ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                    WeeklyWage = 243.25m,
+                    DaysCFwd = 5.5m,
+                    DaysTaken = 3.5m,
+                    HolidayAccruedDaysCore = 25,
+                    HolidaysCarriedOverCoreSource = "rp1",
+                    IrregularHoursWorker = true
+                },
+                Htnp = new List<HolidayTakenNotPaidCalculationRequestModel>()
+                {
+                    new HolidayTakenNotPaidCalculationRequestModel()
+                    {
+                        InputSource = InputSource.Rp14a,
+                        InsolvencyDate = new DateTime(2018, 01, 10),
+                        DismissalDate = new DateTime(2018, 01, 03),
+                        UnpaidPeriodFrom = new DateTime(2017, 12, 12),
+                        UnpaidPeriodTo = new DateTime(2017, 12, 29),
+                        WeeklyWage = 306.85m,
+                        ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
+                        PayDay = 6,
+                        IsTaxable = true
+                    }
+                }
+            };
+            var response = new HolidayCalculationResponseDTO();
+
+            _service.Setup(m => m.PerformIrregularHolidayCalculationAsync(request, _confOptions)).ReturnsAsync(response);
             var controller = new HolidayController(_service.Object, _mockLogger.Object, _confOptions);
 
             //Act

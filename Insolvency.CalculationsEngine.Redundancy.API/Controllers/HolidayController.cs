@@ -1,5 +1,5 @@
 ﻿using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares.Validators;
-using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares.Validators.IrregaulrWorkerHourHPA;
+using Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middlewares.Validators.IrregularHourWorkerHPA;
 using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Errors;
 using Insolvency.CalculationsEngine.Redundancy.BL.DTOs.Holiday;
 using Insolvency.CalculationsEngine.Redundancy.BL.Services.Interfaces;

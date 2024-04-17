@@ -254,49 +254,5 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
             request.IpConfirmedDays = -1m;
             return request;
         }
-
-
-        public static IrregularHolidayPayAccruedCalculationRequestModel GetValidRequestForIrregularHourWorkerData()
-        {
-            return new IrregularHolidayPayAccruedCalculationRequestModel
-            {
-                InsolvencyDate = new DateTime(2024, 06, 30),
-                EmpStartDate = new DateTime(2021, 04, 01),
-                DismissalDate = new DateTime(2024, 06, 30),
-                ContractedHolEntitlement = 28,
-                HolidayYearStart = new DateTime(2024, 04, 01),
-                IsTaxable = true,
-                PayDay = (int)DayOfWeek.Saturday,
-                ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
-                WeeklyWage = 243.25m,
-                DaysCFwd = 6m,
-                DaysTaken =8,
-                IrregularHoursWorker = true,
-                HolidayAccruedDaysCore = 20,
-                HolidaysCarriedOverCoreSource = "Rp1"
-            };
-        }
-
-        public static IrregularHolidayPayAccruedCalculationRequestModel GetValidRequestForIrregularHourWorkerDataWithSource_Override()
-        {
-            return new IrregularHolidayPayAccruedCalculationRequestModel
-            {
-                InsolvencyDate = new DateTime(2024, 06, 30),
-                EmpStartDate = new DateTime(2021, 04, 01),
-                DismissalDate = new DateTime(2024, 06, 30),
-                ContractedHolEntitlement = 28,
-                HolidayYearStart = new DateTime(2024, 04, 01),
-                IsTaxable = true,
-                PayDay = (int)DayOfWeek.Saturday,
-                ShiftPattern = new List<string> { "1", "2", "3", "4", "5" },
-                WeeklyWage = 243.25m,
-                DaysCFwd = 12m,
-                DaysTaken = 8,
-                IrregularHoursWorker = true,
-                HolidayAccruedDaysCore = 12,
-                HolidaysCarriedOverCoreSource = "Override"
-            };
-        }
-
     }
 }

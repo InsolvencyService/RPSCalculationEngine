@@ -440,7 +440,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
         public async Task PerformHolidayPayAccruedForIrregularHoursWorkersCalculationAsync_Return_CalculatedHolidayPayAccruedResponse()
         {
             // Arrange
-            var inputData = await Task.FromResult(HolidayPayAccruedTestsDataGenerator.GetValidRequestForIrregularHourWorkerData());
+            var inputData = await Task.FromResult(IrregularHolidayPayAccruedTestsDataGenerator.GetValidRequestForIrregularHourWorkerData());
 
             // Act
             var outputData = await Task.FromResult(_holidayPayAccruedCalculationService.PerformHolidayPayAccruedForIrregularHoursWorkersCalculationAsync(inputData, _options));
@@ -471,7 +471,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
         public async Task PerformHolidayPayAccruedForIrregularHoursWorkersCalculationWithSource_OverrideAsync_Return_CalculatedHolidayPayAccruedResponse()
         {
             // Arrange
-            var inputData = await Task.FromResult(HolidayPayAccruedTestsDataGenerator.GetValidRequestForIrregularHourWorkerDataWithSource_Override());
+            var inputData = await Task.FromResult(IrregularHolidayPayAccruedTestsDataGenerator.GetValidRequestForIrregularHourWorkerDataWithSource_Override());
 
             // Act
             var outputData = await Task.FromResult(_holidayPayAccruedCalculationService.PerformHolidayPayAccruedForIrregularHoursWorkersCalculationAsync(inputData, _options));
