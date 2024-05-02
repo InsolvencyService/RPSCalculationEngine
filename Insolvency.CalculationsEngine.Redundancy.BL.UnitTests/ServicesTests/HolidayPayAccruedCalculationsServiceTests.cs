@@ -506,6 +506,26 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
             outputData.Result.WeeklyResults[1].PreferentialClaim.Should().Be(outputData.Result.WeeklyResults[0].GrossEntitlement);
             outputData.Result.WeeklyResults[1].NonPreferentialClaim.Should().Be(0m);
         }
+
+        [Fact]
+        [Trait("Category", "UnitTest")]
+        public async Task PerformHolidayPayAccruedForIrregularHoursWorkersCalculationWithNegativeHolidayAccruedCoreDays_Return_CalculatedHolidayPayAccruedResponse()
+        {
+            // Arrange
+            var inputData = await Task.FromResult(IrregularHolidayPayAccruedTestsDataGenerator.GetRequestWithNegativeHolidayAccuredCoreDays());
+
+            // Act
+            var outputData = await Task.FromResult(_holidayPayAccruedCalculationService.PerformHolidayPayAccruedForIrregularHoursWorkersCalculationAsync(inputData, _options));
+
+            // Assert
+            outputData.Result.StatutoryMax.Should().Be(571.00m);
+            outputData.Result.HolidaysOwed.Should().Be(16.80m);
+            outputData.Result.BusinessDaysInClaim.Should().Be(156.00m);
+            outputData.Result.WorkingDaysInClaim.Should().Be(13.00m);
+            outputData.Result.ProRataAccruedDays.Should().Be(5.2000m);
+
+            outputData.Result.WeeklyResults.Count.Should().Be(2);     
+        }
     }
 }
 

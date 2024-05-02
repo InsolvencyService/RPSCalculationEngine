@@ -273,7 +273,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
         public static IrregularHolidayPayAccruedCalculationRequestModel GetRequestWithNegativeHolidayAccuredCoreDays()
         {
             var request = GetValidRequestForIrregularHourWorkerData();
-            request.HolidayAccruedDaysCore = -1m;
+            request.HolidayAccruedDaysCore = -3m;
+            request.HolidaysCarriedOverCoreSource = "rp14a";
+            request.ShiftPattern = new List<string> { "3", "4", "5" };
+            request.InsolvencyDate = new DateTime(2024, 05, 1);
+            request.EmpStartDate = new DateTime(2021, 04, 01);
+            request.DismissalDate = new DateTime(2024, 05, 01);
+            request.DaysTaken = 1;
+            request.DaysCFwd = 6;
             return request;
         }
 
