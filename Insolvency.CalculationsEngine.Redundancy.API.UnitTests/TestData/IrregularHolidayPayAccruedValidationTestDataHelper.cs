@@ -89,14 +89,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.UnitTests.TestData
                 "Days taken must be 0 or greater" };
             yield return new object[] {
                 IrregularHolidayPayAccruedTestsDataGenerator.GetRequestWithBlankHolidaysCarriedOverCoreSource(),
-                "Holidays Carried Over Core Source is not provided" };
-            yield return new object[] {
-                IrregularHolidayPayAccruedTestsDataGenerator.GetRequestWithNegativeHolidayAccuredCoreDays(),
-                "Holiday Accrued Days Core must be greater than or equal to 0" };
+                "Holidays Carried Over Core Source is not provided" };          
             yield return new object[] {
                 IrregularHolidayPayAccruedTestsDataGenerator.GetRequestWithNullHolidayAccuredCoreDays(),
                 "Holiday Accrued Days Core is not provided" };
-
 
         }
 

@@ -225,13 +225,14 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
             ///8. Find the adjusted holiday entitlement using a sub-calculation called “Get adjusted holiday entitlement”:
             /// a.Return the greater of the statutory holiday entitlement from step 7 and the calculation input “Contracted holiday entitlement”
-            decimal contractedHolentitlement = ConfigValueLookupHelper.Get_Irregular_Hour_Worker_ContractedHolEntitlement(options);
-            decimal adjHolidayEntitlement = await statHolEntitlement.GetAdjustedHolidayEntitlement(contractedHolentitlement);
+           /// decimal contractedHolentitlement = ConfigValueLookupHelper.Get_Irregular_Hour_Worker_ContractedHolEntitlement(options);
+            decimal holidayAccruedDaysCore = data.HolidayAccruedDaysCore.GetValueOrDefault();
+            decimal adjHolidayEntitlement = await statHolEntitlement.GetAdjustedHolidayEntitlement(holidayAccruedDaysCore);
 
             ///9.Find the statutory holiday entitlement using a sub-calculation called “Get pro-rata accrued days”
             /// a.Divide the adjusted holiday entitlement(step 8) by the total business days in claim(step 4)
             ///b.Multiply that number by the total working days in holiday claim(step 5)
-            /// New Step after (b) - Step 9bb. Compare Holidays Accrued Core and the result of 9b.  Take the lowest of the 2 figures.
+            ///Removed- New Step after (b) - Step 9bb. Compare Holidays Accrued Core and the result of 9b.  Take the lowest of the 2 figures.
             ///c.Add the limited days carried forward(step 6)
             ///d.Subtract the calculation input “days taken”
             ///e. Don't perform the step e

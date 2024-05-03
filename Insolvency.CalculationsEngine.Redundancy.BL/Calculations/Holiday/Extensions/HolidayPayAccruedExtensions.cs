@@ -99,12 +99,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Calculations.Holiday.Exten
                                                                 decimal totalWorkingDaysInHolidayClaim, decimal limitedDaysCFwd, decimal daysTaken, List<string> shiftPattern, decimal? holidayAccruedCore)
         {
             proRataAccruedDays = (adjHolidayEntitlement / totalBusinessDaysInHolidayClaim) * totalWorkingDaysInHolidayClaim;
-            proRataAccruedDays = Math.Max(0, proRataAccruedDays);
-            
-            if (holidayAccruedCore.HasValue)
-            {
-                proRataAccruedDays = Math.Min(holidayAccruedCore.Value, proRataAccruedDays);
-            }
+            proRataAccruedDays = Math.Max(0, proRataAccruedDays);                 
 
             proRataAccruedDays = proRataAccruedDays + limitedDaysCFwd - daysTaken;
 

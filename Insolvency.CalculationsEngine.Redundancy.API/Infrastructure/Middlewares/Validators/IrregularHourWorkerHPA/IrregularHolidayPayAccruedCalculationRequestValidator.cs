@@ -93,8 +93,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
             RuleFor(req => req.HolidayAccruedDaysCore)
                 .NotNull()
                 .WithMessage($"Holiday Accrued Days Core is not provided")
-                .GreaterThanOrEqualTo(0)
-                .WithMessage($"Holiday Accrued Days Core must be greater than or equal to 0")
                 .When(req => req.IrregularHoursWorker == true);
 
             RuleFor(req => req.HolidaysCarriedOverCoreSource)
@@ -105,6 +103,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.API.Infrastructure.Middleware
 
             RuleFor(req => req.IrregularHoursWorker)
                 .NotNull()
+                .NotEmpty()
                 .WithMessage($"Irregular Hours Worker value is not provided or is not valid ('true' or 'false')");
         }
 
