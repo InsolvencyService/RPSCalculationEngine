@@ -52,11 +52,13 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
             if (data.paBenefitAmount > decimal.Zero)
             {
-                benefitDailyRate = await data.paBenefitAmount.GetDailyAmount(
-                           data.paBenefitStartDate.Date,
-                           paBenefitsEndDate.Date);
+                if (data.paBenefitStartDate.Date <= protectiveAwardEndDate.Date)
+                {
+                    var maxStartDate = data.ProtectiveAwardStartDate.Date > data.paBenefitStartDate.Date ? data.ProtectiveAwardStartDate.Date : data.paBenefitStartDate.Date;
+                    var overLappingDays = (protectiveAwardEndDate.Date - maxStartDate).TotalDays + 1;
+                    benefitDailyRate = data.paBenefitAmount / (decimal)overLappingDays;
+                }
             }
-           
 
             //step through payWeek
             var counter = 1;
