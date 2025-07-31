@@ -49,6 +49,23 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 new NoticeWorkedNotPaidWeeklyResult()
                 {
                     WeekNumber = 1,
+                    PayDate = new DateTime(2018, 7, 27),
+                    MaximumEntitlement = 508m,
+                    EmployerEntitlement = 11.11M,
+                    GrossEntitlement = 11.11M,
+                    IsTaxable = true,
+                    TaxDeducted = 2.22M,
+                    NiDeducted = 0m,
+                    NetEntitlement = 8.89M,
+                    MaximumDays = 7,
+                    EmploymentDays = 1,
+                    MaximumEntitlementIn4MonthPeriod = 435.43M,
+                    EmployerEntitlementIn4MonthPeriod = 0m,
+                    GrossEntitlementIn4Months = 0m
+                },
+                new NoticeWorkedNotPaidWeeklyResult()
+                {
+                    WeekNumber = 2,
                     PayDate = new DateTime(2018, 8, 03),
                     MaximumEntitlement = 508m,
                     EmployerEntitlement = 55.56M,
@@ -65,7 +82,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.UnitTests.ServicesTests
                 },
                 new NoticeWorkedNotPaidWeeklyResult()
                 {
-                    WeekNumber = 2,
+                    WeekNumber = 3,
                     PayDate = new DateTime(2018, 8, 10),
                     MaximumEntitlement = 362.86m,
                     EmployerEntitlement = 33.33M,
