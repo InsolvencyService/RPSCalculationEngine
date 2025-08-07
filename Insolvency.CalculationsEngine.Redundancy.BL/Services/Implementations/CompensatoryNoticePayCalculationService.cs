@@ -33,7 +33,9 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             yearsOfService = Math.Max(yearsOfService, 1);
             yearsOfService = Math.Min(yearsOfService, 12);
 
-            var statutaryMax = ConfigValueLookupHelper.GetStatutoryMax(options, dismissalDate);
+            var maxDate = dismissalDate > insolvencyDate ? dismissalDate : insolvencyDate;
+
+            var statutaryMax = ConfigValueLookupHelper.GetStatutoryMax(options, maxDate);
             var taxRate = ConfigValueLookupHelper.GetTaxRate(options, dismissalDate);
             var niThreshold = ConfigValueLookupHelper.GetNIThreshold(options, DateTime.Now);
             var niRate = ConfigValueLookupHelper.GetNIRate(options, DateTime.Now);
