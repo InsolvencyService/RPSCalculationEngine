@@ -45,7 +45,7 @@ jobs:
               deployToSlotOrASE: true
               slotName: 'staging'
               appSettings: >
-                -APPLICATIONINSIGHTS_CONNECTION_STRING '${{ parameters.appInsightsConnectionString }}'
+                -APPLICATIONINSIGHTS_CONNECTION_STRING ${{ parameters.appInsightsConnectionString }}
 
           - task: AzureAppServiceSettings@1
             displayName: Apply App Service Settings
