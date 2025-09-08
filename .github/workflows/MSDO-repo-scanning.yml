@@ -1,0 +1,21 @@
+name: MSDO Repo Scanning
+
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  actions: read
+  security-events: write
+
+jobs:
+  run-msdo-scan:
+    name: Full MSDO Scan
+    uses: InsolvencyService/MSDO-Netcompany/.github/workflows/MSDO-main-pipeline.yml@main 
+    with:
+      branch: ${{ github.ref_name }}
+    secrets:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

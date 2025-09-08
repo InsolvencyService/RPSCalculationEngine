@@ -41,7 +41,6 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 extendedAdjustedPeriodTo = extendedAdjustedPeriodTo.AddDays(7);
 
             var payDays = await adjUnpaidPeriodFrom
-                .AddDays(1)
                 .GetDaysInRange(extendedAdjustedPeriodTo, data.DateNoticeGiven.DayOfWeek);
 
             // set pref period start date
