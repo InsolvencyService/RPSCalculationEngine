@@ -240,6 +240,13 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
 
             decimal proRataAccruedDays = 0.00m;
+
+            if (data.HolidayAccruedDaysCore.HasValue && data.HolidayAccruedDaysCore > 28)
+            {
+                var defaultIrregularHours = ConfigValueLookupHelper.Get_Irregular_Hour_Worker_ContractedHolEntitlement(options);
+                data.HolidayAccruedDaysCore = defaultIrregularHours;
+            }
+
             proRataAccruedDays = await proRataAccruedDays.GetIrregularProRataAccruedDays((decimal)adjHolidayEntitlement, totalBusinessDaysInClaim,
                                                                                 totalWorkingDaysInClaim, limitedDaysCFwd,
                                                                                 data.DaysTaken.GetValueOrDefault(),
