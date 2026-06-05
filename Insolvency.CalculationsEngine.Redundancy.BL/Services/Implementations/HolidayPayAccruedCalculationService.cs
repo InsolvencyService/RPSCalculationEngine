@@ -241,10 +241,10 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
 
             decimal proRataAccruedDays = 0.00m;
 
-            if (data.HolidayAccruedDaysCore.HasValue && data.HolidayAccruedDaysCore > 28)
+            var irregularHoursEntitlement = ConfigValueLookupHelper.Get_Irregular_Hour_Worker_ContractedHolEntitlement(options);
+            if (data.HolidayAccruedDaysCore.HasValue && data.HolidayAccruedDaysCore > irregularHoursEntitlement)
             {
-                var defaultIrregularHours = ConfigValueLookupHelper.Get_Irregular_Hour_Worker_ContractedHolEntitlement(options);
-                data.HolidayAccruedDaysCore = defaultIrregularHours;
+                data.HolidayAccruedDaysCore = irregularHoursEntitlement;
             }
 
             proRataAccruedDays = await proRataAccruedDays.GetIrregularProRataAccruedDays((decimal)adjHolidayEntitlement, totalBusinessDaysInClaim,
