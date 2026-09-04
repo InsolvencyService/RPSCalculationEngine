@@ -97,7 +97,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Calculations.Holiday.Exten
         public static async Task<decimal> GetIrregularProRataAccruedDays(this decimal proRataAccruedDays, decimal irregularHoursEntitlement, decimal totalBusinessDaysInHolidayClaim,
                                                                 decimal totalWorkingDaysInHolidayClaim, decimal limitedDaysCFwd, decimal daysTaken, List<string> shiftPattern, decimal? holidayAccruedCore)
         {
-            proRataAccruedDays = (irregularHoursEntitlement / totalBusinessDaysInHolidayClaim) * totalWorkingDaysInHolidayClaim;
+            proRataAccruedDays = ((decimal)holidayAccruedCore / totalBusinessDaysInHolidayClaim) * totalWorkingDaysInHolidayClaim;
 
             proRataAccruedDays = Math.Max(0, proRataAccruedDays);
 
