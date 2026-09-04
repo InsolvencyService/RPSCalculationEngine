@@ -247,7 +247,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
                 data.HolidayAccruedDaysCore = irregularHoursEntitlement;
             }
 
-            proRataAccruedDays = await proRataAccruedDays.GetIrregularProRataAccruedDays((decimal)adjHolidayEntitlement, totalBusinessDaysInClaim,
+            proRataAccruedDays = await proRataAccruedDays.GetIrregularProRataAccruedDays((decimal)irregularHoursEntitlement, totalBusinessDaysInClaim,
                                                                                 totalWorkingDaysInClaim, limitedDaysCFwd,
                                                                                 data.DaysTaken.GetValueOrDefault(),
                                                                                 shiftPattern,
@@ -256,7 +256,7 @@ namespace Insolvency.CalculationsEngine.Redundancy.BL.Services.Implementations
             calculationResult.BusinessDaysInClaim = totalBusinessDaysInClaim;
             calculationResult.StatutoryMax = Math.Round(statMaxWeeklyPay, 2);
             calculationResult.WorkingDaysInClaim = totalWorkingDaysInClaim;
-            calculationResult.HolidaysOwed = Math.Round(adjHolidayEntitlement, 4);
+            calculationResult.HolidaysOwed = Math.Round((decimal)data.HolidayAccruedDaysCore, 4);
             calculationResult.ProRataAccruedDays = Math.Round(proRataAccruedDays, 4);
 
             // Calculate weekly breakdown of holiday pay accrued
